@@ -17,6 +17,7 @@ import net.infugogr.barracuda.item.ModItemGroups;
 import net.infugogr.barracuda.item.ModItems;
 import net.infugogr.barracuda.screenhandler.ModScreenHandlerType;
 import net.infugogr.barracuda.sound.ModSounds;
+import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
@@ -72,6 +73,13 @@ public class Barracuda implements ModInitializer {
 		// geco mobs
 		FabricDefaultAttributeRegistry.register(ModEntities.BARRACUDA, BarracudaEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.AZUER_REAPER, BarracudaEntity.setAttributes());
+
+		CustomPortalBuilder.beginPortal()
+				.frameBlock(ModBlocks.CHARGED_REDSTONEIUM_BLOCK)
+				.lightWithItem(ModItems.CAPACITOR)
+				.destDimID(Barracuda.id("beta92"))
+				.tintColor(0xc76efa)
+				.registerPortal();
 
 		LOGGER.info("Loaded!");
 	}

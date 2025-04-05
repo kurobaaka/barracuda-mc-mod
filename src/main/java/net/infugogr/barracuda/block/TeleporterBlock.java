@@ -35,9 +35,6 @@ public class TeleporterBlock extends HorizontalFacingBlock implements BlockEntit
 
     @Override
     public void onEntityLand(BlockView world, Entity entity) {
-        //Govno govno = new Govno();
-        //govno.setInPortal();
-        //govno.tickPortal(entity);
         super.onEntityLand(world, entity);
     }
 

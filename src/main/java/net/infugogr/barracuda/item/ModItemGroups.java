@@ -73,6 +73,7 @@ public class ModItemGroups {
                         entries.add(ModItems.RUBY_SWORD);
                         entries.add(ModItems.RUBY_HOE);
                         entries.add(ModItems.HEART_OF_RED_HARBOR);
+                        entries.add(ModItems.DOUBLOON);
 
                         entries.add(ModItems.BRONZE_BLADE);
                         entries.add(ModItems.BRONZE_INGOT);
@@ -106,6 +107,7 @@ public class ModItemGroups {
                         entries.add(ModItems.CHARGED_REDSTONEIUM_INGOT);
                         entries.add(ModBlocks.REDSTONEIUM_BLOCK);
                         entries.add(ModBlocks.CHARGED_REDSTONEIUM_BLOCK);
+                        entries.add(ModItems.LIVE_CAPSULE);
                     }).build());
 
     public static final ItemGroup BARRACUDA_MOD_ITEMS_GROUP_4 = Registry.register(Registries.ITEM_GROUP,

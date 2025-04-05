@@ -2,13 +2,8 @@ package net.infugogr.barracuda.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.infugogr.barracuda.Barracuda;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.AxeItem;
-import net.minecraft.item.HoeItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.PickaxeItem;
-import net.minecraft.item.ShovelItem;
-import net.minecraft.item.SwordItem;
+import net.minecraft.entity.EntityType;
+import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
@@ -68,6 +63,9 @@ public class ModItems {
     public static final Item STEEL_INGOT = register("steel_ingot");
     public static final Item STEEL_PLATE = register("steel_plate");
     public static final Item STEEL_SHARDS = register("steel_shards");
+    public static final Item DOUBLOON = register("doubloon");
+    public static final LiveCapsule LIVE_CAPSULE = registerItem("live_capsule",
+            new LiveCapsule(null, new FabricItemSettings()));
 
 
         // Weapons stuff

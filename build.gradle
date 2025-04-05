@@ -18,6 +18,7 @@ repositories {
 			includeGroupByRegex("software\\.bernie.*")
 			includeGroup("com.eliotlash.mclib")
 		}
+		maven {url = "https://maven.kyrptonaught.dev"}
 	}
 }
 
@@ -40,6 +41,9 @@ dependencies {
 	implementation("com.eliotlash.mclib:mclib:20")
 
 	include modApi('teamreborn:energy:3.0.0')
+
+	modImplementation 'net.kyrptonaught:customportalapi:0.0.1-beta64-1.20.2'
+	include 'net.kyrptonaught:customportalapi:0.0.1-beta64-1.20.2'
 }
 
 processResources {

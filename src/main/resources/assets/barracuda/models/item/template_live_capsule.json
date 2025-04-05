@@ -1,0 +1,7 @@
+{
+    "parent": "minecraft:item/generated",
+    "textures": {
+        "layer0": "barracuda:item/live_capsule",
+        "layer1": "barracuda:item/live_capsule_overlay"
+    }
+}
