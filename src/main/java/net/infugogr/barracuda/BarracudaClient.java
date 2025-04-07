@@ -6,15 +6,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.infugogr.barracuda.block.entity.ModBlockEntityType;
 import net.infugogr.barracuda.block.entity.client.TeleporterBlockRenderer;
 import net.infugogr.barracuda.entity.ModEntities;
-import net.infugogr.barracuda.entity.client.ModModelLayers;
-import net.infugogr.barracuda.entity.client.PorcupineModel;
-import net.infugogr.barracuda.entity.client.PorcupineRenderer;
-import net.infugogr.barracuda.entity.client.AzureSerpentModel;
-import net.infugogr.barracuda.entity.client.AzureSerpentRenderer;
-import net.infugogr.barracuda.entity.client.BassFishModel;
-import net.infugogr.barracuda.entity.client.BassFishRenderer;
-import net.infugogr.barracuda.entity.client.BarracudaRenderer;
-import net.infugogr.barracuda.entity.client.AzureReaperRenderer;
+import net.infugogr.barracuda.entity.client.*;
 import net.infugogr.barracuda.screenhandler.FishingNetScreen;
 import net.infugogr.barracuda.screenhandler.FuelGeneratorScreen;
 import net.infugogr.barracuda.screenhandler.ModScreenHandlerType;
@@ -32,8 +24,8 @@ public class BarracudaClient implements ClientModInitializer {
         HandledScreens.register(ModScreenHandlerType.SMES, SMESScreen::new);
         HandledScreens.register(ModScreenHandlerType.FISHING_NET, FishingNetScreen::new);
 
-        EntityRendererRegistry.register(ModEntities.PORCUPINE, PorcupineRenderer::new);
-        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.PORCUPINE, PorcupineModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.GIANT, GiantRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.GIANT, GiantModel::getTexturedModelData);
         
         EntityRendererRegistry.register(ModEntities.BASS_FISH, BassFishRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.BASS_FISH, BassFishModel::getTexturedModelData);

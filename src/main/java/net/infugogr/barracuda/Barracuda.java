@@ -9,9 +9,7 @@ import net.infugogr.barracuda.entity.ModEntities;
 import net.infugogr.barracuda.entity.custom.AzureSerpentEntity;
 import net.infugogr.barracuda.entity.custom.BarracudaEntity;
 import net.infugogr.barracuda.entity.custom.BassFishEntity;
-import net.infugogr.barracuda.entity.custom.PorcupineEntity;
-// import net.infugogr.barracuda.block.entity.renderer.FuelGeneratorBlockEntityRenderer;
-// import net.infugogr.barracuda.block.entity.renderer.SMESBlockEntityRenderer;
+import net.infugogr.barracuda.entity.custom.ModGiantEntity;
 import net.infugogr.barracuda.entity.effect.ModStatusEffects;
 import net.infugogr.barracuda.item.ModItemGroups;
 import net.infugogr.barracuda.item.ModItems;
@@ -65,7 +63,7 @@ public class Barracuda implements ModInitializer {
 
 		EnergyStorage.SIDED.registerForBlockEntity(HVcableBlockEntity::getEnergyProvider, ModBlockEntityType.HVCABLE);
 
-		FabricDefaultAttributeRegistry.register(ModEntities.PORCUPINE, PorcupineEntity.createPorcupineAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.GIANT, ModGiantEntity.createGiantAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.BASS_FISH, BassFishEntity.createBassFishAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.AZURE_SERPENT, AzureSerpentEntity.createAzureSerpentAttributes());
 

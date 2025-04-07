@@ -18,8 +18,9 @@ repositories {
 			includeGroupByRegex("software\\.bernie.*")
 			includeGroup("com.eliotlash.mclib")
 		}
-		maven {url = "https://maven.kyrptonaught.dev"}
 	}
+	maven {url = "https://maven.kyrptonaught.dev"}
+	maven { url 'https://maven.nucleoid.xyz' }
 }
 
 fabricApi {
@@ -44,6 +45,10 @@ dependencies {
 
 	modImplementation 'net.kyrptonaught:customportalapi:0.0.1-beta64-1.20.2'
 	include 'net.kyrptonaught:customportalapi:0.0.1-beta64-1.20.2'
+
+	modImplementation include("eu.pb4:polymer-core:0.7.10+1.20.4")
+	modImplementation include("eu.pb4:polymer-blocks:0.7.10+1.20.4")
+	modImplementation include("eu.pb4:polymer-resource-pack:0.7.10+1.20.4")
 }
 
 processResources {
