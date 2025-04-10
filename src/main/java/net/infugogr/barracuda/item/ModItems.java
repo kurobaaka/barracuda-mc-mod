@@ -2,7 +2,9 @@ package net.infugogr.barracuda.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.infugogr.barracuda.Barracuda;
+import net.infugogr.barracuda.fluid.ModFluids;
 import net.minecraft.entity.EntityType;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -66,7 +68,25 @@ public class ModItems {
     public static final Item DOUBLOON = register("doubloon");
     public static final LiveCapsule LIVE_CAPSULE = registerItem("live_capsule",
             new LiveCapsule(null, new FabricItemSettings()));
-
+    public static final Item CRUDE_OIL_BUCKET = ModFluids.CRUDE_OIL.bucket();
+    public static final Item HEAVY_OIL_BUCKET = register("heavy_oil_bucket",
+            Item::new, settings -> settings.maxCount(1).recipeRemainder(Items.BUCKET));
+    public static final Item DIESEL_BUCKET= register("diesel_bucket",
+            Item::new, settings -> settings.maxCount(1).recipeRemainder(Items.BUCKET));
+    public static final Item GAS_CAPSULE = register("gas_capsule",
+            Item::new, settings -> settings.maxCount(16).recipeRemainder(ModItems.EMPTY_CAPSULE));
+    public static final Item WATER_CAPSULE = registerItem("water_capsule",
+            (Item)(new CapsuleItem(Fluids.WATER, (new Item.Settings()).recipeRemainder(ModItems.EMPTY_CAPSULE).maxCount(16))));
+    public static final Item DIESEL_CAPSULE = register("diesel_capsule",
+            Item::new, settings -> settings.maxCount(16).recipeRemainder(ModItems.EMPTY_CAPSULE));
+    public static final Item HEAVY_OIL_CAPSULE = register("heavy_oil_capsule",
+            Item::new, settings -> settings.maxCount(16).recipeRemainder(ModItems.EMPTY_CAPSULE));
+    public static final Item CRUDE_OIL_CAPSULE = registerItem("crude_oil_capsule",
+            (Item)(new CapsuleItem(ModFluids.CRUDE_OIL.still(), (new Item.Settings()).recipeRemainder(ModItems.EMPTY_CAPSULE).maxCount(16))));
+    public static final Item LAVA_CAPSULE = registerItem("lava_capsule",
+            (Item)(new CapsuleItem(Fluids.LAVA, (new Item.Settings()).recipeRemainder(ModItems.EMPTY_CAPSULE).maxCount(16))));
+    public static final Item EMPTY_CAPSULE = registerItem("empty_capsule",
+            (Item)(new CapsuleItem(Fluids.EMPTY, (new Item.Settings()).maxCount(16))));
 
         // Weapons stuff
 

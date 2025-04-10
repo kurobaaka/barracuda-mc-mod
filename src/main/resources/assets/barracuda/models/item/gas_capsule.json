@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "barracuda:item/sapphire_boots"
+    "layer0": "barracuda:item/gas_capsule"
   }
 }
