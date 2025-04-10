@@ -16,6 +16,7 @@
   "block.barracuda.uranium_ore": "Uranium Ore",
   "container.barracuda.battery": "SMES",
   "container.barracuda.fuel_generator": "Fuel Generator",
+  "container.barracuda.oil_refinery": "Oil Refinery",
   "container.barracuda.fishing_net": "Fishing net",
   "fgplate1": "§7Requires:§r",
   "fgplate2": "§71x capacitor§r",

@@ -1,6 +1,5 @@
 package net.infugogr.barracuda.mixin;
 
-import net.infugogr.barracuda.item.LiveCapsule;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.item.ItemColors;
 import org.spongepowered.asm.mixin.Mixin;

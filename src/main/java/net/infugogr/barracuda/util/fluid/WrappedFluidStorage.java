@@ -1,6 +1,5 @@
 package net.infugogr.barracuda.util.fluid;
 
-import com.mojang.datafixers.util.Pair;
 import net.infugogr.barracuda.util.WrappedStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.fluid.base.SingleFluidStorage;
@@ -10,9 +9,6 @@ import net.fabricmc.fabric.api.transfer.v1.storage.base.CombinedStorage;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
-import net.minecraft.nbt.NbtOps;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.registry.RegistryWrapper;
 
 import java.util.ArrayList;
 import java.util.List;

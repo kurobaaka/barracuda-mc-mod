@@ -11,11 +11,20 @@ import net.infugogr.barracuda.block.crates.ResourceCrateBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.FluidBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
+
+
+
+import net.minecraft.item.Item;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+
+import java.util.function.Function;
 
 public class ModBlocks {
 
@@ -53,6 +62,8 @@ public class ModBlocks {
             new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
     public static final Block FUEL_GENERATOR = registerWithItemCopy("fuel_generator",
             new FuelGeneratorBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
+    public static final Block OIL_REFINERY = registerWithItemCopy("oil_refinery",
+            new OilRefineryBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
     public static final Block LVCABLE = registerWithItemCopy("lv_cable",
             new LVcableBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
     public static final Block SMES = registerWithItemCopy("smes",
@@ -70,6 +81,11 @@ public class ModBlocks {
     
 
     private static Block registerWithItemCopy(String name, Block block) {
+        registerBlockItem(name, block);
+        return Registry.register(Registries.BLOCK, new Identifier(Barracuda.MOD_ID, name), block);
+    }
+
+    public static FluidBlock registerFluidBlock(String name, FluidBlock block) {
         registerBlockItem(name, block);
         return Registry.register(Registries.BLOCK, new Identifier(Barracuda.MOD_ID, name), block);
     }

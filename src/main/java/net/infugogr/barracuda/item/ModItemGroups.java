@@ -127,6 +127,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.URANIUM_BLOCK);
                         entries.add(ModBlocks.DISCHARGED_URANIUM_BLOCK);
                         entries.add(ModBlocks.FUEL_GENERATOR);
+                        entries.add(ModBlocks.OIL_REFINERY);
                         entries.add(ModBlocks.LVCABLE);
                         entries.add(ModBlocks.SMES);
                         entries.add(ModBlocks.MACHINE_FRAME);
@@ -142,6 +143,16 @@ public class ModItemGroups {
                         entries.add(ModItems.ENGINEER_CHESTPLATE);
                         entries.add(ModItems.ENGINEER_LEGGINGS);
                         entries.add(ModItems.ENGINEER_BOOTS);
+                        entries.add(ModItems.CRUDE_OIL_BUCKET);
+                        entries.add(ModItems.HEAVY_OIL_BUCKET);
+                        entries.add(ModItems.DIESEL_BUCKET);
+                        entries.add(ModItems.EMPTY_CAPSULE);
+                        entries.add(ModItems.GAS_CAPSULE);
+                        entries.add(ModItems.WATER_CAPSULE);
+                        entries.add(ModItems.LAVA_CAPSULE);
+                        entries.add(ModItems.CRUDE_OIL_CAPSULE);
+                        entries.add(ModItems.HEAVY_OIL_CAPSULE);
+                        entries.add(ModItems.DIESEL_CAPSULE);
 
                         entries.add(ModItems.ENERGY_HELMET);
                         entries.add(ModItems.ENERGY_CHESTPLATE);

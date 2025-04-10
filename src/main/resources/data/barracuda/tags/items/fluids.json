@@ -1,0 +1,13 @@
+{
+  "values": [
+    "barracuda:crude_oil_bucket",
+    "barracuda:heavy_oil_bucket",
+    "barracuda:diesel_bucket",
+    "barracuda:gas_capsule",
+    "barracuda:crude_oil_capsule",
+    "barracuda:heavy_oil_capsule",
+    "barracuda:diesel_capsule",
+    "barracuda:water_capsule",
+    "minecraft:water_bucket"
+  ]
+}

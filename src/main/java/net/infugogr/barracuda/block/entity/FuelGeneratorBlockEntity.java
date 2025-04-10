@@ -83,7 +83,7 @@ public class FuelGeneratorBlockEntity extends UpdatableBlockEntity implements Sy
         if (this.world == null || this.world.isClient)
             return;
 
-        SimpleEnergyStorage energyStorage = (SimpleEnergyStorage) this.energyStorage.getStorage(null);
+        SimpleEnergyStorage energyStorage = this.energyStorage.getStorage(null);
 
         spread(this.world, this.pos, energyStorage);
 

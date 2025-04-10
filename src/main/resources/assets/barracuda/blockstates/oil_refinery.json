@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "barracuda:block/oil_refinery",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "barracuda:block/oil_refinery"
+    },
+    "facing=west": {
+      "model": "barracuda:block/oil_refinery",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "barracuda:block/oil_refinery",
+      "y": 180
+    }
+  }
+}
