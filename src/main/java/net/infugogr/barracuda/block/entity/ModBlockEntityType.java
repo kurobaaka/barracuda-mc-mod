@@ -35,10 +35,6 @@ public class ModBlockEntityType {
             BlockEntityType.Builder.create(TeleporterBlockEntity::new, ModBlocks.TELEPORTER)
                     .build());
 
-    public static final BlockEntityType<OilRefineryBlockEntity> OIL_REFINERY = register("oil_refinery",
-            BlockEntityType.Builder.create(OilRefineryBlockEntity::new, ModBlocks.OIL_REFINERY)
-                    .build());
-
     public static final BlockEntityType<FishingNetBlockEntity> FISHING_NET =
             Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Barracuda.MOD_ID, "fishing_net"),
                     FabricBlockEntityTypeBuilder.create(FishingNetBlockEntity::new,

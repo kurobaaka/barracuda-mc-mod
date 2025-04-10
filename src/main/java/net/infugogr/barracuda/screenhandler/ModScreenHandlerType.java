@@ -22,10 +22,6 @@ public class ModScreenHandlerType {
             Registry.register(Registries.SCREEN_HANDLER, Barracuda.id("smes"),
                     new ExtendedScreenHandlerType<>(SMESScreenHandler::new));
 
-    public static final ScreenHandlerType<OilRefineryScreenHandler> OIL_REFINERY =
-            Registry.register(Registries.SCREEN_HANDLER, Barracuda.id("oil_refinery"),
-                    new ExtendedScreenHandlerType<>(OilRefineryScreenHandler::new));
-
     //public static final ScreenHandlerType<SMESScreenHandler> TELEPORTER =
     //        Registry.register(Registries.SCREEN_HANDLER, Barracuda.id("teleporter"),
     //                new ExtendedScreenHandlerType<>(SMESScreenHandler::new));
