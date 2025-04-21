@@ -138,7 +138,7 @@ public class ModItemGroups {
                         entries.add(ModItems.SCREWDRIVER);
                         entries.add(ModItems.HAMMER);
                         entries.add(ModBlocks.WALL_BLOCK);
-                        //entries.add(ModBlocks.TELEPORTER);
+                        entries.add(ModBlocks.TELEPORTER);
                         entries.add(ModItems.ENGINEER_HELMET);
                         entries.add(ModItems.ENGINEER_CHESTPLATE);
                         entries.add(ModItems.ENGINEER_LEGGINGS);

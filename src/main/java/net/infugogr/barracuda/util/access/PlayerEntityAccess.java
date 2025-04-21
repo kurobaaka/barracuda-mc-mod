@@ -1,4 +1,4 @@
-//package net.infugogr.barracuda.access;
+//package net.infugogr.barracuda.util.access;
 //
 //import net.infugogr.barracuda.entity.MinigameFishingBobberEntity;
 //

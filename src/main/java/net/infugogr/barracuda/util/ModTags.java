@@ -12,6 +12,7 @@ public class ModTags {
     public static final TagKey<Item> PLATES = of("plates");
     public static final TagKey<Item> CABELS = of("cabels");
     public static final TagKey<Item> FLUIDS = of("fluids");
+    public static final TagKey<Item> CRUSHER_RECIPE_ITEMS = of("crusher");
 
     private static TagKey<Item> of(String name) {
         return TagKey.of(RegistryKeys.ITEM, Identifier.of(Barracuda.MOD_ID, name));

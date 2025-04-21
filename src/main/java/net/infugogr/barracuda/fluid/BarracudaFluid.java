@@ -7,7 +7,6 @@ import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
@@ -19,12 +18,12 @@ import net.minecraft.world.WorldView;
 
 import java.util.function.Supplier;
 
-public abstract class IndustriaFluid extends FlowableFluid {
+public abstract class BarracudaFluid extends FlowableFluid {
     private final Supplier<Fluid> stillSupplier, flowingSupplier;
     private final Supplier<Item> bucketSupplier;
     private final Supplier<Block> blockSupplier;
 
-    public IndustriaFluid(Supplier<Fluid> stillSupplier, Supplier<Fluid> flowingSupplier, Supplier<Item> bucketSupplier, Supplier<Block> blockSupplier) {
+    public BarracudaFluid(Supplier<Fluid> stillSupplier, Supplier<Fluid> flowingSupplier, Supplier<Item> bucketSupplier, Supplier<Block> blockSupplier) {
         this.stillSupplier = stillSupplier;
         this.flowingSupplier = flowingSupplier;
         this.bucketSupplier = bucketSupplier;
@@ -90,7 +89,7 @@ public abstract class IndustriaFluid extends FlowableFluid {
         builder.add(LEVEL);
     }
 
-    public static class Flowing extends IndustriaFluid {
+    public static class Flowing extends BarracudaFluid {
         public Flowing(Supplier<Fluid> stillSupplier, Supplier<Fluid> flowingSupplier, Supplier<Item> bucketSupplier, Supplier<Block> blockSupplier) {
             super(stillSupplier, flowingSupplier, bucketSupplier, blockSupplier);
         }
@@ -116,7 +115,7 @@ public abstract class IndustriaFluid extends FlowableFluid {
         }
     }
 
-    public static class Still extends IndustriaFluid {
+    public static class Still extends BarracudaFluid {
         public Still(Supplier<Fluid> stillSupplier, Supplier<Fluid> flowingSupplier, Supplier<Item> bucketSupplier, Supplier<Block> blockSupplier) {
             super(stillSupplier, flowingSupplier, bucketSupplier, blockSupplier);
         }

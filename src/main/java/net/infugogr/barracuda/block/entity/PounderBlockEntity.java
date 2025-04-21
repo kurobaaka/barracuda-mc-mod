@@ -1,13 +1,13 @@
 package net.infugogr.barracuda.block.entity;
 
-import net.infugogr.barracuda.block.ModBlocks;
 import net.infugogr.barracuda.block.recipes.MachineFrameRecipes;
 import net.infugogr.barracuda.item.ModItems;
 import net.infugogr.barracuda.util.ModTags;
 import net.infugogr.barracuda.util.UpdatableBlockEntity;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.inventory.Inventories;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
@@ -20,18 +20,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
-
 import static net.infugogr.barracuda.block.MachineFrameBlock.IS_PLATED;
 import static net.minecraft.block.Block.dropStack;
 import static net.minecraft.block.HorizontalFacingBlock.FACING;
 
-public class MachineFrameBlockEntity extends UpdatableBlockEntity{
+public class PounderBlockEntity extends UpdatableBlockEntity{
     private final DefaultedList<ItemStack> inventory;
 
-    public MachineFrameBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.MACHINE_FRAME, pos, state);
-        this.inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
+    public PounderBlockEntity(BlockPos pos, BlockState state) {
+        super(ModBlockEntityType.POUNDER, pos, state);
+        this.inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
     }
 
     @Override

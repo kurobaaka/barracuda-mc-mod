@@ -22,7 +22,6 @@ import net.infugogr.barracuda.item.ModItems;
 import net.infugogr.barracuda.screenhandler.ModScreenHandlerType;
 import net.infugogr.barracuda.sound.ModSounds;
 import net.infugogr.barracuda.util.ModTags;
-import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -61,6 +60,9 @@ public class Barracuda implements ModInitializer {
 		EnergyStorage.SIDED.registerForBlockEntity(FuelGeneratorBlockEntity::getEnergyProvider, ModBlockEntityType.FUEL_GENERATOR);
 		ItemStorage.SIDED.registerForBlockEntity(FuelGeneratorBlockEntity::getInventoryProvider, ModBlockEntityType.FUEL_GENERATOR);
 
+		EnergyStorage.SIDED.registerForBlockEntity(CrusherBlockEntity::getEnergyProvider, ModBlockEntityType.CRUSHER);
+		ItemStorage.SIDED.registerForBlockEntity(CrusherBlockEntity::getInventoryProvider, ModBlockEntityType.CRUSHER);
+
 		ItemStorage.SIDED.registerForBlockEntity(FishingNetBlockEntity::getInventoryProvider, ModBlockEntityType.FISHING_NET);
 
 		EnergyStorage.SIDED.registerForBlockEntity(SMESblockEntity::getEnergyProvider, ModBlockEntityType.SMES);
@@ -82,13 +84,6 @@ public class Barracuda implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(ModEntities.AZURE_SERPENT, AzureSerpentEntity.createAzureSerpentAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.BARRACUDA, BarracudaEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.AZUER_REAPER, BarracudaEntity.setAttributes());
-
-		CustomPortalBuilder.beginPortal()
-				.frameBlock(ModBlocks.CHARGED_REDSTONEIUM_BLOCK)
-				.lightWithItem(ModItems.CAPACITOR)
-				.destDimID(Barracuda.id("beta92"))
-				.tintColor(0xc76efa)
-				.registerPortal();
 
 		// Fluid Properties
 		var commonFluidAttributes = new FluidVariantAttributeHandler() {

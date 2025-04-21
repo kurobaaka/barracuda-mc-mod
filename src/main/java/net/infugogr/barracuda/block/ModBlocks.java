@@ -78,6 +78,10 @@ public class ModBlocks {
             new WallBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
     public static final Block FISHING_NET = registerWithItemCopy("fishing_net",
             new FishingNetBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()));
+    public static final Block CRUSHER = registerWithItemCopy("crusher",
+            new CrusherBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()));
+    public static final Block POUNDER = registerWithItemCopy("pounder",
+            new PounderBlock(FabricBlockSettings.copyOf(Blocks.STONE).nonOpaque()));
     
 
     private static Block registerWithItemCopy(String name, Block block) {

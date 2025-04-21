@@ -2,7 +2,7 @@
 //
 //import net.infugogr.barracuda.Barracuda;
 //import net.infugogr.barracuda.ReelItems;
-//import net.infugogr.barracuda.access.PlayerEntityAccess;
+//import net.infugogr.barracuda.util.access.PlayerEntityAccess;
 //import net.infugogr.barracuda.entity.MinigameFishingBobberEntity;
 //import net.infugogr.barracuda.entity.ModularFishingBobberEntity;
 //import eu.pb4.polymer.core.api.item.PolymerItem;

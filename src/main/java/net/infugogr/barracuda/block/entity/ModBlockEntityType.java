@@ -39,6 +39,14 @@ public class ModBlockEntityType {
             BlockEntityType.Builder.create(OilRefineryBlockEntity::new, ModBlocks.OIL_REFINERY)
                     .build());
 
+    public static final BlockEntityType<CrusherBlockEntity> CRUSHER = register("crusher",
+            BlockEntityType.Builder.create(CrusherBlockEntity::new, ModBlocks.CRUSHER)
+                    .build());
+
+    public static final BlockEntityType<PounderBlockEntity> POUNDER = register("pounder",
+            BlockEntityType.Builder.create(PounderBlockEntity::new, ModBlocks.POUNDER)
+                    .build());
+
     public static final BlockEntityType<FishingNetBlockEntity> FISHING_NET =
             Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Barracuda.MOD_ID, "fishing_net"),
                     FabricBlockEntityTypeBuilder.create(FishingNetBlockEntity::new,
