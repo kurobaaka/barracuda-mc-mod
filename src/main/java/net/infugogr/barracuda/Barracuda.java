@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
+import net.fabricmc.loader.api.FabricLoader;
 import net.infugogr.barracuda.block.ModBlocks;
 import net.infugogr.barracuda.block.entity.*;
 import net.infugogr.barracuda.block.recipes.CentrifugeRecipeManager;
@@ -35,6 +36,11 @@ public class Barracuda implements ModInitializer {
 	}
 
 	public void onInitialize() {
+        if (FabricLoader.getInstance().isModLoaded("geckolib3")) {
+            throw new RuntimeException(
+                    "Barracuda requires GeckoLib! Please install GeckoLib 4.x for your Minecraft version."
+            );
+        }
 		LOGGER.info("Loading...");
 		// Load registry classes
 		ModItems.registerModItems();
