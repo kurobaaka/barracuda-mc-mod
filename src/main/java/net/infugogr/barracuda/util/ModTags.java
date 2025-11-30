@@ -19,5 +19,9 @@ public class ModTags {
     }
     public static class Fluids {
         public static final TagKey<Fluid> CRUDE_OIL = TagKey.of(RegistryKeys.FLUID, Barracuda.id("crude_oil"));
+        public static final TagKey<Fluid> HEAVY_OIL = TagKey.of(RegistryKeys.FLUID, Barracuda.id("heavy_oil"));
+        public static final TagKey<Fluid> DIESEL = TagKey.of(RegistryKeys.FLUID, Barracuda.id("diesel"));
+        public static final TagKey<Fluid> GAS = TagKey.of(RegistryKeys.FLUID, Barracuda.id("gas"));
+
     }
 }

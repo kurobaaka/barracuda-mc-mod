@@ -10,7 +10,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class FishingNetScreen extends HandledScreen<FishingNetScreenHandler> {
-    private static final Identifier TEXTURE = new Identifier(Barracuda.MOD_ID, "textures/gui/fishingnet.png");
+    private static final Identifier TEXTURE = new Identifier(Barracuda.MOD_ID, "textures/gui/container/fishingnet.png");
 
     public FishingNetScreen(FishingNetScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);

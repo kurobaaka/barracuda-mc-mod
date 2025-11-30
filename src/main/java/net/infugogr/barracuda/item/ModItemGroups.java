@@ -122,12 +122,15 @@ public class ModItemGroups {
                         entries.add(ModItems.DISCHARGED_URANIUM_NUGGET);
                         entries.add(ModItems.URANIUM_DUST);
                         entries.add(ModItems.URANIUM_NUGGET);
+                        entries.add(ModItems.URANIUM_FUEL_ROD);
                         entries.add(ModBlocks.URANIUM_ORE);
                         entries.add(ModBlocks.DEEPSLATE_URANIUM_ORE);
                         entries.add(ModBlocks.URANIUM_BLOCK);
                         entries.add(ModBlocks.DISCHARGED_URANIUM_BLOCK);
                         entries.add(ModBlocks.FUEL_GENERATOR);
+                        entries.add(ModBlocks.URANIUM_GENERATOR);
                         entries.add(ModBlocks.OIL_REFINERY);
+                        entries.add(ModBlocks.CHEMICAL_PLANT);
                         entries.add(ModBlocks.LVCABLE);
                         entries.add(ModBlocks.SMES);
                         entries.add(ModBlocks.MACHINE_FRAME);
@@ -135,9 +138,14 @@ public class ModItemGroups {
                         entries.add(ModItems.SMES_PLATE);
                         entries.add(ModItems.CAPACITOR);
                         entries.add(ModBlocks.HVCABLE);
+                        entries.add(ModBlocks.WALL_LAMP);
+                        entries.add(ModBlocks.CLOSET);
                         entries.add(ModItems.SCREWDRIVER);
                         entries.add(ModItems.HAMMER);
-                        entries.add(ModBlocks.WALL_BLOCK);
+                        entries.add(ModBlocks.SHUTTLE_WALL);
+                        entries.add(ModBlocks.FLOOR_BLOCK);
+                        entries.add(ModBlocks.PLATING);
+                        entries.add(ModBlocks.RODS_BLOCK);
                         entries.add(ModBlocks.TELEPORTER);
                         entries.add(ModItems.ENGINEER_HELMET);
                         entries.add(ModItems.ENGINEER_CHESTPLATE);
@@ -153,6 +161,12 @@ public class ModItemGroups {
                         entries.add(ModItems.CRUDE_OIL_CAPSULE);
                         entries.add(ModItems.HEAVY_OIL_CAPSULE);
                         entries.add(ModItems.DIESEL_CAPSULE);
+                        entries.add(ModItems.POSITION_CHIP);
+                        entries.add(ModItems.DIMENSION_CHIP_OVERWORLD);
+                        entries.add(ModItems.DIMENSION_CHIP_NETHER);
+                        entries.add(ModItems.DIMENSION_CHIP_END);
+                        entries.add(ModItems.DIMENSION_CHIP_BETA);
+                        entries.add(ModItems.IRON_PLATE);
 
                         entries.add(ModItems.ENERGY_HELMET);
                         entries.add(ModItems.ENERGY_CHESTPLATE);
@@ -170,6 +184,8 @@ public class ModItemGroups {
                     FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.MUD)) // URANIUM_INGOT потом заменить на друидский прикол
                      .displayName(TITLE5)
                      .entries((displayContext, entries) -> {
+                         entries.add(ModBlocks.MAGIC_GRASS_BLOCK);
+                         entries.add(ModBlocks.MAGIC_DIRT_BLOCK);
                         entries.add(ModItems.SHROOM_HELMET);
                         entries.add(ModItems.SHROOM_CHESTPLATE);
                         entries.add(ModItems.SHROOM_LEGGINGS);

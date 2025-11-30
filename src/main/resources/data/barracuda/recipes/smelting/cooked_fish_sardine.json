@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smelting",
-    "ingredient": {
-      "item": "barracuda:fish_sardine"
-    },
-    "result": "barracuda:cooked_fish_sardine",
-    "experience": 0.7,
-    "cookingtime": 600
-  }

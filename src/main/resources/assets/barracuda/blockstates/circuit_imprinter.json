@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "barracuda:block/circuit_imprinter",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "barracuda:block/circuit_imprinter"
+    },
+    "facing=west": {
+      "model": "barracuda:block/circuit_imprinter",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "barracuda:block/circuit_imprinter",
+      "y": 180
+    }
+  }
+}

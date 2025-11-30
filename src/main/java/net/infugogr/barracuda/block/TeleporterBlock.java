@@ -2,35 +2,38 @@ package net.infugogr.barracuda.block;
 
 import com.mojang.serialization.MapCodec;
 import net.infugogr.barracuda.block.entity.ModBlockEntityType;
+import net.infugogr.barracuda.block.entity.TeleporterBlockEntity;
 import net.infugogr.barracuda.util.TickableBlockEntity;
-import net.infugogr.barracuda.world.dimension.ModDimensions;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.BlockRotation;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.Nullable;
 
-public class TeleporterBlock extends HorizontalFacingBlock implements BlockEntityProvider{
+import java.util.Objects;
+import net.minecraft.entity.LivingEntity;
+
+public class TeleporterBlock extends HorizontalFacingBlock implements BlockEntityProvider {
     public static final MapCodec<TeleporterBlock> CODEC = createCodec(TeleporterBlock::new);
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
+
     protected TeleporterBlock(Settings settings) {
         super(settings);
         setDefaultState(getDefaultState().with(FACING, Direction.NORTH));
@@ -46,6 +49,17 @@ public class TeleporterBlock extends HorizontalFacingBlock implements BlockEntit
         return ModBlockEntityType.TELEPORTER.instantiate(pos, state);
     }
 
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        if (!world.isClient) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity instanceof TeleporterBlockEntity entity) {
+                player.openHandledScreen(entity);
+            }
+        }
+        return ActionResult.SUCCESS;
+    }
+
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
@@ -55,7 +69,7 @@ public class TeleporterBlock extends HorizontalFacingBlock implements BlockEntit
     @Nullable
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+        return getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing());
     }
 
     @Override
@@ -63,34 +77,59 @@ public class TeleporterBlock extends HorizontalFacingBlock implements BlockEntit
         builder.add(FACING);
     }
 
+    @Override
+    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
+        if (!world.isClient && entity instanceof LivingEntity) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity instanceof TeleporterBlockEntity teleporter) {
+                world.scheduleBlockTick(pos, this, 95);
+            }
+        }
+    }
 
     @Override
-    public void onEntityLand(BlockView world1, Entity entity) {
-        World world = entity.getWorld();
-        if (!world.isClient && entity instanceof ServerPlayerEntity serverPlayer) {
-            Vec3d currentPos = entity.getPos();
-            BlockPos baseXZ = new BlockPos((int) currentPos.x, 0, (int) currentPos.z);
-            RegistryKey<World> currentDim = world.getRegistryKey();
-            ServerWorld targetWorld = null;
-
-            if (currentDim == World.OVERWORLD) {
-                targetWorld = serverPlayer.getServer().getWorld(ModDimensions.BETA_LEVEL_KEY);
-            } else if (currentDim == ModDimensions.BETA_LEVEL_KEY) {
-                targetWorld = serverPlayer.getServer().getWorld(World.OVERWORLD);
+    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, net.minecraft.util.math.random.Random random) {
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof TeleporterBlockEntity teleporter) {
+            Entity entity = world.getClosestPlayer(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 1.0, false);
+            if (entity != null) {
+                tryTeleport(teleporter, (ServerPlayerEntity) entity);
             }
+        }
+    }
 
-            if (targetWorld != null) {
-                BlockPos targetPos = findHighestSafePosition(targetWorld, baseXZ);
-                if (targetPos != null) {
-                    serverPlayer.teleport(
-                            targetWorld,
-                            targetPos.getX() + 0.5,
-                            targetPos.getY(),
-                            targetPos.getZ() + 0.5,
-                            entity.getYaw(),
-                            entity.getPitch()
-                    );
-                }
+    private void tryTeleport(TeleporterBlockEntity teleporter, ServerPlayerEntity player) {
+        // Проверяем наличие чипа позиции и энергии
+        if (!teleporter.hasPosChip() || teleporter.getEnergyStorage().amount == 10000000) {
+            return;
+        }
+
+        // Получаем целевую позицию
+        BlockPos targetPos = teleporter.getTargetPosition();
+        if (targetPos == null) return;
+
+        // Определяем целевое измерение (если есть чип измерения) или текущее
+        RegistryKey<World> targetDim = teleporter.getTargetDimension();
+        if (targetDim == null) {
+            targetDim = player.getWorld().getRegistryKey();
+        }
+
+        ServerWorld targetWorld = Objects.requireNonNull(player.getServer()).getWorld(targetDim);
+        if (targetWorld != null) {
+            // Находим безопасную позицию для телепортации
+            BlockPos safePos = findHighestSafePosition(targetWorld, targetPos);
+            if (safePos != null) {
+                teleporter.getEnergyStorage().amount -= 10000000;
+                teleporter.markDirty(); // Сохраняем изменения энергии
+                player.teleport(
+                        targetWorld,
+                        safePos.getX() + 0.5,
+                        safePos.getY(),
+                        safePos.getZ() + 0.5,
+                        player.getYaw(),
+                        player.getPitch()
+                );
+                teleporter.syncWithClient(); // Синхронизируем с клиентом
             }
         }
     }
@@ -108,9 +147,7 @@ public class TeleporterBlock extends HorizontalFacingBlock implements BlockEntit
                 return feet;
             }
         }
-
-        // Если не нашли безопасное место — fallback на world spawn
-        return world.getSpawnPos();
+        return baseXZ;
     }
 
     @Override

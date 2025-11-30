@@ -1,6 +1,7 @@
 package net.infugogr.barracuda.item;
 
 
+import net.infugogr.barracuda.fluid.ModFluids;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -32,11 +33,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
-import org.slf4j.LoggerFactory;
 
 
 public class CapsuleItem extends BucketItem{
-    private final Fluid fluid;
+    public Fluid fluid;
 
     public CapsuleItem(Fluid fluid, Settings settings) {
         super(fluid, settings);
@@ -70,6 +70,12 @@ public class CapsuleItem extends BucketItem{
                             if(itemStack21.getItem() == ModItems.CRUDE_OIL_BUCKET){
                                 itemStack21 = ModItems.CRUDE_OIL_CAPSULE.getDefaultStack();
                             }
+                            if(itemStack21.getItem() == ModItems.HEAVY_OIL_BUCKET){
+                                itemStack21 = ModItems.HEAVY_OIL_CAPSULE.getDefaultStack();
+                            }
+                            if(itemStack21.getItem() == ModItems.DIESEL_BUCKET){
+                                itemStack21 = ModItems.DIESEL_CAPSULE.getDefaultStack();
+                            }
                             if(itemStack21.getItem() == Items.LAVA_BUCKET){
                                 itemStack21 = ModItems.LAVA_CAPSULE.getDefaultStack();
                             }
@@ -84,6 +90,9 @@ public class CapsuleItem extends BucketItem{
 
                     return TypedActionResult.fail(itemStack);
                 } else {
+                    if (this.fluid == ModFluids.GAS.still()){
+                        return TypedActionResult.pass(itemStack);
+                    }
                     BlockState blockState = world.getBlockState(blockPos);
                     BlockPos blockPos3 = blockState.getBlock() instanceof FluidFillable && this.fluid == Fluids.WATER ? blockPos : blockPos2;
                     if (this.placeFluid(user, world, blockPos3, blockHitResult)) {
@@ -180,5 +189,30 @@ public class CapsuleItem extends BucketItem{
         SoundEvent soundEvent = this.fluid.isIn(FluidTags.LAVA) ? SoundEvents.ITEM_BUCKET_EMPTY_LAVA : SoundEvents.ITEM_BUCKET_EMPTY;
         world.playSound(player, pos, soundEvent, SoundCategory.BLOCKS, 1.0F, 1.0F);
         world.emitGameEvent(player, GameEvent.FLUID_PLACE, pos);
+    }
+
+    public Fluid getFluid() {
+        return this.fluid;
+    }
+    public ItemStack getFilledVariant(Fluid fluid) {
+        if (fluid == Fluids.WATER){
+            return ModItems.WATER_CAPSULE.getDefaultStack();
+        }
+        if (fluid == Fluids.LAVA){
+            return ModItems.LAVA_CAPSULE.getDefaultStack();
+        }
+        if (fluid == ModFluids.CRUDE_OIL.still()){
+            return ModItems.CRUDE_OIL_CAPSULE.getDefaultStack();
+        }
+        if (fluid == ModFluids.GAS.still()){
+            return ModItems.GAS_CAPSULE.getDefaultStack();
+        }
+        if (fluid == ModFluids.DIESEL.still()){
+            return ModItems.DIESEL_CAPSULE.getDefaultStack();
+        }
+        if (fluid == ModFluids.HEAVY_OIL.still()){
+            return ModItems.HEAVY_OIL_CAPSULE.getDefaultStack();
+        }
+        return ModItems.EMPTY_CAPSULE.getDefaultStack();
     }
 }

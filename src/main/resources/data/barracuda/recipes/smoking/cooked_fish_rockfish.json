@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smoking",
-    "ingredient": {
-      "item": "barracuda:fish_rockfish"
-    },
-    "result": "barracuda:cooked_fish_rockfish",
-    "experience": 0.7,
-    "cookingtime": 300
-  }

@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smoking",
-    "ingredient": {
-      "item": "barracuda:fish_black_sea_bass"
-    },
-    "result": "barracuda:cooked_fish_black_sea_bass",
-    "experience": 0.7,
-    "cookingtime": 300
-  }

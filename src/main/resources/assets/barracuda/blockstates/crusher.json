@@ -2,18 +2,18 @@
   "variants": {
     "facing=east": {
       "model": "barracuda:block/crusher",
-      "y": 90
+      "y": 270
     },
     "facing=north": {
-      "model": "barracuda:block/crusher"
+      "model": "barracuda:block/crusher",
+      "y": 180
     },
     "facing=west": {
       "model": "barracuda:block/crusher",
-      "y": 270
+      "y": 90
     },
     "facing=south": {
-      "model": "barracuda:block/crusher",
-      "y": 180
+      "model": "barracuda:block/crusher"
     }
   }
 }

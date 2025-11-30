@@ -1,0 +1,49 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"print": {
+			"animation_length": 2.75,
+			"bones": {
+				"bone2": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.5": {
+							"vector": [0, 0, -6],
+							"easing": "step",
+							"easingArgs": [11]
+						},
+						"1.75": {
+							"vector": [0, 0, -6]
+						},
+						"2.75": {
+							"vector": [0, 0, 0],
+							"easing": "step",
+							"easingArgs": [11]
+						}
+					},
+					"scale": {
+						"0.0": {
+							"vector": [1, 1, 1]
+						},
+						"1.5": {
+							"vector": [1, 1, 0.2],
+							"easing": "step",
+							"easingArgs": [11]
+						},
+						"1.75": {
+							"vector": [1, 1, 0.2]
+						},
+						"2.75": {
+							"vector": [1, 1, 1],
+							"easing": "step",
+							"easingArgs": [11]
+						}
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

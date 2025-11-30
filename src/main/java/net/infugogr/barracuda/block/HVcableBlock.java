@@ -127,6 +127,13 @@ public class HVcableBlock extends Block implements Waterloggable, BlockEntityPro
         if (state.isAir())
             return false;
 
+        if (state.contains(Properties.HORIZONTAL_FACING)) {
+            Direction blockFacing = state.get(Properties.HORIZONTAL_FACING);
+            if (blockFacing != facing.getOpposite()) {
+                return false;
+            }
+        } else return false;
+
         return EnergyStorage.SIDED.find(world, pos, facing.getOpposite()) != null;
     }
 

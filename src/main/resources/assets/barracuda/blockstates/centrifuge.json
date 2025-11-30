@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "barracuda:block/centrifuge",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "barracuda:block/centrifuge",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "barracuda:block/centrifuge",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "barracuda:block/centrifuge"
+    }
+  }
+}

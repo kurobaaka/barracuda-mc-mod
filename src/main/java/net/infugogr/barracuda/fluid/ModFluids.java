@@ -16,6 +16,9 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class ModFluids {
     public static final FluidRegistryObject CRUDE_OIL = registerFluid("crude_oil");
+    public static final FluidRegistryObject HEAVY_OIL = registerFluid("heavy_oil");
+    public static final FluidRegistryObject DIESEL = registerFluid("diesel");
+    public static final FluidRegistryObject GAS = registerFluid("gas");
 
     public static FluidRegistryObject registerFluid(String name) {
         final AtomicReference<BarracudaFluid.Still> still = new AtomicReference<>();
@@ -29,6 +32,18 @@ public class ModFluids {
         block.set(ModBlocks.registerFluidBlock(name, new FluidBlock(still.get(), FabricBlockSettings.copyOf(Blocks.WATER))));
 
         return new FluidRegistryObject(still.get(), flowing.get(), bucket.get(), block.get());
+    }
+
+    private static <T extends Fluid> T registerFluidVariant(String id, T value) {
+        return Registry.register(Registries.FLUID, id, value);
+    }
+
+    static {
+        for (Fluid fluid : Registries.FLUID) {
+            for (FluidState fluidState : fluid.getStateManager().getStates()) {
+                Fluid.STATE_IDS.add(fluidState);
+            }
+        }
     }
 
     public static <T extends Fluid> T register(String name, T fluid) {

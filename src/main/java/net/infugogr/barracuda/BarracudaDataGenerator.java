@@ -7,10 +7,6 @@ import net.minecraft.registry.RegistryBuilder;
 public class BarracudaDataGenerator implements DataGeneratorEntrypoint {
 	@Override
 	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
-		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 	}
 
-	@Override
-	public void buildRegistry(RegistryBuilder registryBuilder) {
-	}
 }

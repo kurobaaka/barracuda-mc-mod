@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:campfire_cooking",
-    "ingredient": {
-      "item": "barracuda:fish_carp"
-    },
-    "result": "barracuda:cooked_fish_carp",
-    "experience": 0.7,
-    "cookingtime": 600
-  }

@@ -35,7 +35,6 @@ public class SyncingFluidStorage extends SingleFluidStorage implements SyncableS
             this.isDirty = false;
 
             if (this.blockEntity instanceof UpdatableBlockEntity updatableBlockEntity) {
-                updatableBlockEntity.update();
             } else {
                 this.blockEntity.markDirty();
             }

@@ -8,25 +8,21 @@ import net.infugogr.barracuda.block.crates.MobCrateBlock;
 import net.infugogr.barracuda.block.crates.PlantsCrateBlock;
 import net.infugogr.barracuda.block.crates.RareResourceCrate;
 import net.infugogr.barracuda.block.crates.ResourceCrateBlock;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FluidBlock;
+import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 
-
-
-import net.minecraft.item.Item;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-
-import java.util.function.Function;
+import java.util.function.ToIntFunction;
 
 public class ModBlocks {
+
+    public static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {
+        return (state) -> (Boolean)state.get(Properties.LIT) ? litLevel : 0;
+    }
 
     // Crates
     public static final Block BASIC_CRATE = registerWithItemCopy("basic_crate", 
@@ -42,6 +38,10 @@ public class ModBlocks {
 
     public static final Block AQUATIC_SAND = registerWithItemCopy("aquatic_sand",
             new AquaticSandBlock(FabricBlockSettings.copyOf(Blocks.SAND)));
+    public static final Block MAGIC_GRASS_BLOCK = registerWithItemCopy("magic_grass_block",
+            new Block(FabricBlockSettings.copyOf(Blocks.GRASS_BLOCK)));
+    public static final Block MAGIC_DIRT_BLOCK = registerWithItemCopy("magic_dirt",
+            new Block(FabricBlockSettings.copyOf(Blocks.DIRT)));
     public static final Block MINERAL_BLOCK = registerWithItemCopy("mineral_block",
             new Block(FabricBlockSettings.copyOf(Blocks.STONE)));
     public static final Block MINERAL_CLUSTER = registerWithItemCopy("mineral_cluster",
@@ -62,8 +62,12 @@ public class ModBlocks {
             new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
     public static final Block FUEL_GENERATOR = registerWithItemCopy("fuel_generator",
             new FuelGeneratorBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
+    public static final Block URANIUM_GENERATOR = registerWithItemCopy("uranium_generator",
+            new UraniumGeneratorBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
     public static final Block OIL_REFINERY = registerWithItemCopy("oil_refinery",
-            new OilRefineryBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
+            new OilRefineryBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()));
+    public static final Block CHEMICAL_PLANT = registerWithItemCopy("chemical_plant",
+            new ChemicalPlantBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()));
     public static final Block LVCABLE = registerWithItemCopy("lv_cable",
             new LVcableBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
     public static final Block SMES = registerWithItemCopy("smes",
@@ -74,14 +78,31 @@ public class ModBlocks {
             new TeleporterBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()));
     public static final Block HVCABLE = registerWithItemCopy("hv_cable",
             new HVcableBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
-    public static final Block WALL_BLOCK = registerWithItemCopy("wall_block",
-            new WallBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
+    public static final Block SHUTTLE_WALL = registerWithItemCopy("shuttle_wall",
+            new ShuttleWallBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
+    public static final Block FLOOR_BLOCK = registerWithItemCopy("floor_block",
+            new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
+    public static final Block PLATING = registerWithItemCopy("plating",
+            new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
     public static final Block FISHING_NET = registerWithItemCopy("fishing_net",
             new FishingNetBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()));
     public static final Block CRUSHER = registerWithItemCopy("crusher",
             new CrusherBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()));
+    public static final Block ELECTRIC_SMELTER = registerWithItemCopy("electric_smelter",
+            new ElectricSmelterBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()));
     public static final Block POUNDER = registerWithItemCopy("pounder",
             new PounderBlock(FabricBlockSettings.copyOf(Blocks.STONE).nonOpaque()));
+    public static final Block CENTRIFUGE = registerWithItemCopy("centrifuge",
+            new CentrifugeBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()));
+    public static final Block RODS_BLOCK = registerWithItemCopy("rods_block",
+            new RodsBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()));
+    public static final Block CLOSET = registerWithItemCopy("closet",
+            new Closet(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()));
+    public static final Block CIRCUIT_IMPRINTER = registerWithItemCopy("circuit_imprinter",
+            new CircuitImprinterBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()));
+    public static final Block WALL_LAMP = registerWithItemCopy("wall_lamp",
+            new WallLampBlock(FabricBlockSettings.copyOf(Blocks.STONE).nonOpaque().luminance(createLightLevelFromLitBlockState(15))));
+
     
 
     private static Block registerWithItemCopy(String name, Block block) {

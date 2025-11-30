@@ -25,21 +25,33 @@ import java.util.List;
 import java.util.Map;
 
 public class WrappedInventoryStorage<T extends SimpleInventory> implements NBTSerializable<NbtList> {
+
     private final List<T> inventories = new ArrayList<>();
     private final List<InventoryStorage> storages = new ArrayList<>();
     private final Map<Direction, InventoryStorage> sidedStorageMap = new HashMap<>();
-    private final CombinedStorage<ItemVariant, InventoryStorage> combinedStorage = new CombinedStorage<>(this.storages);
+    private final CombinedStorage<ItemVariant, InventoryStorage> combinedStorage =
+            new CombinedStorage<>(storages);
 
-    public void addInventory(@NotNull T inventory) {
+    // ---------------------------
+    //  ИНИЦИАЛИЗАЦИЯ
+    // ---------------------------
+
+    public void addInventory(T inventory) {
         addInventory(inventory, null);
     }
 
-    public void addInventory(@NotNull T inventory, Direction side) {
-        this.inventories.add(inventory);
-        var storage = InventoryStorage.of(inventory, side);
-        this.storages.add(storage);
-        this.sidedStorageMap.put(side, storage);
+    public void addInventory(T inventory, Direction side) {
+        inventories.add(inventory);
+
+        InventoryStorage storage = InventoryStorage.of(inventory, side);
+
+        storages.add(storage);
+        sidedStorageMap.put(side, storage);
     }
+
+    // ---------------------------
+    //  ПОЛУЧЕНИЕ ДАННЫХ
+    // ---------------------------
 
     public List<T> getInventories() {
         return inventories;
@@ -49,78 +61,88 @@ public class WrappedInventoryStorage<T extends SimpleInventory> implements NBTSe
         return storages;
     }
 
-    public Map<Direction, InventoryStorage> getSidedStorageMap() {
-        return sidedStorageMap;
-    }
-
     public CombinedStorage<ItemVariant, InventoryStorage> getCombinedStorage() {
         return combinedStorage;
     }
 
     public @Nullable InventoryStorage getStorage(Direction side) {
-        return this.sidedStorageMap.get(side);
+        return sidedStorageMap.get(side);
     }
 
     public @Nullable T getInventory(int index) {
-        return this.inventories.get(index);
+        if (index < 0 || index >= inventories.size()) return null;
+        return inventories.get(index);
     }
 
+    /**
+     * Возвращает список всех ItemStack из всех инвентарей (живых, не копий).
+     */
     public @NotNull List<ItemStack> getStacks() {
-        List<ItemStack> stacks = new ArrayList<>();
-        for (T inventory : this.inventories) {
-            for (int i = 0; i < inventory.size(); i++) {
-                stacks.add(inventory.getStack(i));
+        List<ItemStack> list = new ArrayList<>();
+        for (T inv : inventories) {
+            for (int i = 0; i < inv.size(); i++) {
+                list.add(inv.getStack(i));
             }
         }
-
-        return stacks;
+        return list;
     }
 
+    /**
+     * Проверка, что общая сумма всех слотов равна ожидаемой.
+     */
     public void checkSize(int size) {
-        if (this.inventories.stream().map(Inventory::size).reduce(0, Integer::sum) != size)
-            throw new IllegalArgumentException("Size of inventories does not match the size provided: " + size);
+        int sum = inventories.stream()
+                .mapToInt(Inventory::size)
+                .sum();
+
+        if (sum != size)
+            throw new IllegalArgumentException(
+                    "Size mismatch: inventories=" + sum + " expected=" + size
+            );
     }
 
-    public void onOpen(@NotNull PlayerEntity player) {
-        for (T inventory : this.inventories) {
-            inventory.onOpen(player);
-        }
+    // ---------------------------
+    //  ХУКИ
+    // ---------------------------
+
+    public void onOpen(PlayerEntity player) {
+        inventories.forEach(inv -> inv.onOpen(player));
     }
 
-    public void onClose(@NotNull PlayerEntity player) {
-        for (T inventory : this.inventories) {
-            inventory.onClose(player);
-        }
+    public void onClose(PlayerEntity player) {
+        inventories.forEach(inv -> inv.onClose(player));
     }
 
-    public void dropContents(@NotNull World world, @NotNull BlockPos pos) {
-        for (T inventory : this.inventories) {
-            ItemScatterer.spawn(world, pos, inventory);
-        }
+    public void dropContents(World world, BlockPos pos) {
+        inventories.forEach(inv -> ItemScatterer.spawn(world, pos, inv));
     }
 
     public RecipeSimpleInventory getRecipeInventory() {
         return new RecipeSimpleInventory(getStacks().toArray(new ItemStack[0]));
     }
 
+    // ---------------------------
+    //  NBT
+    // ---------------------------
+
     @Override
     public NbtList writeNbt() {
-        var nbt = new NbtList();
-        for (T inventory : this.inventories) {
-            var inventoryNbt = new NbtCompound();
-            nbt.add(Inventories.writeNbt(inventoryNbt, inventory.getHeldStacks()));
-        }
+        NbtList list = new NbtList();
 
-        return nbt;
+        for (SimpleInventory inv : inventories) {
+            NbtCompound tag = new NbtCompound();
+            Inventories.writeNbt(tag, inv.getHeldStacks()); // безопасно
+            list.add(tag);
+        }
+        return list;
     }
 
     @Override
-    public void readNbt(NbtList nbt) {
-        for (int index = 0; index < nbt.size(); index++) {
-            var inventoryNbt = nbt.getCompound(index);
-
-            SimpleInventory inventory = this.inventories.get(index);
-            Inventories.readNbt(inventoryNbt, inventory.getHeldStacks());
+    public void readNbt(NbtList list) {
+        for (int i = 0; i < list.size(); i++) {
+            NbtCompound tag = list.getCompound(i);
+            SimpleInventory inv = inventories.get(i);
+            Inventories.readNbt(tag, inv.getHeldStacks());
         }
     }
 }

@@ -1,0 +1,10 @@
+{
+  "type": "item_fluid",
+  "inputs": [
+    { "item": "minecraft:coal", "count": 4 }
+  ],
+  "input_fluid": "barracuda:gas",
+  "input_fluid_buckets": 1,
+  "output": { "item": "barracuda:plastic", "count": 4 },
+  "craft_time": 300
+}

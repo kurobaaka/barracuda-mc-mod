@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "barracuda:block/electric_smelter",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "barracuda:block/electric_smelter",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "barracuda:block/electric_smelter",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "barracuda:block/electric_smelter"
+    }
+  }
+}

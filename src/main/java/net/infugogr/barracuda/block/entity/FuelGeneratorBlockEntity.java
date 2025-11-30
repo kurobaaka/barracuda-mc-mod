@@ -45,12 +45,11 @@ public class FuelGeneratorBlockEntity extends UpdatableBlockEntity implements Sy
     protected final PropertyDelegate propertyDelegate;
     private int progress = 0;
     private int maxProgress = 0;
-    private int output = 0;
 
     public FuelGeneratorBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntityType.FUEL_GENERATOR, pos, state);
         this.energyStorage.addStorage(new SyncingEnergyStorage(this, 5000, 0, 100));
-        this.inventoryStorage.addInventory(new SyncingSimpleInventory(this, 1));
+        this.inventoryStorage.addInventory(new SyncingSimpleInventory(this, 5));
         this.propertyDelegate = new PropertyDelegate() {
             @Override
             public int get(int index) {
@@ -87,21 +86,20 @@ public class FuelGeneratorBlockEntity extends UpdatableBlockEntity implements Sy
 
         spread(this.world, this.pos, energyStorage);
 
-        if (energyStorage.getAmount() > energyStorage.getCapacity() - 20)
+        if (energyStorage.getAmount() > energyStorage.getCapacity())
             return;
 
         if (this.progress > 0) {
             this.progress--;
             energyStorage.amount += 20;
-            update();
         } else {
             SimpleInventory inventory = this.inventoryStorage.getInventory(0);
+            assert inventory != null;
             ItemStack stack = inventory.getStack(0);
             if (isFuel(stack)) {
                 this.maxProgress = getFuelTime(stack);
                 this.progress = getFuelTime(stack);
                 stack.decrement(1);
-                update();
             }
         }
     }

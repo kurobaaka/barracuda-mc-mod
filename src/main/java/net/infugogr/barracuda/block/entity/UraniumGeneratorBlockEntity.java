@@ -1,0 +1,159 @@
+package net.infugogr.barracuda.block.entity;
+
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
+import net.infugogr.barracuda.Barracuda;
+import net.infugogr.barracuda.item.ModItems;
+import net.infugogr.barracuda.screenhandler.UraniumGeneratorScreenHandler;
+import net.infugogr.barracuda.util.SyncableStorage;
+import net.infugogr.barracuda.util.SyncableTickableBlockEntity;
+import net.infugogr.barracuda.util.UpdatableBlockEntity;
+import net.infugogr.barracuda.util.energy.EnergySpreader;
+import net.infugogr.barracuda.util.energy.SyncingEnergyStorage;
+import net.infugogr.barracuda.util.energy.WrappedEnergyStorage;
+import net.infugogr.barracuda.util.inventory.SyncingSimpleInventory;
+import net.infugogr.barracuda.util.inventory.WrappedInventoryStorage;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.screen.PropertyDelegate;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import org.jetbrains.annotations.Nullable;
+import team.reborn.energy.api.EnergyStorage;
+import team.reborn.energy.api.base.SimpleEnergyStorage;
+
+import java.util.List;
+
+import static net.minecraft.block.entity.AbstractFurnaceBlockEntity.createFuelTimeMap;
+
+public class UraniumGeneratorBlockEntity extends UpdatableBlockEntity implements SyncableTickableBlockEntity, EnergySpreader, ExtendedScreenHandlerFactory {
+    public static final Text TITLE = Barracuda.containerTitle("uranium_generator");
+    private final WrappedEnergyStorage energyStorage = new WrappedEnergyStorage();
+    private final WrappedInventoryStorage<SimpleInventory> inventoryStorage = new WrappedInventoryStorage<>();
+    protected final PropertyDelegate propertyDelegate;
+    private int progress = 0;
+    private int maxProgress = 0;
+
+    public UraniumGeneratorBlockEntity(BlockPos pos, BlockState state) {
+        super(ModBlockEntityType.URANIUM_GENERATOR, pos, state);
+        this.energyStorage.addStorage(new SyncingEnergyStorage(this, 25000000, 0, 1000000));
+        this.inventoryStorage.addInventory(new SyncingSimpleInventory(this, 5));
+        this.propertyDelegate = new PropertyDelegate() {
+            @Override
+            public int get(int index) {
+                return switch (index) {
+                    case 0 -> UraniumGeneratorBlockEntity.this.progress;
+                    case 1 -> UraniumGeneratorBlockEntity.this.maxProgress;
+                    case 2 -> (int)UraniumGeneratorBlockEntity.this.energyStorage.getStorage(null).getAmount();
+                    case 3 -> (int)UraniumGeneratorBlockEntity.this.energyStorage.getStorage(null).getCapacity();
+                    default -> 0;
+                };
+            }
+            @Override
+            public void set(int index, int value) {
+            }
+            @Override
+            public int size() {
+                return 4;
+            }
+        };
+    }
+    @Override
+    public List<SyncableStorage> getSyncableStorages() {
+        var energy = (SyncingEnergyStorage) this.energyStorage.getStorage(null);
+        var inventory = (SyncingSimpleInventory) this.inventoryStorage.getInventory(0);
+        assert inventory != null;
+        return List.of(energy, inventory);
+    }
+    @Override
+    public void onTick() {
+        if (this.world == null || this.world.isClient)
+            return;
+
+        SimpleEnergyStorage energyStorage = this.energyStorage.getStorage(null);
+
+        spread(this.world, this.pos, energyStorage);
+
+        if (energyStorage.getAmount() > energyStorage.getCapacity() - 100000)
+            return;
+
+        if (this.progress > 0) {
+            this.progress--;
+            energyStorage.amount += 100000;
+        } else {
+            SimpleInventory inventory = this.inventoryStorage.getInventory(0);
+            assert inventory != null;
+            ItemStack stack = inventory.getStack(0);
+            if (stack.getItem() == ModItems.URANIUM_FUEL_ROD) {
+                this.maxProgress = 3000;
+                this.progress = 3000;
+                stack.decrement(1);
+            }
+        }
+    }
+    @Override
+    public void writeScreenOpeningData(ServerPlayerEntity serverPlayerEntity, PacketByteBuf packetByteBuf) {
+        packetByteBuf.writeBlockPos(this.pos);
+    }
+    @Override
+    public void writeNbt(NbtCompound nbt) {
+        nbt.put("EnergyStorage", this.energyStorage.writeNbt());
+        nbt.put("Inventory", this.inventoryStorage.writeNbt());
+        nbt.putInt("BurnTime", this.progress);
+        nbt.putInt("FuelTime", this.maxProgress);
+    }
+    @Override
+    public void readNbt(NbtCompound nbt) {
+        this.energyStorage.readNbt(nbt.getList("EnergyStorage", NbtElement.COMPOUND_TYPE));
+        this.inventoryStorage.readNbt(nbt.getList("Inventory", NbtElement.COMPOUND_TYPE));
+        this.progress = nbt.getInt("BurnTime");
+        this.maxProgress = nbt.getInt("FuelTime");
+    }
+    @Override
+    public NbtCompound toInitialChunkDataNbt() {
+        return createNbt();
+    }
+    @Override
+    public Text getDisplayName() {
+        return TITLE;
+    }
+    @Override
+    public @Nullable ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
+        return new UraniumGeneratorScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
+    }
+    public boolean isFuel(ItemStack stack) {
+        return createFuelTimeMap().containsKey(stack.getItem());
+    }
+    public int getFuelTime(ItemStack stack) {
+        return createFuelTimeMap().getOrDefault(stack.getItem(), 0);
+    }
+    public WrappedInventoryStorage<SimpleInventory> getWrappedInventoryStorage() {
+        return this.inventoryStorage;
+    }
+    public EnergyStorage getEnergyProvider(Direction direction) {
+        return this.energyStorage.getStorage(direction);
+    }
+    public boolean isValid(ItemStack itemStack, int slot) {
+        return slot == 0 && itemStack.getItem() == ModItems.URANIUM_FUEL_ROD;
+    }
+    public InventoryStorage getInventoryProvider(Direction direction) {
+        return this.inventoryStorage.getStorage(direction);
+    }
+    @Nullable
+    @Override
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
+    }
+}

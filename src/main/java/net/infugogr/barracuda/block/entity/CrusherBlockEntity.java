@@ -3,9 +3,6 @@ package net.infugogr.barracuda.block.entity;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
 import net.infugogr.barracuda.Barracuda;
-import net.infugogr.barracuda.block.ModBlocks;
-import net.infugogr.barracuda.block.recipes.CrusherRecipes;
-import net.infugogr.barracuda.item.ModItems;
 import net.infugogr.barracuda.screenhandler.CrusherScreenHandler;
 import net.infugogr.barracuda.util.ModTags;
 import net.infugogr.barracuda.util.SyncableStorage;
@@ -112,7 +109,6 @@ public class CrusherBlockEntity extends UpdatableBlockEntity implements Syncable
             this.progress = 0;
 
             if (currentProgress > 0)
-                update();
 
             return;
         }
@@ -124,19 +120,15 @@ public class CrusherBlockEntity extends UpdatableBlockEntity implements Syncable
             this.progress = 0;
             input.decrement(1);
             if (output == ItemStack.EMPTY) {
-                inventory2.setStack(0, CrusherRecipes.getCrusherOutput(input.getItem()).getDefaultStack());
-                update();
                 output.increment(1);
             } else {
                 output.increment(2);
             }
-            update();
             return;
         }
 
         this.progress++;
         energyStorage.amount -= 20;
-        update();
     }
 
 

@@ -8,6 +8,8 @@
     "barracuda:heavy_oil_capsule",
     "barracuda:diesel_capsule",
     "barracuda:water_capsule",
-    "minecraft:water_bucket"
+    "minecraft:water_bucket",
+    "minecraft:bucket",
+    "barracuda:empty_capsule"
   ]
 }

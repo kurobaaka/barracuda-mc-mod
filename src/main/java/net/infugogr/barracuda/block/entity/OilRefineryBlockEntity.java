@@ -125,9 +125,7 @@ public class OilRefineryBlockEntity extends UpdatableBlockEntity implements Sync
             this.progress = 0;
 
             if (currentProgress > 0)
-                update();
-
-            return;
+                return;
         }
         if (this.progress >= this.maxProgress) {
             this.progress = 0;
@@ -138,13 +136,11 @@ public class OilRefineryBlockEntity extends UpdatableBlockEntity implements Sync
             oilStorage.amount -= FluidConstants.BUCKET;
             watStorage.amount -= (long) (FluidConstants.BUCKET * 0.5);
 
-            update();
             return;
         }
 
         this.progress++;
         energyStorage.amount -= 20;
-        update();
     }
     @Override
     public void writeScreenOpeningData(ServerPlayerEntity serverPlayerEntity, PacketByteBuf packetByteBuf) {
@@ -200,6 +196,10 @@ public class OilRefineryBlockEntity extends UpdatableBlockEntity implements Sync
     public ActionResult setFluid(ItemStack stack, PlayerEntity player) {
         SingleFluidStorage oil = this.fluidStorage.getStorage(Direction.UP);
         SingleFluidStorage water = this.fluidStorage.getStorage(Direction.DOWN);
+        SingleFluidStorage heavy_oil =  this.fluidStorage.getStorage(Direction.SOUTH);
+        SingleFluidStorage diesel =  this.fluidStorage.getStorage(Direction.EAST);
+        SingleFluidStorage gas =  this.fluidStorage.getStorage(Direction.WEST);
+
         if (oil.getAmount() <= oil.getCapacity() - FluidConstants.BUCKET & (stack.getItem() == ModItems.CRUDE_OIL_BUCKET | stack.getItem() == ModItems.CRUDE_OIL_CAPSULE)) {
             ItemUsage.exchangeStack(stack, player, stack.getRecipeRemainder());
             oil.amount += FluidConstants.BUCKET;
@@ -209,6 +209,34 @@ public class OilRefineryBlockEntity extends UpdatableBlockEntity implements Sync
             ItemUsage.exchangeStack(stack, player, stack.getRecipeRemainder());
             water.amount += FluidConstants.BUCKET;
             return  ActionResult.SUCCESS;
-        } else {return  ActionResult.PASS;}
+        }
+        else if (heavy_oil.getAmount() >= FluidConstants.BUCKET & (stack.getItem() == Items.BUCKET | stack.getItem() == ModItems.EMPTY_CAPSULE)) {
+            if (stack.getItem() == Items.BUCKET){
+                ItemUsage.exchangeStack(stack, player, ModItems.HEAVY_OIL_BUCKET.getDefaultStack());
+            } else {
+                ItemUsage.exchangeStack(stack, player, ModItems.HEAVY_OIL_CAPSULE.getDefaultStack());
+            }
+            heavy_oil.amount -= FluidConstants.BUCKET;
+            return ActionResult.SUCCESS;
+        }
+        else if (diesel.getAmount() >= FluidConstants.BUCKET & (stack.getItem() == Items.BUCKET | stack.getItem() == ModItems.EMPTY_CAPSULE)) {
+            if (stack.getItem() == Items.BUCKET){
+                ItemUsage.exchangeStack(stack, player, ModItems.DIESEL_BUCKET.getDefaultStack());
+            } else {
+                ItemUsage.exchangeStack(stack, player, ModItems.DIESEL_CAPSULE.getDefaultStack());
+            }
+            diesel.amount -= FluidConstants.BUCKET;
+            return ActionResult.SUCCESS;
+        }
+        else if (gas.getAmount() >= FluidConstants.BUCKET & (stack.getItem() == Items.BUCKET | stack.getItem() == ModItems.EMPTY_CAPSULE)) {
+            if (stack.getItem() == Items.BUCKET){
+                ItemUsage.exchangeStack(stack, player, ModItems.GAS_BUCKET.getDefaultStack());
+            } else {
+                ItemUsage.exchangeStack(stack, player, ModItems.GAS_CAPSULE.getDefaultStack());
+            }
+            gas.amount -= FluidConstants.BUCKET;
+            return ActionResult.SUCCESS;
+        }
+        else {return  ActionResult.PASS;}
     }
 }

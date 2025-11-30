@@ -2,18 +2,18 @@
   "variants": {
     "facing=east": {
       "model": "barracuda:block/teleporter",
-      "y": 90
+      "y": 270
     },
     "facing=north": {
-      "model": "barracuda:block/teleporter"
+      "model": "barracuda:block/teleporter",
+      "y": 180
     },
     "facing=west": {
       "model": "barracuda:block/teleporter",
-      "y": 270
+      "y": 90
     },
     "facing=south": {
-      "model": "barracuda:block/teleporter",
-      "y": 180
+      "model": "barracuda:block/teleporter"
     }
   }
 }

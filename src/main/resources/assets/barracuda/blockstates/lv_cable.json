@@ -158,6 +158,30 @@
           }
         ]
       }
+    },
+    {
+      "apply": {
+        "model": "barracuda:block/rods_block"
+      },
+      "when": {
+        "OR": [
+          {
+            "state": "rods"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "barracuda:block/shuttle_wall"
+      },
+      "when": {
+        "OR": [
+          {
+            "state": "wall"
+          }
+        ]
+      }
     }
   ]
 }

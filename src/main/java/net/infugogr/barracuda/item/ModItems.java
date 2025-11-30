@@ -3,11 +3,13 @@ package net.infugogr.barracuda.item;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.infugogr.barracuda.Barracuda;
 import net.infugogr.barracuda.fluid.ModFluids;
+import net.infugogr.barracuda.world.dimension.ModDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.world.World;
 
 import java.util.function.Function;
 
@@ -69,26 +71,38 @@ public class ModItems {
     public static final LiveCapsule LIVE_CAPSULE = registerItem("live_capsule",
             new LiveCapsule(null, new FabricItemSettings()));
     public static final Item CRUDE_OIL_BUCKET = ModFluids.CRUDE_OIL.bucket();
-    public static final Item HEAVY_OIL_BUCKET = register("heavy_oil_bucket",
-            Item::new, settings -> settings.maxCount(1).recipeRemainder(Items.BUCKET));
-    public static final Item DIESEL_BUCKET= register("diesel_bucket",
-            Item::new, settings -> settings.maxCount(1).recipeRemainder(Items.BUCKET));
-    public static final Item GAS_CAPSULE = register("gas_capsule",
-            Item::new, settings -> settings.maxCount(16).recipeRemainder(ModItems.EMPTY_CAPSULE));
+    public static final Item HEAVY_OIL_BUCKET = ModFluids.HEAVY_OIL.bucket();
+    public static final Item GAS_BUCKET = ModFluids.GAS.bucket();
+    public static final Item DIESEL_BUCKET= ModFluids.DIESEL.bucket();
+    public static final Item GAS_CAPSULE = registerItem("gas_capsule",
+            (Item)(new CapsuleItem(ModFluids.GAS.still(), (new Item.Settings()).recipeRemainder(ModItems.EMPTY_CAPSULE).maxCount(16))));
     public static final Item WATER_CAPSULE = registerItem("water_capsule",
             (Item)(new CapsuleItem(Fluids.WATER, (new Item.Settings()).recipeRemainder(ModItems.EMPTY_CAPSULE).maxCount(16))));
-    public static final Item DIESEL_CAPSULE = register("diesel_capsule",
-            Item::new, settings -> settings.maxCount(16).recipeRemainder(ModItems.EMPTY_CAPSULE));
-    public static final Item HEAVY_OIL_CAPSULE = register("heavy_oil_capsule",
-            Item::new, settings -> settings.maxCount(16).recipeRemainder(ModItems.EMPTY_CAPSULE));
+    public static final Item DIESEL_CAPSULE = registerItem("diesel_capsule",
+            (Item)(new CapsuleItem(ModFluids.DIESEL.still(), (new Item.Settings()).recipeRemainder(ModItems.EMPTY_CAPSULE).maxCount(16))));
+    public static final Item HEAVY_OIL_CAPSULE = registerItem("heavy_oil_capsule",
+            (Item)(new CapsuleItem(ModFluids.HEAVY_OIL.still(), (new Item.Settings()).recipeRemainder(ModItems.EMPTY_CAPSULE).maxCount(16))));
     public static final Item CRUDE_OIL_CAPSULE = registerItem("crude_oil_capsule",
             (Item)(new CapsuleItem(ModFluids.CRUDE_OIL.still(), (new Item.Settings()).recipeRemainder(ModItems.EMPTY_CAPSULE).maxCount(16))));
     public static final Item LAVA_CAPSULE = registerItem("lava_capsule",
             (Item)(new CapsuleItem(Fluids.LAVA, (new Item.Settings()).recipeRemainder(ModItems.EMPTY_CAPSULE).maxCount(16))));
     public static final Item EMPTY_CAPSULE = registerItem("empty_capsule",
             (Item)(new CapsuleItem(Fluids.EMPTY, (new Item.Settings()).maxCount(16))));
+    public static final Item URANIUM_FUEL_ROD = register("uranium_fuel_rod",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item DIMENSION_CHIP_OVERWORLD = registerItem("dimension_chip_overworld",
+            new DimensionChip(new FabricItemSettings().maxCount(1), World.OVERWORLD));
+    public static final Item DIMENSION_CHIP_END = registerItem("dimension_chip_end",
+            new DimensionChip(new FabricItemSettings().maxCount(1), World.END));
+    public static final Item DIMENSION_CHIP_NETHER = registerItem("dimension_chip_nether",
+            new DimensionChip(new FabricItemSettings().maxCount(1), World.NETHER));
+    public static final Item DIMENSION_CHIP_BETA = registerItem("dimension_chip_beta",
+            new DimensionChip(new FabricItemSettings().maxCount(1), ModDimensions.BETA_LEVEL_KEY));
+    public static final Item POSITION_CHIP = registerItem("position_chip",
+            new PosChip(new FabricItemSettings().maxCount(1)));
 
-        // Weapons stuff
+
+    // Weapons stuff
 
     public static final Item RUBY_PICKAXE = registerItem("ruby_pickaxe",
             new PickaxeItem(ModToolMaterial.RUBY, 2, 2f, new FabricItemSettings()));
@@ -395,6 +409,8 @@ public class ModItems {
 **/
     public static final IronPlate IRON_PLATE = register("iron_plate",
             IronPlate::new, settings -> settings.maxCount(16));
+    public static final Item Plastic = register("plastic",
+            Item::new, settings -> settings.maxCount(16));
 
     private static <T extends Item> T registerItem(String name, T item) {
         return Registry.register(Registries.ITEM, Barracuda.id(name), item);

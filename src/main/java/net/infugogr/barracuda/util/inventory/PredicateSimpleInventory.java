@@ -14,7 +14,7 @@ public class PredicateSimpleInventory extends SyncingSimpleInventory {
     }
 
     public PredicateSimpleInventory(UpdatableBlockEntity blockEntity, BiPredicate<ItemStack, Integer> predicate, ItemStack... stacks) {
-        super(blockEntity, stacks);
+        super(blockEntity, stacks.length);
         this.predicate = predicate;
     }
 

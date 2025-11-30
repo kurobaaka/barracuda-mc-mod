@@ -2,6 +2,8 @@ package net.infugogr.barracuda.block.entity;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.infugogr.barracuda.Barracuda;
+import net.infugogr.barracuda.block.CircuitImprinterBlock;
+import net.infugogr.barracuda.block.ElectricSmelterBlock;
 import net.infugogr.barracuda.block.ModBlocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -47,10 +49,42 @@ public class ModBlockEntityType {
             BlockEntityType.Builder.create(PounderBlockEntity::new, ModBlocks.POUNDER)
                     .build());
 
-    public static final BlockEntityType<FishingNetBlockEntity> FISHING_NET =
-            Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Barracuda.MOD_ID, "fishing_net"),
-                    FabricBlockEntityTypeBuilder.create(FishingNetBlockEntity::new,
-                            ModBlocks.FISHING_NET).build());
+    public static final BlockEntityType<ElectricSmelterBlockEntity> ELECTRIC_SMELTER = register("electric_smelter",
+            BlockEntityType.Builder.create(ElectricSmelterBlockEntity::new, ModBlocks.ELECTRIC_SMELTER)
+                    .build());
+
+    public static final BlockEntityType<CentrifugeBlockEntity> CENTRIFUGE = register("centrifuge",
+            BlockEntityType.Builder.create(CentrifugeBlockEntity::new, ModBlocks.CENTRIFUGE)
+                    .build());
+
+    public static final BlockEntityType<WallLampBlockEntity> WALL_LAMP = register("wall_lamp",
+            BlockEntityType.Builder.create(WallLampBlockEntity::new, ModBlocks.WALL_LAMP)
+                    .build());
+
+    public static final BlockEntityType<UraniumGeneratorBlockEntity> URANIUM_GENERATOR = register("uranium_generator",
+            BlockEntityType.Builder.create(UraniumGeneratorBlockEntity::new, ModBlocks.URANIUM_GENERATOR)
+                    .build());
+
+
+    public static final BlockEntityType<FishingNetBlockEntity> FISHING_NET = register("fishing_net",
+            BlockEntityType.Builder.create(FishingNetBlockEntity::new, ModBlocks.FISHING_NET)
+                    .build());
+
+    public static final BlockEntityType<ClosetBlockEntity> CLOSET = register("closet",
+            BlockEntityType.Builder.create(ClosetBlockEntity::new, ModBlocks.CLOSET)
+                    .build());
+
+    public static final BlockEntityType<ShuttleWallBlockEntity> SHUTTLE_WALL = register("shuttle_wall",
+            BlockEntityType.Builder.create(ShuttleWallBlockEntity::new, ModBlocks.SHUTTLE_WALL)
+                    .build());
+
+    public static final BlockEntityType<CircuitImprinterBlockEntity> CIRCUIT_IMPRINTER = register("circuit_imprinter",
+            BlockEntityType.Builder.create(CircuitImprinterBlockEntity::new, ModBlocks.CIRCUIT_IMPRINTER)
+                    .build());
+
+    public static final BlockEntityType<ChemicalPlantBlockEntity> CHEMICAL_PLANT = register("chemical_plant",
+            BlockEntityType.Builder.create(ChemicalPlantBlockEntity::new, ModBlocks.CHEMICAL_PLANT)
+                    .build());
                     
     public static <T extends BlockEntity> BlockEntityType<T> register(String name, BlockEntityType<T> type) {
         return Registry.register(Registries.BLOCK_ENTITY_TYPE, Barracuda.id(name), type);

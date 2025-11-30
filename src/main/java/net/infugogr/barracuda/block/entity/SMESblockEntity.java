@@ -106,7 +106,6 @@ public class SMESblockEntity extends UpdatableBlockEntity implements SyncableTic
                         energyStorage.amount -= inserted;
                         transaction.commit();
 
-                        update();
                     } else if (this.chargeMode == ChargeMode.DISCHARGE && itemEnergyStorage.supportsExtraction() && energyStorage.getAmount() < energyStorage.getCapacity()) {
                         long attemptToExtract = Math.min(Math.min(itemEnergyStorage.getAmount(), energyStorage.getCapacity() - energyStorage.getAmount()), energyStorage.maxInsert);
                         if (attemptToExtract <= 0)
@@ -119,7 +118,6 @@ public class SMESblockEntity extends UpdatableBlockEntity implements SyncableTic
                         energyStorage.amount += extracted;
                         transaction.commit();
 
-                        update();
                     }
                 }
             }
@@ -207,7 +205,6 @@ public class SMESblockEntity extends UpdatableBlockEntity implements SyncableTic
     public void setChargeMode(ChargeMode mode) {
         this.chargeMode = mode;
         System.out.println("Charge mode set to: " + mode);
-        update();
     }
 
     public enum ChargeMode {

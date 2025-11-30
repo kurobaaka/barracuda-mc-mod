@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smoking",
-    "ingredient": {
-      "item": "barracuda:fish_herring"
-    },
-    "result": "barracuda:cooked_fish_herring",
-    "experience": 0.7,
-    "cookingtime": 300
-  }

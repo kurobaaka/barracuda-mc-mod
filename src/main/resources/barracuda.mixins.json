@@ -3,9 +3,9 @@
 	"package": "net.infugogr.barracuda.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
+      "BucketItemMixin"
 	],
 	"client": [
-		"ItemColorsMixin"
 	],
 
 	"injectors": {

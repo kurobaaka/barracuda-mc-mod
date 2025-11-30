@@ -51,9 +51,10 @@ public interface EnergySpreader {
 
             transaction.commit();
 
+            // ----- здесь исправляем вызов -----
             if (currentEnergy != energyStorage.getAmount()) {
                 if (this instanceof UpdatableBlockEntity updatableBlockEntity) {
-                    updatableBlockEntity.update();
+                    updatableBlockEntity.markForSync(); // ← вместо update()
                 } else if (this instanceof BlockEntity blockEntity) {
                     blockEntity.markDirty();
                 }

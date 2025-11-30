@@ -61,7 +61,7 @@ public class CrusherBlock extends BlockWithEntity implements BlockEntityProvider
     @Nullable
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+        return getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing());
     }
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {

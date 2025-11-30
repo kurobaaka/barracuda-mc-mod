@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
 public class FuelGeneratorScreen  extends HandledScreen<FuelGeneratorScreenHandler> {
-    private static final Identifier TEXTURE = Barracuda.id("textures/gui/fuel_generator_gui.png");
+    private static final Identifier TEXTURE = Barracuda.id("textures/gui/container/fuel_generator_gui.png");
 
     public FuelGeneratorScreen(FuelGeneratorScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
@@ -36,16 +36,16 @@ public class FuelGeneratorScreen  extends HandledScreen<FuelGeneratorScreenHandl
         long energy = this.handler.getEnergy();
         long maxEnergy = this.handler.getMaxEnergy();
         int energySize = MathHelper.ceil((float) energy / maxEnergy * 70);
-        context.drawTexture(TEXTURE, x + 152, y + 78 - energySize, 176, 84 - energySize, 16, energySize);
+        context.drawTexture(TEXTURE, x + 161, y + 78 - energySize, 176, 70 - energySize, 7, energySize);
 
         int burnTime = this.handler.getProgress();
         int fuelTime = this.handler.getMaxProgress();
         float burnTimePercentage = (float) burnTime / fuelTime;
         int burnTimeSize = Math.round(burnTimePercentage * 14);
-        context.drawTexture(TEXTURE, this.x + 9, this.y + 26 - burnTimeSize, 176, 14 - burnTimeSize, 14, burnTimeSize);
+        context.drawTexture(TEXTURE, this.x + 37, this.y + 29 - burnTimeSize, 183, 14 - burnTimeSize, 14, burnTimeSize);
 
         Text text =  Text.literal("Output: "+ EnergyCounter.CounterWh(this.handler.getEnergyPerTick()));
-        context.drawText(this.textRenderer, text, x + 31,y + 32,0xFF3e3e3e, false);
+        context.drawText(this.textRenderer, text, x + 55,y + 35,0xFF3e3e3e, false);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class FuelGeneratorScreen  extends HandledScreen<FuelGeneratorScreenHandl
         renderBackground(context, mouseX, mouseY, delta);
         super.render(context, mouseX, mouseY, delta);
         drawMouseoverTooltip(context, mouseX, mouseY);
-        if (isPointWithinBounds(152, 9, 16, 69, mouseX, mouseY)) {
+        if (isPointWithinBounds(160, 9, 9, 69, mouseX, mouseY)) {
             long energy = this.handler.getEnergy();
             long maxEnergy = this.handler.getMaxEnergy();
             context.drawTooltip(this.textRenderer, Text.literal(EnergyCounter.CounterAh(energy) + " / " + EnergyCounter.CounterAh(maxEnergy)), mouseX, mouseY);

@@ -2,6 +2,7 @@ package net.infugogr.barracuda.screenhandler;
 
 import net.infugogr.barracuda.block.ModBlocks;
 import net.infugogr.barracuda.block.entity.FuelGeneratorBlockEntity;
+import net.infugogr.barracuda.screenhandler.slot.OutputSlot;
 import net.infugogr.barracuda.screenhandler.slot.PredicateSlot;
 import net.infugogr.barracuda.util.inventory.WrappedInventoryStorage;
 import net.minecraft.block.Block;
@@ -40,7 +41,7 @@ public class FuelGeneratorScreenHandler extends ScreenHandler {
 
         WrappedInventoryStorage<SimpleInventory> inventory = this.blockEntity.getWrappedInventoryStorage();
         inventory.onOpen(playerInventory.player);
-        inventory.checkSize(1);
+        inventory.checkSize(5);
         addBlockEntityInventory();
         addPlayerInventory(playerInventory);
         addPlayerHotbar(playerInventory);
@@ -48,35 +49,69 @@ public class FuelGeneratorScreenHandler extends ScreenHandler {
     }
 
     private void addBlockEntityInventory() {
-        addSlot(new PredicateSlot( this.blockEntity.getWrappedInventoryStorage().getInventory(0), 0, 8, 28,
+        addSlot(new PredicateSlot( this.blockEntity.getWrappedInventoryStorage().getInventory(0), 0, 36, 32,
                 itemStack -> this.blockEntity.isValid(itemStack, 0)));
+        addSlot(new OutputSlot( this.blockEntity.getWrappedInventoryStorage().getInventory(0), 1, 36, 50));
+        addSlot(new PredicateSlot( this.blockEntity.getWrappedInventoryStorage().getInventory(0), 2, 8, 14));
+        addSlot(new PredicateSlot( this.blockEntity.getWrappedInventoryStorage().getInventory(0), 3, 8, 32));
+        addSlot(new PredicateSlot( this.blockEntity.getWrappedInventoryStorage().getInventory(0), 4, 8, 50));
     }
 
     @Override
-    public ItemStack quickMove(PlayerEntity player, int slot) {
-        ItemStack stack = ItemStack.EMPTY;
-        Slot slotObject = this.slots.get(slot);
+    public ItemStack quickMove(PlayerEntity player, int index) {
+        ItemStack result;
+        Slot slot = this.slots.get(index);
+        if (!slot.hasStack()) return ItemStack.EMPTY;
+        ItemStack stackInSlot = slot.getStack();
+        result = stackInSlot.copy();
+        final int FUEL_SLOT = 0;
+        final int BUCKET_SLOT = 1;
+        final int WORK_START = 2;
+        final int WORK_END = 5;
 
-        if (slotObject.hasStack()) {
-            ItemStack stackInSlot = slotObject.getStack();
-            stack = stackInSlot.copy();
-
-            if (slot < 0) {
-                if (!insertItem(stackInSlot, 0, this.slots.size(), true)) {
-                    return ItemStack.EMPTY;
-                }
-            } else if (!insertItem(stackInSlot, 0, 0, false)) {
+        if (index < WORK_END) {
+            if (!this.insertItem(stackInSlot, WORK_END, this.slots.size(), true)) {
                 return ItemStack.EMPTY;
             }
-
-            if (stackInSlot.isEmpty()) {
-                slotObject.setStack(ItemStack.EMPTY);
-            } else {
-                slotObject.markDirty();
+            slot.onTakeItem(player, stackInSlot);
+        } else {
+            if (isFuel(stackInSlot)) {
+                if (!this.insertItem(stackInSlot, FUEL_SLOT, FUEL_SLOT + 1, false)) {
+                    if (!this.insertItem(stackInSlot, WORK_START, WORK_END, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                }
+            }
+            else if (isEmptyBucket(stackInSlot)) {
+                if (!this.insertItem(stackInSlot, BUCKET_SLOT, BUCKET_SLOT + 1, false)) {
+                    if (!this.insertItem(stackInSlot, WORK_START, WORK_END, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                }
+            }
+            else if (!this.insertItem(stackInSlot, WORK_START, WORK_END, false)) {
+                return ItemStack.EMPTY;
             }
         }
+        if (stackInSlot.isEmpty()) {
+            slot.setStack(ItemStack.EMPTY);
+        } else {
+            slot.markDirty();
+        }
+        if (ItemStack.areEqual(result, stackInSlot)) {
+            return ItemStack.EMPTY;
+        }
+        slot.onTakeItem(player, stackInSlot);
+        return result;
+    }
 
-        return stack;
+    private boolean isFuel(ItemStack stack) {
+        if (stack.isEmpty()) return false;
+        return net.fabricmc.fabric.api.registry.FuelRegistry.INSTANCE.get(stack.getItem()) != null;
+    }
+
+    private boolean isEmptyBucket(ItemStack stack) {
+        return !stack.isEmpty() && stack.getItem() == net.minecraft.item.Items.BUCKET;
     }
 
     private void addPlayerInventory(PlayerInventory playerInventory) {

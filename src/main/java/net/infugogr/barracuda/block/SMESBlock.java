@@ -71,35 +71,11 @@ public class SMESBlock extends HorizontalFacingBlock implements BlockEntityProvi
     @Nullable
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+        return getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing());
     }
 
     @Override
     protected MapCodec<? extends HorizontalFacingBlock> getCodec() {return CODEC;}
-
-    public enum BatteryLevel {
-        BASIC(100_000, 1_000),
-        ADVANCED(1_000_000, 10_000),
-        ELITE(10_000_000, 100_000),
-        ULTIMATE(100_000_000, 1_000_000),
-        CREATIVE(Long.MAX_VALUE, Long.MAX_VALUE);
-
-        private final long capacity;
-        private final long maxTransfer;
-
-        BatteryLevel(long capacity, long maxTransfer) {
-            this.capacity = capacity;
-            this.maxTransfer = maxTransfer;
-        }
-
-        public long getCapacity() {
-            return this.capacity;
-        }
-
-        public long getMaxTransfer() {
-            return this.maxTransfer;
-        }
-    }
 
     @Override
     public BlockRenderType getRenderType(BlockState state) {

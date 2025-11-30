@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
 public class SMESScreen extends HandledScreen<SMESScreenHandler> {
-    private static final Identifier TEXTURE = Barracuda.id("textures/gui/smes_gui.png");
+    private static final Identifier TEXTURE = Barracuda.id("textures/gui/container/smes_gui.png");
 
     public SMESScreen(SMESScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
@@ -41,10 +41,10 @@ public class SMESScreen extends HandledScreen<SMESScreenHandler> {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        super.render(context, mouseX, mouseY, delta);
         renderBackground(context, mouseX, mouseY, delta);
+        super.render(context, mouseX, mouseY, delta);
         drawMouseoverTooltip(context, mouseX, mouseY);
-        if (isPointWithinBounds(152, 9, 16, 69, mouseX, mouseY)) {
+        if (isPointWithinBounds(160, 9, 9, 69, mouseX, mouseY)) {
             long energy = this.handler.getEnergy();
             long maxEnergy = this.handler.getMaxEnergy();
             context.drawTooltip(this.textRenderer, Text.literal(EnergyCounter.CounterAh(energy) + " / " + EnergyCounter.CounterAh(maxEnergy)), mouseX, mouseY);

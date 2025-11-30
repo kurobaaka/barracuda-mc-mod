@@ -1,0 +1,36 @@
+{
+  "variants": {
+    "facing=south,lit=false": {
+      "model": "barracuda:block/wall_lamp",
+      "y": 0
+    },
+    "facing=north,lit=false": {
+      "model": "barracuda:block/wall_lamp",
+      "y": 180
+    },
+    "facing=west,lit=false": {
+      "model": "barracuda:block/wall_lamp",
+      "y": 90
+    },
+    "facing=east,lit=false": {
+      "model": "barracuda:block/wall_lamp",
+      "y": 270
+    },
+    "facing=south,lit=true": {
+      "model": "barracuda:block/wall_lamp_lit",
+      "y": 0
+    },
+    "facing=north,lit=true": {
+      "model": "barracuda:block/wall_lamp_lit",
+      "y": 180
+    },
+    "facing=west,lit=true": {
+      "model": "barracuda:block/wall_lamp_lit",
+      "y": 90
+    },
+    "facing=east,lit=true": {
+      "model": "barracuda:block/wall_lamp_lit",
+      "y": 270
+    }
+  }
+}

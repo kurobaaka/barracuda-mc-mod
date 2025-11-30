@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smoking",
-    "ingredient": {
-      "item": "barracuda:fish_glass_catfish"
-    },
-    "result": "barracuda:cooked_fish_glass_catfish",
-    "experience": 0.7,
-    "cookingtime": 300
-  }

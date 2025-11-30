@@ -21,10 +21,11 @@ public class SyncingEnergyStorage extends SimpleEnergyStorage implements Syncabl
 
     @Override
     public void sync() {
-        if (this.isDirty && this.blockEntity != null && this.blockEntity.hasWorld() && !this.blockEntity.getWorld().isClient) {
-            this.isDirty = false;
-
-            this.blockEntity.update();
+        if (this.isDirty && this.blockEntity != null && this.blockEntity.hasWorld()) {
+            assert this.blockEntity.getWorld() != null;
+            if (!this.blockEntity.getWorld().isClient) {
+                this.isDirty = false;
+            }
         }
     }
 
