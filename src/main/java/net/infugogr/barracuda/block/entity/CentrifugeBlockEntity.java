@@ -50,7 +50,7 @@ public class CentrifugeBlockEntity extends UpdatableBlockEntity implements Synca
     public static final Text TITLE = Barracuda.containerTitle("centrifuge");
     private final WrappedEnergyStorage energyStorage = new WrappedEnergyStorage();
     private final WrappedInventoryStorage<SimpleInventory> inventoryStorage = new WrappedInventoryStorage<>();
-    private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     protected final PropertyDelegate propertyDelegate;
     private int progress = 0;
     private int maxProgress = 0;
