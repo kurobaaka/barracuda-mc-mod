@@ -3,6 +3,7 @@ package net.infugogr.barracuda.block.entity;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
 import net.infugogr.barracuda.Barracuda;
+import net.infugogr.barracuda.block.OilRefineryBlock;
 import net.infugogr.barracuda.screenhandler.ClosetScreenHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -22,11 +23,12 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
 import org.jetbrains.annotations.Nullable;
 
 public class ClosetBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory {
     public static final Text TITLE = Text.translatable("container." + Barracuda.MOD_ID + ".closet");
-
     private final SimpleInventory inventory = new SimpleInventory(54) {
         @Override
         public void markDirty() {

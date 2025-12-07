@@ -85,6 +85,10 @@ public class ModBlockEntityType {
     public static final BlockEntityType<ChemicalPlantBlockEntity> CHEMICAL_PLANT = register("chemical_plant",
             BlockEntityType.Builder.create(ChemicalPlantBlockEntity::new, ModBlocks.CHEMICAL_PLANT)
                     .build());
+
+    public static final BlockEntityType<MultiBlockEntity> MULTIBLOCK = register("multiblock",
+            BlockEntityType.Builder.create(MultiBlockEntity::new, ModBlocks.MULTIBLOCK)
+                    .build());
                     
     public static <T extends BlockEntity> BlockEntityType<T> register(String name, BlockEntityType<T> type) {
         return Registry.register(Registries.BLOCK_ENTITY_TYPE, Barracuda.id(name), type);
