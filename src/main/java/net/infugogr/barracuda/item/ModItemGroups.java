@@ -131,6 +131,10 @@ public class ModItemGroups {
                         entries.add(ModBlocks.URANIUM_GENERATOR);
                         entries.add(ModBlocks.OIL_REFINERY);
                         entries.add(ModBlocks.CHEMICAL_PLANT);
+                        entries.add(ModBlocks.ELECTRIC_SMELTER);
+                        entries.add(ModBlocks.CRUSHER);
+                        entries.add(ModBlocks.CENTRIFUGE);
+                        entries.add(ModBlocks.CIRCUIT_IMPRINTER);
                         entries.add(ModBlocks.LVCABLE);
                         entries.add(ModBlocks.SMES);
                         entries.add(ModBlocks.MACHINE_FRAME);
@@ -167,6 +171,7 @@ public class ModItemGroups {
                         entries.add(ModItems.DIMENSION_CHIP_END);
                         entries.add(ModItems.DIMENSION_CHIP_BETA);
                         entries.add(ModItems.IRON_PLATE);
+                        entries.add(ModItems.PLASTIC);
 
                         entries.add(ModItems.ENERGY_HELMET);
                         entries.add(ModItems.ENERGY_CHESTPLATE);

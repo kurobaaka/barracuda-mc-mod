@@ -1,14 +1,11 @@
 package net.infugogr.barracuda.block;
 
-import net.infugogr.barracuda.block.entity.MultiBlockEntity;
-import net.infugogr.barracuda.block.entity.OilRefineryBlockEntity;
-import net.infugogr.barracuda.block.entity.SMESblockEntity;
+import net.infugogr.barracuda.block.entity.*;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.IntProperty;
@@ -22,14 +19,11 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
 public class MultiBlock extends Block implements BlockEntityProvider {
 
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
-
-    // Простое свойство индекса формы: SHAPE = 0..99 (запас)
     public static final IntProperty SHAPE = IntProperty.of("shape", 0, 99);
 
     public MultiBlock(Settings settings) {
@@ -49,6 +43,12 @@ public class MultiBlock extends Block implements BlockEntityProvider {
                 BlockEntity blockEntity2 = world.getBlockEntity(multiBlockEntity.getEntityPos());
                 if (blockEntity2 instanceof OilRefineryBlockEntity oilRefineryBlockEntity) {
                     player.openHandledScreen(oilRefineryBlockEntity);
+                }
+                if (blockEntity2 instanceof ClosetBlockEntity closetBlockEntity) {
+                    player.openHandledScreen(closetBlockEntity);
+                }
+                if (blockEntity2 instanceof CircuitImprinterBlockEntity circuitImprinterBlockEntity) {
+                    player.openHandledScreen(circuitImprinterBlockEntity);
                 }
             }
         }
@@ -78,10 +78,10 @@ public class MultiBlock extends Block implements BlockEntityProvider {
                     Block.createCuboidShape(0, 2, 0, 16, 10, 16)
             );
 
-    // CLOSET SHAPE (1×2×1)
+    // CLOSET SHAPE
     private static VoxelShape closetShape(Direction facing) {
         double y1 = 0.0;
-        double y2 = 1.875;
+        double y2 = 0.875;
         double x1 = 0.125;
         double x2 = 0.875;
         double z1 = 0.125;
@@ -96,17 +96,23 @@ public class MultiBlock extends Block implements BlockEntityProvider {
         };
     }
 
-    // CIRCUIT PRINTER shape (1×1×2)
-    private static final VoxelShape PRINTER_FULL =
-            Block.createCuboidShape(2, 0, 1, 14, 11, 25);  // конвертировано 0.125..1.5625 *16
+    private static VoxelShape printerShape(Direction facing) {
+        double y1 = 0.0;
+        double y2 = 0.6875;
+        double x1 = 0.125;
+        double x2 = 0.875;
+        double z1 = 0.125;
+        double z2 = 0.5625;
 
-    // Передняя половина
-    private static final VoxelShape PRINTER_FRONT =
-            Block.createCuboidShape(2, 0, 1, 14, 11, 13);
+        return switch (facing.getOpposite()) {
+            case SOUTH -> VoxelShapes.cuboid(x1, y1, 0.0, x2, y2, z2);
+            case NORTH -> VoxelShapes.cuboid(x1, y1, 1 - z2, x2, y2, 1);
+            case EAST -> VoxelShapes.cuboid(0, y1, z1, z2, y2, x2);
+            case WEST -> VoxelShapes.cuboid(1 - z2, y1, z1, 1, y2, x2);
+            default -> VoxelShapes.fullCube();
+        };
+    }
 
-    // Задняя половина
-    private static final VoxelShape PRINTER_BACK =
-            Block.createCuboidShape(2, 0, 13, 14, 11, 25);
 
     // ---------------------------------------------------
 
@@ -125,13 +131,11 @@ public class MultiBlock extends Block implements BlockEntityProvider {
             case 4 -> OIL_REFINERY_TOP;
             case 5 -> OIL_REFINERY_TOP;
 
-            // 10..11 — Closet (верх/низ)
-            case 10 -> closetShape(facing); // нижний
-            case 11 -> closetShape(facing); // верхний
+            //11 — Closet
+            case 11 -> closetShape(facing);
 
-            // 20..21 — Circuit Imprinter
-            case 20 -> PRINTER_FRONT;
-            case 21 -> PRINTER_BACK;
+            //21 — Circuit Imprinter
+            case 21 -> printerShape(facing);
 
             default -> VoxelShapes.fullCube();
         };
@@ -163,8 +167,6 @@ public class MultiBlock extends Block implements BlockEntityProvider {
 
                         Direction facing = controllerState.get(OilRefineryBlock.FACING);
                         Direction perp = facing.rotateYClockwise();
-
-                        // Ломаем ВСЮ структуру (6 блоков)
                         for (int w = -1; w <= 1; w++) {
                             for (int h = 0; h >= -1; h--) {
                                 BlockPos target = controllerPos.add(
@@ -172,15 +174,18 @@ public class MultiBlock extends Block implements BlockEntityProvider {
                                         h,
                                         perp.getOffsetZ() * w
                                 );
-
-                                // Если это MultiBlock или сам контроллер — ломаем
                                 BlockState st = world.getBlockState(target);
                                 if (st.getBlock() instanceof MultiBlock || st.getBlock() instanceof OilRefineryBlock) {
                                     world.breakBlock(target, st.getBlock() instanceof OilRefineryBlock);
-                                    // true — только контроллер дропает предмет
                                 }
                             }
                         }
+                    }
+                    if (controllerState.getBlock() instanceof Closet) {
+                        world.breakBlock(controllerPos, true);
+                    }
+                    if (controllerState.getBlock() instanceof CircuitImprinterBlock) {
+                        world.breakBlock(controllerPos, true);
                     }
                 }
             }

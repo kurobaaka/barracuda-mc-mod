@@ -3,6 +3,7 @@ package net.infugogr.barracuda.block;
 import net.infugogr.barracuda.block.entity.ClosetBlockEntity;
 import net.infugogr.barracuda.block.entity.FuelGeneratorBlockEntity;
 import net.infugogr.barracuda.block.entity.MultiBlockEntity;
+import net.infugogr.barracuda.util.UniversalStructurePlacer;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.*;
 import net.minecraft.entity.LivingEntity;
@@ -102,7 +103,7 @@ public class Closet extends Block implements BlockEntityProvider {
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         Direction facing = state.get(FACING);
         double y1 = 0.0;
-        double y2 = 1.875; // высота 2 блока почти
+        double y2 = 1; // 875
         double x1 = 0.125;
         double x2 = 0.875;
         double z1 = 0.125;
@@ -127,9 +128,7 @@ public class Closet extends Block implements BlockEntityProvider {
             return super.onBreak(world, pos, state, player);
         }
         BlockState result = super.onBreak(world, pos, state, player);
-        Direction facing = state.get(FACING);
-        Direction perp = facing.rotateYClockwise();
-                BlockPos target = pos.add(perp.getOffsetX(), 1, perp.getOffsetZ());
+                BlockPos target = pos.up();
                 BlockState partState = world.getBlockState(target);
                 if (partState.getBlock() instanceof MultiBlock) {
                     world.breakBlock(target, false);
@@ -141,5 +140,12 @@ public class Closet extends Block implements BlockEntityProvider {
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         BlockPos checkPos = pos.add(0, 1, 0);
         return world.isAir(checkPos);
+    }
+
+    @Override
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        if (world.isClient) return;
+        Direction facing = state.get(FACING);
+        UniversalStructurePlacer.placeCloset(world, pos, facing);
     }
 }

@@ -45,37 +45,29 @@ public class UniversalStructurePlacer {
     // ---------------- CLOSET 1×2×1 ----------------
 
     public static void placeCloset(World world, BlockPos pos, Direction facing) {
-
-        // нижний блок
-        world.setBlockState(pos,
-                ModBlocks.MULTIBLOCK.getDefaultState()
-                        .with(MultiBlock.SHAPE, 10)
-                        .with(MultiBlock.FACING, facing));
-
         // верхний блок
         world.setBlockState(pos.up(),
                 ModBlocks.MULTIBLOCK.getDefaultState()
                         .with(MultiBlock.SHAPE, 11)
                         .with(MultiBlock.FACING, facing));
+        BlockEntity be = world.getBlockEntity(pos.up());
+        if (be instanceof MultiBlockEntity multiBlockEntity) {
+            multiBlockEntity.setEntityPos(pos);
+        }
     }
 
     // ------------ CIRCUIT IMPRINTER 1×1×2 ------------
 
     public static void placeCircuitImprinter(World world, BlockPos pos, Direction facing) {
-
-        BlockPos front = pos;
-        BlockPos back = pos.offset(facing);
-
-        // передняя половина (shape 20)
-        world.setBlockState(front,
-                ModBlocks.MULTIBLOCK.getDefaultState()
-                        .with(MultiBlock.SHAPE, 20)
-                        .with(MultiBlock.FACING, facing));
-
+        BlockPos back = pos.offset(facing.getOpposite());
         // задняя половина (shape 21)
         world.setBlockState(back,
                 ModBlocks.MULTIBLOCK.getDefaultState()
                         .with(MultiBlock.SHAPE, 21)
                         .with(MultiBlock.FACING, facing));
+        BlockEntity be = world.getBlockEntity(pos.offset(facing.getOpposite()));
+        if (be instanceof MultiBlockEntity multiBlockEntity) {
+            multiBlockEntity.setEntityPos(pos);
+        }
     }
 }

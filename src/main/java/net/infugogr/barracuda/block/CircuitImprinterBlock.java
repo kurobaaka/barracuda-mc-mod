@@ -4,12 +4,15 @@ import com.mojang.serialization.MapCodec;
 import net.infugogr.barracuda.block.entity.CircuitImprinterBlockEntity;
 import net.infugogr.barracuda.block.entity.ModBlockEntityType;
 import net.infugogr.barracuda.util.TickableBlockEntity;
+import net.infugogr.barracuda.util.UniversalStructurePlacer;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
@@ -23,6 +26,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumMap;
@@ -38,7 +42,7 @@ public class CircuitImprinterBlock extends BlockWithEntity implements BlockEntit
                 this.stateManager.getDefaultState()
                         .with(FACING, Direction.NORTH)
         );
-        runShapeCalculation(VoxelShapes.cuboid(0.125, 0, 0.0625, 0.875, 0.6875, 1.5625));
+        runShapeCalculation(VoxelShapes.cuboid(0.125, 0, 0.0625, 0.875, 0.6875, 1));
     }
 
     private static void runShapeCalculation(VoxelShape shape) {
@@ -105,5 +109,32 @@ public class CircuitImprinterBlock extends BlockWithEntity implements BlockEntit
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         return getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+    }
+
+    @Override
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        if (world.isClient) return;
+        Direction facing = state.get(FACING);
+        UniversalStructurePlacer.placeCircuitImprinter(world, pos, facing);
+    }
+
+    @Override
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        if (world.isClient) {
+            return super.onBreak(world, pos, state, player);
+        }
+        Direction facing = state.get(FACING);
+        BlockState result = super.onBreak(world, pos, state, player);
+        BlockState partState = world.getBlockState(pos.offset(facing.getOpposite()));
+        if (partState.getBlock() instanceof MultiBlock) {
+            world.breakBlock(pos.offset(facing.getOpposite()), false);
+        }
+        return result;
+    }
+
+    @Override
+    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        Direction facing = state.get(FACING);
+        return world.isAir(pos.offset(facing.getOpposite()));
     }
 }

@@ -100,6 +100,10 @@ public class ModItems {
             new DimensionChip(new FabricItemSettings().maxCount(1), ModDimensions.BETA_LEVEL_KEY));
     public static final Item POSITION_CHIP = registerItem("position_chip",
             new PosChip(new FabricItemSettings().maxCount(1)));
+    public static final IronPlate IRON_PLATE = register("iron_plate",
+            IronPlate::new, settings -> settings.maxCount(16));
+    public static final Item PLASTIC = register("plastic",
+            Item::new, settings -> settings.maxCount(16));
 
 
     // Weapons stuff
@@ -407,10 +411,6 @@ public class ModItems {
                     entries.add(ModularFishingRodItem.getStackWithComponents(MANGROVE_ROD, BAMBOO_REEL, IRON_HOOK), ItemGroup.StackVisibility.PARENT_TAB_ONLY);
                     entries.add(ModularFishingRodItem.getStackWithComponents(SPRUCE_ROD, COPPER_REEL, WEIGHTED_HOOK), ItemGroup.StackVisibility.PARENT_TAB_ONLY);
 **/
-    public static final IronPlate IRON_PLATE = register("iron_plate",
-            IronPlate::new, settings -> settings.maxCount(16));
-    public static final Item Plastic = register("plastic",
-            Item::new, settings -> settings.maxCount(16));
 
     private static <T extends Item> T registerItem(String name, T item) {
         return Registry.register(Registries.ITEM, Barracuda.id(name), item);
