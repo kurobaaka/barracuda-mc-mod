@@ -1,20 +1,12 @@
 package net.infugogr.barracuda.screenhandler;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.infugogr.barracuda.Barracuda;
-import net.infugogr.barracuda.block.entity.CircuitImprinterBlockEntity;
-import net.infugogr.barracuda.block.recipes.CircuitImprinterRecipes;
+import net.infugogr.barracuda.recipes.CircuitImprinterRecipes;
 import net.infugogr.barracuda.util.energy.EnergyCounter;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
-import net.minecraft.client.render.GameRenderer;
-import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.server.command.PlaySoundCommand;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;

@@ -10,12 +10,12 @@ public class RenderFluidHandler {
                 new SimpleFluidRenderHandler(Barracuda.id("block/crude_oil_still"), Barracuda.id("block/crude_oil_flow")));
 
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.HEAVY_OIL.still(), ModFluids.HEAVY_OIL.flowing(),
-                new SimpleFluidRenderHandler(Barracuda.id("block/crude_oil_still"), Barracuda.id("block/crude_oil_flow")));
+                new SimpleFluidRenderHandler(Barracuda.id("block/heavy_oil_still"), Barracuda.id("block/heavy_oil_flow")));
 
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.DIESEL.still(), ModFluids.DIESEL.flowing(),
-                new SimpleFluidRenderHandler(Barracuda.id("block/crude_oil_still"), Barracuda.id("block/crude_oil_flow")));
+                new SimpleFluidRenderHandler(Barracuda.id("block/diesel_still"), Barracuda.id("block/diesel_flow")));
 
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.GAS.still(), ModFluids.GAS.flowing(),
-                new SimpleFluidRenderHandler(Barracuda.id("block/crude_oil_still"), Barracuda.id("block/crude_oil_flow")));
+                new SimpleFluidRenderHandler(Barracuda.id("block/gas_still"), Barracuda.id("block/gas_flow")));
     }
 }

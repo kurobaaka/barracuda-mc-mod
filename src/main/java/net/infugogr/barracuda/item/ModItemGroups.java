@@ -216,10 +216,8 @@ public class ModItemGroups {
                      FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.CHICKEN_WING_COOKED))
                       .displayName(TITLE6)
                       .entries((displayContext, entries) -> {
-                         entries.add(ModItems.PORK);
-                         entries.add(ModItems.PORK_COOKED);
-                         entries.add(ModItems.CHICKEN_WING);
-                         entries.add(ModItems.CHICKEN_WING_COOKED);
+                         entries.add(ModItems.RAW_FISH);
+                         entries.add(ModItems.COOKED_FISH);
                          entries.add(ModItems.FISH_EEL);
                          entries.add(ModItems.FISH_BLUEFISH);
                          entries.add(ModItems.FISH_BREAM);
@@ -243,29 +241,6 @@ public class ModItemGroups {
                          entries.add(ModItems.FISH_STURGEON);
                          entries.add(ModItems.FISH_TUNA);
                          entries.add(ModItems.FISH_SQUID);
-                         entries.add(ModItems.COOKED_FISH_EEL);
-                         entries.add(ModItems.COOKED_FISH_BLUEFISH);
-                         entries.add(ModItems.COOKED_FISH_BREAM);
-                         entries.add(ModItems.COOKED_FISH_TILAPIA);
-                         entries.add(ModItems.COOKED_FISH_FLOUNDER);
-                         entries.add(ModItems.COOKED_FISH_GLASS_CATFISH);
-                         entries.add(ModItems.COOKED_FISH_DOLPHINFISH);
-                         entries.add(ModItems.COOKED_FISH_PIKE);
-                         entries.add(ModItems.COOKED_FISH_HERRING);
-                         entries.add(ModItems.COOKED_FISH_CARP);
-                         entries.add(ModItems.COOKED_FISH_CATFISH);
-                         entries.add(ModItems.COOKED_FISH_SHORT_COD);
-                         entries.add(ModItems.COOKED_FISH_SALMON);
-                         entries.add(ModItems.COOKED_FISH_OCTOPUS);
-                         entries.add(ModItems.COOKED_FISH_SANDFISH);
-                         entries.add(ModItems.COOKED_FISH_ANCHOVY);
-                         entries.add(ModItems.COOKED_FISH_SARDINE);
-                         entries.add(ModItems.COOKED_FISH_BLACK_SEA_BASS);
-                         entries.add(ModItems.COOKED_FISH_SEA_CUCUMBER);
-                         entries.add(ModItems.COOKED_FISH_ROCKFISH);
-                         entries.add(ModItems.COOKED_FISH_STURGEON);
-                         entries.add(ModItems.COOKED_FISH_TUNA);
-                         entries.add(ModItems.COOKED_FISH_SQUID);
                       }).build());
 
     public static void registerItemGroups() {

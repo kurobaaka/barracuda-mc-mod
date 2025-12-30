@@ -8,7 +8,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 
 public class ModSounds {
-        // tools sounds
+/*        // tools sounds
     public static final SoundEvent METAL_DETECTOR_FOUND_ORE = registerSoundEvent("metal_detector_found_ore");
         // mob sounds
     public static final SoundEvent AZURE_REAPER_ROAR = registerSoundEvent("azure_reaper_roar");
@@ -28,7 +28,7 @@ public class ModSounds {
         Identifier id = new Identifier(Barracuda.MOD_ID, name);
         return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));
     }
-
+*/
     public static void registerSounds() {
         Barracuda.LOGGER.info("Registering Sounds for " + Barracuda.MOD_ID);
     }

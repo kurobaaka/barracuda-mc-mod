@@ -7,8 +7,9 @@ import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.fabricmc.loader.api.FabricLoader;
 import net.infugogr.barracuda.block.ModBlocks;
 import net.infugogr.barracuda.block.entity.*;
-import net.infugogr.barracuda.block.recipes.CentrifugeRecipeManager;
-import net.infugogr.barracuda.block.recipes.ChemicalPlantRecipeManager;
+import net.infugogr.barracuda.recipes.CentrifugeRecipeManager;
+import net.infugogr.barracuda.recipes.ChemicalPlantRecipeManager;
+import net.infugogr.barracuda.recipes.ModRecipeSerializer;
 import net.infugogr.barracuda.entity.ModEntities;
 import net.infugogr.barracuda.entity.custom.AzureSerpentEntity;
 import net.infugogr.barracuda.entity.custom.BarracudaEntity;
@@ -54,6 +55,7 @@ public class Barracuda implements ModInitializer {
         FluidRegisters.register();
         CentrifugeRecipeManager.register();
         ChemicalPlantRecipeManager.register();
+		ModRecipeSerializer.registerModRecipes();
 		
 
 		// Item Lookup

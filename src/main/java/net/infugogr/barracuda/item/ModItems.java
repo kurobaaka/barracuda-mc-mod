@@ -233,10 +233,9 @@ public class ModItems {
 
         // food items
 
-    public static final Item PORK = registerItem("pork", new Item(new FabricItemSettings().food(ModFoodComponents.PORK)));
-    public static final Item PORK_COOKED = registerItem("pork_cooked", new Item(new FabricItemSettings().food(ModFoodComponents.PORK_COOKED)));
-    public static final Item CHICKEN_WING = registerItem("chicken_wing", new Item(new FabricItemSettings().food(ModFoodComponents.CHICKEN_WING)));
-    public static final Item CHICKEN_WING_COOKED = registerItem("chicken_wing_cooked", new Item(new FabricItemSettings().food(ModFoodComponents.CHICKEN_WING_COOKED)));
+    public static final Item CHICKEN_WING_COOKED = register("chicken_wing_cooked");
+    public static final Item RAW_FISH = registerItem("raw_fish", new Item(new FabricItemSettings().food(ModFoodComponents.RAW_FISH)));
+    public static final Item COOKED_FISH = registerItem("cooked_fish", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH)));
     public static final Item FISH_EEL = registerItem("fish_eel", new Item(new FabricItemSettings().food(ModFoodComponents.FISH_EEL)));
     public static final Item FISH_BLUEFISH = registerItem("fish_bluefish", new Item(new FabricItemSettings().food(ModFoodComponents.FISH_BLUEFISH)));
     public static final Item FISH_BREAM = registerItem("fish_bream", new Item(new FabricItemSettings().food(ModFoodComponents.FISH_BREAM)));
@@ -260,29 +259,7 @@ public class ModItems {
     public static final Item FISH_STURGEON = registerItem("fish_sturgeon", new Item(new FabricItemSettings().food(ModFoodComponents.FISH_STURGEON)));
     public static final Item FISH_TUNA = registerItem("fish_tuna", new Item(new FabricItemSettings().food(ModFoodComponents.FISH_TUNA)));
     public static final Item FISH_SQUID = registerItem("fish_squid", new Item(new FabricItemSettings().food(ModFoodComponents.FISH_SQUID)));
-    public static final Item COOKED_FISH_EEL = registerItem("cooked_fish_eel", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_EEL)));
-    public static final Item COOKED_FISH_BLUEFISH = registerItem("cooked_fish_bluefish", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_BLUEFISH)));
-    public static final Item COOKED_FISH_BREAM = registerItem("cooked_fish_bream", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_BREAM)));
-    public static final Item COOKED_FISH_TILAPIA = registerItem("cooked_fish_tilapia", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_TILAPIA)));
-    public static final Item COOKED_FISH_FLOUNDER = registerItem("cooked_fish_flounder", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_FLOUNDER)));
-    public static final Item COOKED_FISH_GLASS_CATFISH = registerItem("cooked_fish_glass_catfish", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_GLASS_CATFISH)));
-    public static final Item COOKED_FISH_DOLPHINFISH = registerItem("cooked_fish_dolphinfish", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_DOLPHINFISH)));
-    public static final Item COOKED_FISH_PIKE = registerItem("cooked_fish_pike", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_PIKE)));
-    public static final Item COOKED_FISH_HERRING = registerItem("cooked_fish_herring", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_HERRING)));
-    public static final Item COOKED_FISH_CARP = registerItem("cooked_fish_carp", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_CARP)));
-    public static final Item COOKED_FISH_CATFISH = registerItem("cooked_fish_catfish", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_CATFISH)));
-    public static final Item COOKED_FISH_SHORT_COD = registerItem("cooked_fish_short_cod", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_SHORT_COD)));
-    public static final Item COOKED_FISH_SALMON = registerItem("cooked_fish_salmon", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_SALMON)));
-    public static final Item COOKED_FISH_OCTOPUS = registerItem("cooked_fish_octopus", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_OCTOPUS)));
-    public static final Item COOKED_FISH_SANDFISH = registerItem("cooked_fish_sandfish", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_SANDFISH)));
-    public static final Item COOKED_FISH_ANCHOVY = registerItem("cooked_fish_anchovy", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_ANCHOVY)));
-    public static final Item COOKED_FISH_SARDINE = registerItem("cooked_fish_sardine", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_SARDINE)));
-    public static final Item COOKED_FISH_BLACK_SEA_BASS = registerItem("cooked_fish_black_sea_bass", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_BLACK_SEA_BASS)));
-    public static final Item COOKED_FISH_SEA_CUCUMBER = registerItem("cooked_fish_sea_cucumber", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_SEA_CUCUMBER)));
-    public static final Item COOKED_FISH_ROCKFISH = registerItem("cooked_fish_rockfish", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_ROCKFISH)));
-    public static final Item COOKED_FISH_STURGEON = registerItem("cooked_fish_sturgeon", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_STURGEON)));
-    public static final Item COOKED_FISH_TUNA = registerItem("cooked_fish_tuna", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_TUNA)));
-    public static final Item COOKED_FISH_SQUID = registerItem("cooked_fish_squid", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_SQUID)));
+
 /**
     // Fishing Rod Components
     public static final Item MODULAR_FISHING_ROD_ITEM = register(new ModularFishingRodItem(new Item.Settings().maxCount(1)), "modular_fishing_rod");

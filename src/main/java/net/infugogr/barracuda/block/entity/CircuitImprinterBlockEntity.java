@@ -3,7 +3,7 @@ package net.infugogr.barracuda.block.entity;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
 import net.infugogr.barracuda.Barracuda;
-import net.infugogr.barracuda.block.recipes.CircuitImprinterRecipes;
+import net.infugogr.barracuda.recipes.CircuitImprinterRecipes;
 import net.infugogr.barracuda.screenhandler.CircuitImprinterScreenHandler;
 import net.infugogr.barracuda.util.SyncableStorage;
 import net.infugogr.barracuda.util.SyncableTickableBlockEntity;

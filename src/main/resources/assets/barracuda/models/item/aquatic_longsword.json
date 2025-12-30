@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:item/handheld",
+    "textures": {
+      "layer0": "barracuda:item/aquatic_longsword"
+    }
+  }
