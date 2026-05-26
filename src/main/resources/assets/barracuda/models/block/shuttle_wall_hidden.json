@@ -1,0 +1,17 @@
+{
+  "format_version": "1.9.0",
+  "credit": "Made with Blockbench",
+  "textures": {
+    "all": "barracuda:block/machine_particle"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 0],
+      "to": [16, 16, 0],
+      "color": 3,
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#all"}
+      }
+    }
+  ]
+}

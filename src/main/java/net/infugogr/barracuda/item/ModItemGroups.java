@@ -139,6 +139,14 @@ public class ModItemGroups {
                         entries.add(ModBlocks.SMES);
                         entries.add(ModBlocks.MACHINE_FRAME);
                         entries.add(ModItems.FUEL_GENERATOR_PLATE);
+                        entries.add(ModItems.URANIUM_GENERATOR_PLATE);
+                        entries.add(ModItems.OIL_REFINERY_PLATE);
+                        entries.add(ModItems.CHEMICAL_PLANT_PLATE);
+                        entries.add(ModItems.ELECTRIC_SMELTER_PLATE);
+                        entries.add(ModItems.CRUSHER_PLATE);
+                        entries.add(ModItems.CENTRIFUGE_PLATE);
+                        entries.add(ModItems.CIRCUIT_IMPRINTER_PLATE);
+                        entries.add(ModItems.TELEPORTER_PLATE);
                         entries.add(ModItems.SMES_PLATE);
                         entries.add(ModItems.CAPACITOR);
                         entries.add(ModBlocks.HVCABLE);

@@ -6,7 +6,9 @@ import net.infugogr.barracuda.util.SyncableTickableBlockEntity;
 import net.infugogr.barracuda.util.UpdatableBlockEntity;
 import net.infugogr.barracuda.util.energy.SyncingEnergyStorage;
 import net.infugogr.barracuda.util.energy.WrappedEnergyStorage;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.nbt.NbtCompound;
@@ -25,7 +27,7 @@ import java.util.Set;
 import java.util.function.Consumer;
 
 public class LVcableBlockEntity extends UpdatableBlockEntity implements SyncableTickableBlockEntity {
-
+    private BlockState mimicState = Blocks.AIR.getDefaultState();
     private final WrappedEnergyStorage wrappedEnergyStorage = new WrappedEnergyStorage();
 
     // Храним позиции выхода + направление, в которое НАДО ИНСЕРТИТЬ энергию
@@ -36,6 +38,15 @@ public class LVcableBlockEntity extends UpdatableBlockEntity implements Syncable
     public LVcableBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntityType.LVCABLE, blockPos, blockState);
         this.wrappedEnergyStorage.addStorage(new SyncingEnergyStorage(this, 1000, 100, 0));
+    }
+
+    public void setMimicState(BlockState state) {
+        this.mimicState = state;
+        markDirty();
+    }
+
+    public BlockState getMimicState() {
+        return mimicState;
     }
 
     // --------------------
@@ -160,6 +171,7 @@ public class LVcableBlockEntity extends UpdatableBlockEntity implements Syncable
     public void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
         nbt.put("Energy", this.wrappedEnergyStorage.writeNbt());
+        nbt.putInt("Mimic", Block.getRawIdFromState(mimicState));
     }
 
     @Override
@@ -167,6 +179,8 @@ public class LVcableBlockEntity extends UpdatableBlockEntity implements Syncable
         super.readNbt(nbt);
         if (nbt.contains("Energy", NbtElement.LIST_TYPE))
             this.wrappedEnergyStorage.readNbt(nbt.getList("Energy", NbtElement.COMPOUND_TYPE));
+        if (nbt.contains("Mimic", NbtElement.LIST_TYPE))
+            mimicState = Block.getStateFromRawId(nbt.getInt("Mimic"));
     }
 
     @Override

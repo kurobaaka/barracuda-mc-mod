@@ -99,7 +99,7 @@ public class CentrifugeRecipeManager implements SimpleSynchronousResourceReloadL
         LOGGER.info("Centrifuge recipes loaded: {}", recipes.size());
     }
 
-    public Optional<CentrifugeRecipe> getRecipeFor(net.minecraft.item.ItemStack stack) {
+    public Optional<CentrifugeRecipe> getRecipeFor(ItemStack stack) {
         if (stack == null || stack.isEmpty()) return Optional.empty();
         String stackId = Registries.ITEM.getId(stack.getItem()).toString();
         for (CentrifugeRecipe r : recipes.values()) {

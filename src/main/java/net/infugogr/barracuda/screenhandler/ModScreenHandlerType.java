@@ -58,6 +58,10 @@ public class ModScreenHandlerType {
             Registry.register(Registries.SCREEN_HANDLER, Barracuda.id("circuit_imprinter"),
                     new ExtendedScreenHandlerType<>(CircuitImprinterScreenHandler::new));
 
+    public static final ScreenHandlerType<PrimitivePressScreenHandler> PRIMITIVE_PRESS =
+            Registry.register(Registries.SCREEN_HANDLER, Barracuda.id("primitive_press"),
+                    new ExtendedScreenHandlerType<>(PrimitivePressScreenHandler::new));
+
     public static void registerModScreenHandlerType() {
         Barracuda.LOGGER.info("Registering Mod Screen Handler Types for " + Barracuda.MOD_ID);
     }

@@ -4,7 +4,7 @@
 	"texture_size": [32, 32],
 	"textures": {
 		"0": "barracuda:block/hv_cable_connected",
-		"particle": "barracuda:block/hv_cable_connected"
+		"particle": "barracuda:block/machine_particle"
 	},
 	"elements": [
 		{

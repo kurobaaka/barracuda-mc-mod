@@ -4,7 +4,7 @@
 	"texture_size": [64, 64],
 	"textures": {
 		"2": "barracuda:block/electric_smelter",
-		"particle": "barracuda:block/electric_smelter"
+        "particle": "barracuda:block/machine_particle"
 	},
 	"elements": [
 		{

@@ -36,6 +36,22 @@ public class ModItems {
     public static final Item DISCHARGED_URANIUM_NUGGET = register("discharged_uranium_nugget");
     public static final Item FUEL_GENERATOR_PLATE= register("fuel_generator_plate",
             Item::new, settings -> settings.maxCount(16));
+    public static final Item URANIUM_GENERATOR_PLATE= register("uranium_generator_plate",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item OIL_REFINERY_PLATE= register("oil_refinery_plate",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item CHEMICAL_PLANT_PLATE= register("chemical_plant_plate",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item ELECTRIC_SMELTER_PLATE= register("electric_smelter_plate",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item CRUSHER_PLATE= register("crusher_plate",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item CENTRIFUGE_PLATE= register("centrifuge_plate",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item CIRCUIT_IMPRINTER_PLATE= register("circuit_imprinter_plate",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item TELEPORTER_PLATE= register("teleporter_plate",
+            Item::new, settings -> settings.maxCount(16));
     public static final Item SMES_PLATE= register("smes_plate",
             Item::new, settings -> settings.maxCount(16));
     public static final Item CAPACITOR = register("capacitor");

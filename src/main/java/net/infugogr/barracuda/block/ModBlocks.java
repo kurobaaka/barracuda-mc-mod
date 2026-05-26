@@ -102,6 +102,8 @@ public class ModBlocks {
             new CircuitImprinterBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()));
     public static final Block MULTIBLOCK = registerWithItemCopy("multiblock",
             new MultiBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()));
+    public static final Block PRIMITIVE_PRESS = registerWithItemCopy("primitive_press",
+            new PrimitivePressBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()));
     public static final Block WALL_LAMP = registerWithItemCopy("wall_lamp",
             new WallLampBlock(FabricBlockSettings.copyOf(Blocks.STONE).nonOpaque().luminance(createLightLevelFromLitBlockState(15))));
 

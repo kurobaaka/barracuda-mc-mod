@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "barracuda:block/wall_lamp_lit",
-		"particle": "barracuda:block/wall_lamp_lit"
+        "particle": "barracuda:block/machine_particle"
 	},
 	"elements": [
 		{

@@ -1,25 +1,41 @@
 package net.infugogr.barracuda.block;
 
+import net.infugogr.barracuda.Barracuda;
+import net.infugogr.barracuda.block.entity.LVcableBlockEntity;
+import net.infugogr.barracuda.item.ModItems;
 import net.minecraft.block.*;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
+
+import static net.infugogr.barracuda.block.LVcableBlock.STATE;
 
 public class RodsBlock  extends Block implements Waterloggable {
-    private static final VoxelShape SHAPE_1;
-    private static final VoxelShape SHAPE_2;
-    private static final VoxelShape SHAPE_3;
-    private static final VoxelShape SHAPE_4;
-    private static final VoxelShape SHAPE_5;
-    private static final VoxelShape SHAPE_6;
-    private static final VoxelShape SHAPE_7;
-    private static final VoxelShape SHAPE_8;
-    private static final VoxelShape SHAPE_9;
-    private static final VoxelShape SHAPE_10;
-    private static final VoxelShape SHAPE_11;
-    private static final VoxelShape SHAPE_12;
-    private static final VoxelShape SHAPES;
+
+    public static final VoxelShape SHAPES = VoxelShapes.union(
+            VoxelShapes.cuboid(2/16.0, 2/16.0, 0/16.0, 4/16.0, 4/16.0, 16/16.0),
+            VoxelShapes.cuboid(12/16.0,12/16.0,0/16.0,14/16.0,14/16.0,16/16.0),
+            VoxelShapes.cuboid(0/16.0,12/16.0,12/16.0,16/16.0,14/16.0,14/16.0),
+            VoxelShapes.cuboid(0/16.0,12/16.0,2/16.0,16/16.0,14/16.0,4/16.0),
+            VoxelShapes.cuboid(2/16.0,12/16.0,0/16.0,4/16.0,14/16.0,16/16.0),
+            VoxelShapes.cuboid(0/16.0,2/16.0,2/16.0,16/16.0,4/16.0,4/16.0),
+            VoxelShapes.cuboid(0/16.0,2/16.0,12/16.0,16/16.0,4/16.0,14/16.0),
+            VoxelShapes.cuboid(12/16.0,2/16.0,0/16.0,14/16.0,4/16.0,16/16.0),
+            VoxelShapes.cuboid(12/16.0,0/16.0,2/16.0,14/16.0,16/16.0,4/16.0),
+            VoxelShapes.cuboid(2/16.0,0/16.0,2/16.0,4/16.0,16/16.0,4/16.0),
+            VoxelShapes.cuboid(12/16.0,0/16.0,12/16.0,14/16.0,16/16.0,14/16.0),
+            VoxelShapes.cuboid(2/16.0,0/16.0,12/16.0,4/16.0,16/16.0,14/16.0),
+            VoxelShapes.cuboid(2/16.0,2/16.0,2/16.0,14/16.0,14/16.0,14/16.0)
+    ).simplify();
 
     public RodsBlock(Settings settings) {
         super(settings);
@@ -35,21 +51,24 @@ public class RodsBlock  extends Block implements Waterloggable {
         return SHAPES;
     }
 
-    static {
-        SHAPE_1 = VoxelShapes.cuboid(0.25, 0.1875, 0.0, 0.3125, 0.25, 1.0);
-        SHAPE_2 = VoxelShapes.cuboid(0.6875, 0.6875, 0.0, 0.75, 0.75, 1.0);
-        SHAPE_3 = VoxelShapes.cuboid(0.0, 0.625, 0.6875, 1.0, 0.6875, 0.75);
-        SHAPE_4 = VoxelShapes.cuboid(0.0, 0.625, 0.25, 1.0, 0.6875, 0.3125);
-        SHAPE_5 = VoxelShapes.cuboid(0.25, 0.6875, 0.0, 0.3125, 0.75, 1.0);
-        SHAPE_6 = VoxelShapes.cuboid(0.0, 0.25, 0.25, 1.0, 0.3125, 0.3125);
-        SHAPE_7 = VoxelShapes.cuboid(0.0, 0.25, 0.6875, 1.0, 0.3125, 0.75);
-        SHAPE_8 = VoxelShapes.cuboid(0.6875, 0.1875, 0.0, 0.75, 0.25, 1.0);
-        SHAPE_9 = VoxelShapes.cuboid(0.3125, 0.0, 0.3125, 0.375, 1.0, 0.375);
-        SHAPE_10 = VoxelShapes.cuboid(0.625, 0.0, 0.625, 0.6875, 1.0, 0.6875);
-        SHAPE_11 = VoxelShapes.cuboid(0.3125, 0.0, 0.625, 0.375, 1.0, 0.6875);
-        SHAPE_12 = VoxelShapes.cuboid(0.6875, 0.1875, 0.0, 0.75, 0.25, 1.0);
-        SHAPES = VoxelShapes.union(SHAPE_1, SHAPE_2, SHAPE_3,
-                SHAPE_4, SHAPE_5, SHAPE_6, SHAPE_7, SHAPE_8, SHAPE_9, SHAPE_10, SHAPE_11, SHAPE_12).simplify();
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        ItemStack stack = player.getStackInHand(hand);
+        if (!world.isClient) {
+            if (stack.getItem() == ModBlocks.LVCABLE.asItem()) {
+                world.setBlockState(pos, ModBlocks.LVCABLE.getDefaultState().with(STATE, LVcableBlock.StateType.RODS));
+                if (!player.isCreative()) stack.decrement(1);
+                return ActionResult.SUCCESS;
+            } else if (stack.getItem() == ModItems.STEEL_PLATE) {
+                world.setBlockState(pos, ModBlocks.SHUTTLE_WALL.getDefaultState());
+                if (!player.isCreative()) stack.decrement(1);
+                return ActionResult.SUCCESS;
+            } else if (stack.getItem() == ModItems.SCREWDRIVER) {
+                world.setBlockState(pos, Blocks.AIR.getDefaultState());
+                if (!player.isCreative()) dropStack(world, pos, ModBlocks.RODS_BLOCK.asItem().getDefaultStack());
+                return ActionResult.SUCCESS;
+            }
+        }
+        return ActionResult.PASS;
     }
-
 }

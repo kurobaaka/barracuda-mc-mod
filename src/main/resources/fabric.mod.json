@@ -20,7 +20,7 @@
 			"net.infugogr.barracuda.Barracuda"
 		],
 		"client": [
-			"net.infugogr.barracuda.BarracudaClient"
+          "net.infugogr.barracuda.client.BarracudaClient"
 		],
 		"fabric-datagen": [
 			"net.infugogr.barracuda.BarracudaDataGenerator"

@@ -1,0 +1,9 @@
+{
+  "pack": {
+    "pack_format": 18,
+    "supported_formats": [18, 22],
+    "description": {
+      "translate": "resourcePack.continuity.default.description"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "item_item_fluid",
+  "inputs": [
+    { "item": "minecraft:coal", "count": 1 },
+    { "item": "minecraft:sand",  "count": 2 }
+  ],
+  "input_fluid": "barracuda:crude_oil",
+  "input_fluid_buckets": 2,
+  "output": { "item": "minecraft:charcoal", "count": 1 },
+  "output_fluid": "barracuda:diesel",
+  "output_fluid_buckets": 1,
+  "craft_time": 300
+}

@@ -20,6 +20,7 @@ import net.infugogr.barracuda.fluid.FluidRegisters;
 import net.infugogr.barracuda.fluid.ModFluids;
 import net.infugogr.barracuda.item.ModItemGroups;
 import net.infugogr.barracuda.item.ModItems;
+import net.infugogr.barracuda.recipes.PressRecipeManager;
 import net.infugogr.barracuda.screenhandler.ModScreenHandlerType;
 import net.infugogr.barracuda.sound.ModSounds;
 import net.minecraft.text.Text;
@@ -54,12 +55,14 @@ public class Barracuda implements ModInitializer {
 		ModFluids.register();
         FluidRegisters.register();
         CentrifugeRecipeManager.register();
+        PressRecipeManager.register();
         ChemicalPlantRecipeManager.register();
 		ModRecipeSerializer.registerModRecipes();
-		
 
 		// Item Lookup
 		EnergyStorage.SIDED.registerForBlockEntity(WallLampBlockEntity::getEnergyProvider, ModBlockEntityType.WALL_LAMP);
+
+        ItemStorage.SIDED.registerForBlockEntity(PrimitivePressBlockEntity::getInventoryProvider, ModBlockEntityType.PRIMITIVE_PRESS);
 
 		EnergyStorage.SIDED.registerForBlockEntity(FuelGeneratorBlockEntity::getEnergyProvider, ModBlockEntityType.FUEL_GENERATOR);
 		ItemStorage.SIDED.registerForBlockEntity(FuelGeneratorBlockEntity::getInventoryProvider, ModBlockEntityType.FUEL_GENERATOR);
@@ -96,7 +99,6 @@ public class Barracuda implements ModInitializer {
         ItemStorage.SIDED.registerForBlockEntity(CircuitImprinterBlockEntity::getInventoryProvider, ModBlockEntityType.CIRCUIT_IMPRINTER);
 
 
-		EnergyStorage.SIDED.registerForBlockEntity(ShuttleWallBlockEntity::getEnergyProvider, ModBlockEntityType.SHUTTLE_WALL);
 		EnergyStorage.SIDED.registerForBlockEntity(LVcableBlockEntity::getEnergyProvider, ModBlockEntityType.LVCABLE);
 		EnergyStorage.SIDED.registerForBlockEntity(HVcableBlockEntity::getEnergyProvider, ModBlockEntityType.HVCABLE);
 		ItemStorage.SIDED.registerForBlockEntity(ClosetBlockEntity::getInventoryProvider, ModBlockEntityType.CLOSET);

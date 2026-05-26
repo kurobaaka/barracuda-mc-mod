@@ -12,10 +12,6 @@ import net.minecraft.util.Identifier;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @param input   "minecraft:iron_ore" etc.
- * @param outputs up to 9
- */
 public record CentrifugeRecipe(Identifier id, String input, List<ItemStack> outputs, int craftTime) {
     public String getInputId() {
         return input;

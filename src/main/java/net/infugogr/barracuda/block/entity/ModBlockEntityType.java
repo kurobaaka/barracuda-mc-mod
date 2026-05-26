@@ -74,10 +74,6 @@ public class ModBlockEntityType {
             BlockEntityType.Builder.create(ClosetBlockEntity::new, ModBlocks.CLOSET)
                     .build());
 
-    public static final BlockEntityType<ShuttleWallBlockEntity> SHUTTLE_WALL = register("shuttle_wall",
-            BlockEntityType.Builder.create(ShuttleWallBlockEntity::new, ModBlocks.SHUTTLE_WALL)
-                    .build());
-
     public static final BlockEntityType<CircuitImprinterBlockEntity> CIRCUIT_IMPRINTER = register("circuit_imprinter",
             BlockEntityType.Builder.create(CircuitImprinterBlockEntity::new, ModBlocks.CIRCUIT_IMPRINTER)
                     .build());
@@ -88,6 +84,10 @@ public class ModBlockEntityType {
 
     public static final BlockEntityType<MultiBlockEntity> MULTIBLOCK = register("multiblock",
             BlockEntityType.Builder.create(MultiBlockEntity::new, ModBlocks.MULTIBLOCK)
+                    .build());
+
+    public static final BlockEntityType<PrimitivePressBlockEntity> PRIMITIVE_PRESS = register("primitive_press",
+            BlockEntityType.Builder.create(PrimitivePressBlockEntity::new, ModBlocks.PRIMITIVE_PRESS)
                     .build());
                     
     public static <T extends BlockEntity> BlockEntityType<T> register(String name, BlockEntityType<T> type) {

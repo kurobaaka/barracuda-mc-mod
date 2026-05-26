@@ -1,7 +1,10 @@
 package net.infugogr.barracuda.block;
 
+import net.infugogr.barracuda.Barracuda;
 import net.infugogr.barracuda.block.entity.LVcableBlockEntity;
 import net.infugogr.barracuda.block.entity.ModBlockEntityType;
+import net.infugogr.barracuda.item.ModItems;
+import net.infugogr.barracuda.util.ModTags;
 import net.infugogr.barracuda.util.TickableBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -10,6 +13,7 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
@@ -44,6 +48,12 @@ public class LVcableBlock extends Block implements Waterloggable, BlockEntityPro
     public static final EnumProperty<ConnectorType> UP = EnumProperty.of("up", ConnectorType.class);
     public static final EnumProperty<ConnectorType> DOWN = EnumProperty.of("down", ConnectorType.class);
     public static final EnumProperty<StateType> STATE = EnumProperty.of("state", StateType.class);
+    public static final BooleanProperty NORTH2 = BooleanProperty.of("north2");
+    public static final BooleanProperty SOUTH2 = BooleanProperty.of("south2");
+    public static final BooleanProperty WEST2 = BooleanProperty.of("west2");
+    public static final BooleanProperty EAST2 = BooleanProperty.of("east2");
+    public static final BooleanProperty UP2 = BooleanProperty.of("up2");
+    public static final BooleanProperty DOWN2 = BooleanProperty.of("down2");
 
     private static final VoxelShape SHAPE_CABLE_NORTH = VoxelShapes.cuboid(0.4375, 0.4375, 0, 0.5625, 0.5625, 0.4375);
     private static final VoxelShape SHAPE_CABLE_SOUTH = VoxelShapes.cuboid(0.4375, 0.4375, 0.5625, 0.5625, 0.5625, 1);
@@ -59,23 +69,23 @@ public class LVcableBlock extends Block implements Waterloggable, BlockEntityPro
     private static final VoxelShape SHAPE_BLOCK_DOWN = VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 0.125, 0.5625);
     private static VoxelShape[] shapeCache = null;
 
-    private static final VoxelShape SHAPE_1 = VoxelShapes.cuboid(0.1875, 0.1875, 0, 0.25, 0.25, 1);
-    private static final VoxelShape SHAPE_2 = VoxelShapes.cuboid(0.75, 0.75, 0, 0.8125, 0.8125, 1);
-    private static final VoxelShape SHAPE_3 = VoxelShapes.cuboid(0, 0.75, 0.75, 1, 0.8125, 0.8125);
-    private static final VoxelShape SHAPE_4 = VoxelShapes.cuboid(0, 0.75, 0.1875, 0.375, 0.8125, 0.25);
-    private static final VoxelShape SHAPE_5 = VoxelShapes.cuboid(0.1875, 0.75, 0, 0.25, 0.8125, 1);
-    private static final VoxelShape SHAPE_6 = VoxelShapes.cuboid(0, 0.1875, 0.1875, 1, 0.25, 0.25);
-    private static final VoxelShape SHAPE_7 = VoxelShapes.cuboid(0, 0.1875, 0.75, 1, 0.25, 0.8125);
-    private static final VoxelShape SHAPE_8 = VoxelShapes.cuboid(0.75, 0.1875, 0, 0.8125, 0.25, 1);
-    private static final VoxelShape SHAPE_9 = VoxelShapes.cuboid(0.75, 0, 0.1875, 0.8125, 1, 0.25);
-    private static final VoxelShape SHAPE_10 = VoxelShapes.cuboid(0.1875, 0, 0.1875, 0.25, 1, 0.25);
-    private static final VoxelShape SHAPE_11 = VoxelShapes.cuboid(0.75, 0, 0.75, 0.8125, 1, 0.8125);
-    private static final VoxelShape SHAPE_12 = VoxelShapes.cuboid(0.1875, 0, 0.75, 0.25, 1, 0.8125);
-
-    private static final VoxelShape SHAPES = VoxelShapes.union(
-            SHAPE_1, SHAPE_2, SHAPE_3, SHAPE_4, SHAPE_5, SHAPE_6,
-            SHAPE_7, SHAPE_8, SHAPE_9, SHAPE_10, SHAPE_11, SHAPE_12
-    ).simplify();
+    public static final VoxelShape SHAPES = VoxelShapes.union(
+            VoxelShapes.union(
+            VoxelShapes.cuboid(2/16.0, 2/16.0, 0/16.0, 4/16.0, 4/16.0, 16/16.0),
+            VoxelShapes.cuboid(12/16.0,12/16.0,0/16.0,14/16.0,14/16.0,16/16.0),
+            VoxelShapes.cuboid(0/16.0,12/16.0,12/16.0,16/16.0,14/16.0,14/16.0),
+            VoxelShapes.cuboid(0/16.0,12/16.0,2/16.0,16/16.0,14/16.0,4/16.0),
+            VoxelShapes.cuboid(2/16.0,12/16.0,0/16.0,4/16.0,14/16.0,16/16.0),
+            VoxelShapes.cuboid(0/16.0,2/16.0,2/16.0,16/16.0,4/16.0,4/16.0),
+            VoxelShapes.cuboid(0/16.0,2/16.0,12/16.0,16/16.0,4/16.0,14/16.0),
+            VoxelShapes.cuboid(12/16.0,2/16.0,0/16.0,14/16.0,4/16.0,16/16.0),
+            VoxelShapes.cuboid(12/16.0,0/16.0,2/16.0,14/16.0,16/16.0,4/16.0),
+            VoxelShapes.cuboid(2/16.0,0/16.0,2/16.0,4/16.0,16/16.0,4/16.0),
+            VoxelShapes.cuboid(12/16.0,0/16.0,12/16.0,14/16.0,16/16.0,14/16.0),
+            VoxelShapes.cuboid(2/16.0,0/16.0,12/16.0,4/16.0,16/16.0,14/16.0)
+            ).simplify(),
+            VoxelShapes.cuboid(2/16.0,2/16.0,2/16.0,14/16.0,14/16.0,14/16.0)
+            );
 
     public LVcableBlock(Settings settings) {
         super(settings);
@@ -168,6 +178,12 @@ public class LVcableBlock extends Block implements Waterloggable, BlockEntityPro
         ConnectorType east = getConnectorType(world, pos, Direction.EAST);
         ConnectorType up = getConnectorType(world, pos, Direction.UP);
         ConnectorType down = getConnectorType(world, pos, Direction.DOWN);
+        Boolean north2 = getSide(world, pos, Direction.NORTH);
+        Boolean south2 = getSide(world, pos, Direction.SOUTH);
+        Boolean west2 = getSide(world, pos, Direction.WEST);
+        Boolean east2 = getSide(world, pos, Direction.EAST);
+        Boolean up2 = getSide(world, pos, Direction.UP);
+        Boolean down2 = getSide(world, pos, Direction.DOWN);
 
         return state
                 .with(NORTH, north)
@@ -175,7 +191,13 @@ public class LVcableBlock extends Block implements Waterloggable, BlockEntityPro
                 .with(WEST, west)
                 .with(EAST, east)
                 .with(UP, up)
-                .with(DOWN, down);
+                .with(DOWN, down)
+                .with(NORTH2, north2)
+                .with(SOUTH2, south2)
+                .with(WEST2, west2)
+                .with(EAST2, east2)
+                .with(UP2, up2)
+                .with(DOWN2, down2);
     }
 
     @Override
@@ -214,7 +236,6 @@ public class LVcableBlock extends Block implements Waterloggable, BlockEntityPro
         if (!world.isClient && world.getBlockEntity(pos) instanceof LVcableBlockEntity cable) {
             cable.markDirty();
         }
-
         BlockState blockState = calculateState(world, pos, state);
         if (blockState != state) {
             world.setBlockState(pos, blockState);
@@ -224,7 +245,7 @@ public class LVcableBlock extends Block implements Waterloggable, BlockEntityPro
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         super.appendProperties(builder);
-        builder.add(WATERLOGGED, NORTH, SOUTH, WEST, EAST, UP, DOWN, STATE);
+        builder.add(WATERLOGGED, NORTH, SOUTH, WEST, EAST, UP, DOWN, STATE, NORTH2, EAST2, SOUTH2, WEST2, UP2, DOWN2);
     }
 
     @Nullable
@@ -284,18 +305,52 @@ public class LVcableBlock extends Block implements Waterloggable, BlockEntityPro
         ItemStack stack = player.getStackInHand(hand);
 
         if (!world.isClient) {
-            if (stack.getItem() == ModBlocks.RODS_BLOCK.asItem()) {
+            if (stack.getItem() == ModBlocks.RODS_BLOCK.asItem() && state != state.with(STATE, StateType.RODS)) {
                 world.setBlockState(pos, state.with(STATE, StateType.RODS));
                 if (!player.isCreative()) stack.decrement(1);
                 return ActionResult.SUCCESS;
-            } else if (stack.getItem() == ModBlocks.SHUTTLE_WALL.asItem()) {
+
+            } else if (stack.getItem() == ModItems.STEEL_PLATE && state == state.with(STATE, StateType.RODS)) {
                 world.setBlockState(pos, state.with(STATE, StateType.WALL));
                 if (!player.isCreative()) stack.decrement(1);
                 return ActionResult.SUCCESS;
+
+            } else if (stack.getItem() == ModItems.SCREWDRIVER && state == state.with(STATE, StateType.RODS)) {
+                world.setBlockState(pos, state.with(STATE, StateType.NONE));
+                if (!player.isCreative()) dropStack(world, pos, ModBlocks.RODS_BLOCK.asItem().getDefaultStack());
+                return ActionResult.SUCCESS;
+
+            } else if (stack.getItem() == ModItems.SCREWDRIVER && state == state.with(STATE, StateType.WALL)) {
+                world.setBlockState(pos, state.with(STATE, StateType.RODS));
+                if (!player.isCreative()) dropStack(world, pos, ModItems.STEEL_PLATE.getDefaultStack());
+                return ActionResult.SUCCESS;
+
+            } else if (stack.getItem() == ModItems.SCREWDRIVER && state == state.with(STATE, StateType.NONE)) {
+                world.setBlockState(pos, Blocks.AIR.getDefaultState());
+                if (!player.isCreative()) dropStack(world, pos, ModBlocks.LVCABLE.asItem().getDefaultStack());
+                return ActionResult.SUCCESS;
             }
+            /*if (stack.getItem() instanceof BlockItem & state == state.with(STATE, StateType.RODS) & stack.getItem() != ModBlocks.RODS_BLOCK.asItem()){
+                if (be instanceof LVcableBlockEntity entity){
+                    entity.setMimicState(target);
+                    world.updateListeners(pos, state, state, Block.NOTIFY_ALL);
+                    Barracuda.LOGGER.info("1");
+                    return ActionResult.SUCCESS;
+                }
+            }*/
         }
 
         return ActionResult.PASS;
+    }
+    private static boolean getSide(World world, BlockPos pos, Direction dir) {
+        BlockPos neighborPos = pos.offset(dir);
+        BlockState neighbor = world.getBlockState(neighborPos);
+        if (neighbor.isIn(ModTags.SHUTTLE_BLOCKS)){
+            return false;
+        } else if (neighbor.getBlock() instanceof LVcableBlock) {
+            return neighbor != neighbor.with(STATE, LVcableBlock.StateType.WALL);
+        }
+        return true;
     }
 }
 

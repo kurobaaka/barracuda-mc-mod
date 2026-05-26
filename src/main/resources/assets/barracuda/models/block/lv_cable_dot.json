@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "barracuda:block/lv_cable_dot",
-		"particle": "barracuda:block/lv_cable_dot"
+		"particle": "barracuda:block/machine_particle"
 	},
 	"elements": [
 		{
