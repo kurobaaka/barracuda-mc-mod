@@ -29,6 +29,80 @@ public class ModItems {
     public static final Item STONE_MORTAR = register("stone_mortar");
     public static final Item URANIUM_DUST = register("uranium_dust");
     public static final Item URANIUM_INGOT = register("uranium_ingot");
+    public static final Item URANIUM_ROD = register("uranium_rod",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item URANIUM_WIRE = register("uranium_wire",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item URANIUM_PLATE = register("uranium_plate",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item COAL_DUST = register("coal_dust");
+    public static final Item GRAPHITE_INGOT = register("graphite_ingot");
+    public static final Item GRAPHITE_ROD = register("graphite_rod",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item GRAPHITE_WIRE = register("graphite_wire",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item GRAPHITE_PLATE = register("graphite_plate",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item IRON_DUST = register("iron_dust");
+    public static final Item IRON_ROD = register("iron_rod",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item IRON_WIRE = register("iron_wire",
+            Item::new, settings -> settings.maxCount(16));
+    public static final IronPlate IRON_PLATE = register("iron_plate",
+            IronPlate::new, settings -> settings.maxCount(16));
+    public static final Item COPPER_DUST = register("copper_dust");
+    public static final Item COPPER_ROD = register("copper_rod",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item COPPER_WIRE = register("copper_wire",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item COPPER_PLATE = register("copper_plate",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item GOLD_DUST = register("gold_dust");
+    public static final Item GOLDEN_ROD = register("golden_rod",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item GOLDEN_WIRE = register("golden_wire",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item GOLDEN_PLATE = register("golden_plate",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item REDSTONE_INGOT = register("redstone_ingot");
+    public static final Item REDSTONE_CLUSTER = register("redstone_cluster");
+    public static final Item REDSTONE_ROD = register("redstone_rod",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item REDSTONE_WIRE = register("redstone_wire",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item REDSTONE_PLATE = register("redstone_plate",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item LAZULI_DUST = register("lazuli_dust");
+    public static final Item LAZULI_INGOT = register("lazuli_ingot");
+    public static final Item LAZULI_ROD = register("lazuli_rod",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item LAZULI_WIRE = register("lazuli_wire",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item LAZULI_PLATE = register("lazuli_plate",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item DIAMOND_DUST = register("diamond_dust");
+    public static final Item DIAMOND_INGOT = register("diamond_ingot");
+    public static final Item DIAMOND_ROD = register("diamond_rod",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item DIAMOND_WIRE = register("diamond_wire",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item DIAMOND_PLATE = register("diamond_plate",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item NETHERITE_DUST = register("netherite_dust");
+    public static final Item NETHERITE_ROD = register("netherite_rod",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item NETHERITE_WIRE = register("netherite_wire",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item NETHERITE_PLATE = register("netherite_plate",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item EMERALD_DUST = register("emerald_dust");
+    public static final Item EMERALD_INGOT = register("emerald_ingot");
+    public static final Item EMERALD_ROD = register("emerald_rod",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item EMERALD_WIRE = register("emerald_wire",
+            Item::new, settings -> settings.maxCount(16));
+    public static final Item EMERALD_PLATE = register("emerald_plate",
+            Item::new, settings -> settings.maxCount(16));
     public static final Item URANIUM_238 = register("uranium_238");
     public static final Item URANIUM_235 = register("uranium_235");
     public static final Item DISCHARGED_URANIUM_INGOT = register("discharged_uranium_ingot");
@@ -116,8 +190,6 @@ public class ModItems {
             new DimensionChip(new FabricItemSettings().maxCount(1), ModDimensions.BETA_LEVEL_KEY));
     public static final Item POSITION_CHIP = registerItem("position_chip",
             new PosChip(new FabricItemSettings().maxCount(1)));
-    public static final IronPlate IRON_PLATE = register("iron_plate",
-            IronPlate::new, settings -> settings.maxCount(16));
     public static final Item PLASTIC = register("plastic",
             Item::new, settings -> settings.maxCount(16));
 
