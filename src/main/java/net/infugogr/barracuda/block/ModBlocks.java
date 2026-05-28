@@ -53,9 +53,21 @@ public class ModBlocks {
     public static final Block CHARGED_REDSTONEIUM_BLOCK = registerWithItemCopy("charged_redstoneium_block",
             new ChargedRedstoneiumBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).ticksRandomly()));
     public static final Block URANIUM_ORE = registerWithItemCopy("uranium_ore",
-            new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
+            new Block(FabricBlockSettings.copyOf(Blocks.DIAMOND_ORE)));
+    public static final Block RUBY_ORE = registerWithItemCopy("ruby_ore",
+            new Block(FabricBlockSettings.copyOf(Blocks.DIAMOND_ORE)));
+    public static final Block SAPPHIRE_ORE = registerWithItemCopy("sapphire_ore",
+            new Block(FabricBlockSettings.copyOf(Blocks.DIAMOND_ORE)));
+    public static final Block SILVER_ORE = registerWithItemCopy("silver_ore",
+            new Block(FabricBlockSettings.copyOf(Blocks.GOLD_ORE)));
     public static final Block DEEPSLATE_URANIUM_ORE = registerWithItemCopy("deepslate_uranium_ore",
-            new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
+            new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE_DIAMOND_ORE)));
+    public static final Block DEEPSLATE_RUBY_ORE = registerWithItemCopy("deepslate_ruby_ore",
+            new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE_DIAMOND_ORE)));
+    public static final Block DEEPSLATE_SAPPHIRE_ORE = registerWithItemCopy("deepslate_sapphire_ore",
+            new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE_DIAMOND_ORE)));
+    public static final Block DEEPSLATE_SILVER_ORE = registerWithItemCopy("deepslate_silver_ore",
+            new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE_GOLD_ORE)));
     public static final Block URANIUM_BLOCK = registerWithItemCopy("uranium_block",
             new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
     public static final Block DISCHARGED_URANIUM_BLOCK = registerWithItemCopy("discharged_uranium_block",

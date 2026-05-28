@@ -29,12 +29,12 @@ public class ModItems {
     public static final Item STONE_MORTAR = register("stone_mortar");
     public static final Item URANIUM_DUST = register("uranium_dust");
     public static final Item URANIUM_INGOT = register("uranium_ingot");
-    public static final Item URANIUM_ROD = register("uranium_rod",
+    /*public static final Item URANIUM_ROD = register("uranium_rod",
             Item::new, settings -> settings.maxCount(16));
     public static final Item URANIUM_WIRE = register("uranium_wire",
             Item::new, settings -> settings.maxCount(16));
     public static final Item URANIUM_PLATE = register("uranium_plate",
-            Item::new, settings -> settings.maxCount(16));
+            Item::new, settings -> settings.maxCount(16));*/
     public static final Item COAL_DUST = register("coal_dust");
     public static final Item GRAPHITE_INGOT = register("graphite_ingot");
     public static final Item GRAPHITE_ROD = register("graphite_rod",

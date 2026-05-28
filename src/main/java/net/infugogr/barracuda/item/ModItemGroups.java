@@ -35,6 +35,8 @@ public class ModItemGroups {
                         entries.add(ModItems.ANCHOR);
                         entries.add(ModItems.LOST_ANCHOR);
                         entries.add(ModItems.SAPPHIRE);
+                        entries.add(ModBlocks.SAPPHIRE_ORE);
+                        entries.add(ModBlocks.DEEPSLATE_SAPPHIRE_ORE);
                         entries.add(ModItems.SAPPHIRE_DUST);
                         entries.add(ModItems.SAPPHIRE_HELMET);
                         entries.add(ModItems.SAPPHIRE_CHESTPLATE);
@@ -63,6 +65,8 @@ public class ModItemGroups {
                         entries.add(ModBlocks.CURSED_GOLD_BLOCK);
                         entries.add(ModItems.TORMENTED_SOUL);
                         entries.add(ModItems.RUBY);
+                        entries.add(ModBlocks.RUBY_ORE);
+                        entries.add(ModBlocks.DEEPSLATE_RUBY_ORE);
                         entries.add(ModItems.RUBY_DUST);
                         entries.add(ModItems.RUBY_HELMET);
                         entries.add(ModItems.RUBY_CHESTPLATE);
@@ -84,6 +88,8 @@ public class ModItemGroups {
                         entries.add(ModItems.METAL_PLATE);
                         entries.add(ModItems.METAL_SHARDS);
                         entries.add(ModItems.SILVER_INGOT);
+                        entries.add(ModBlocks.SILVER_ORE);
+                        entries.add(ModBlocks.DEEPSLATE_SILVER_ORE);
                         entries.add(ModItems.STEEL_BLADE);
                         entries.add(ModItems.STEEL_INGOT);
                         entries.add(ModItems.STEEL_PLATE);
