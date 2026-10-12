@@ -1,7 +1,57 @@
 {
-  "variants": {
-    "": {
-      "model": "barracuda:block/shuttle_wall"
+  "multipart": [
+    {
+      "when": {"north": true },
+      "apply": { "model": "barracuda:block/shuttle_wall" }
+    },
+    {
+      "when": {"north": false },
+      "apply": { "model": "barracuda:block/shuttle_wall_hidden" }
+    },
+
+    {
+      "when": {"south": true },
+      "apply": { "model": "barracuda:block/shuttle_wall", "y": 180 }
+    },
+    {
+      "when": {"south": false },
+      "apply": { "model": "barracuda:block/shuttle_wall_hidden", "y": 180 }
+    },
+
+    {
+      "when": {"east": true },
+      "apply": { "model": "barracuda:block/shuttle_wall", "y": 90 }
+    },
+    {
+      "when": {"east": false },
+      "apply": { "model": "barracuda:block/shuttle_wall_hidden", "y": 90 }
+    },
+
+    {
+      "when": {"west": true },
+      "apply": { "model": "barracuda:block/shuttle_wall", "y": 270 }
+    },
+    {
+      "when": {"west": false },
+      "apply": { "model": "barracuda:block/shuttle_wall_hidden", "y": 270 }
+    },
+
+    {
+      "when": {"up": true },
+      "apply": { "model": "barracuda:block/shuttle_wall", "x": 270 }
+    },
+    {
+      "when": {"up": false },
+      "apply": { "model": "barracuda:block/shuttle_wall_hidden", "x": 270 }
+    },
+
+    {
+      "when": {"down": true },
+      "apply": { "model": "barracuda:block/shuttle_wall", "x": 90 }
+    },
+    {
+      "when": {"down": false },
+      "apply": { "model": "barracuda:block/shuttle_wall_hidden", "x": 90 }
     }
-  }
+  ]
 }

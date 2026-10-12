@@ -34,7 +34,7 @@ public class PrimitivePressScreen extends HandledScreen<PrimitivePressScreenHand
         context.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
         int progress = this.handler.getProgress();
         if (progress>0){
-            context.drawTexture(TEXTURE, this.x + 78, this.y + 32, 176, 0, 24, 16);
+            context.drawTexture(TEXTURE, this.x + 77, this.y + 30, 176, 0, 24, 16);
         }
     }
 }

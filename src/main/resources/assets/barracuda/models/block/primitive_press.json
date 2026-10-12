@@ -4,7 +4,7 @@
 	"texture_size": [64, 64],
 	"textures": {
 		"0": "barracuda:block/primitive_press",
-        "particle": "barracuda:block/machine_particle"
+		"particle": "barracuda:block/machine_particle"
 	},
 	"elements": [
 		{

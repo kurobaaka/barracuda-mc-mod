@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "II ",
+    "I I",
+    " II"
+  ],
+  "result": {
+    "item": "barracuda:rod_shape"
+  },
+  "show_notification": true
+}

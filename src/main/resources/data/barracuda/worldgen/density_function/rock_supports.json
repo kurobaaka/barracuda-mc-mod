@@ -1,0 +1,105 @@
+{
+  "type": "minecraft:min",
+  "argument1": {
+    "type": "minecraft:add",
+    "argument1": "minecraft:y",
+    "argument2": {
+      "type": "minecraft:mul",
+      "argument1": -1.0,
+      "argument2": "barracuda:island_floor_surface"
+    }
+  },
+  "argument2": {
+    "type": "minecraft:min",
+    "argument1": {
+      "type": "minecraft:add",
+      "argument1": 300.0,
+      "argument2": {
+        "type": "minecraft:mul",
+        "argument1": -1.0,
+        "argument2": "minecraft:y"
+      }
+    },
+    "argument2": {
+      "type": "minecraft:mul",
+      "argument1": 40.0,
+      "argument2": {
+        "type": "minecraft:add",
+        "argument1": "barracuda:island_profile",
+        "argument2": {
+          "type": "minecraft:add",
+          "argument1": {
+            "type": "minecraft:mul",
+            "argument1": -1.0,
+            "argument2": {
+              "type": "minecraft:y_clamped_gradient",
+              "from_y": 150,
+              "to_y": 300,
+              "from_value": -0.08,
+              "to_value": 0.0
+            }
+          },
+          "argument2": {
+            "type": "minecraft:mul",
+            "argument1": {
+              "type": "minecraft:y_clamped_gradient",
+              "from_y": 160,
+              "to_y": 300,
+              "from_value": 0.2,
+              "to_value": 0.0
+            },
+            "argument2": {
+              "type": "minecraft:add",
+              "argument1": {
+                "type": "minecraft:mul",
+                "argument1": 0.45,
+                "argument2": {
+                  "type": "minecraft:noise",
+                  "noise": "barracuda:island_cliff",
+                  "xz_scale": 0.02,
+                  "y_scale": 0.0
+                }
+              },
+              "argument2": {
+                "type": "minecraft:add",
+                "argument1": {
+                  "type": "minecraft:mul",
+                  "argument1": 0.25,
+                  "argument2": {
+                    "type": "minecraft:noise",
+                    "noise": "barracuda:island_cliff",
+                    "xz_scale": 0.1,
+                    "y_scale": 0.0
+                  }
+                },
+                "argument2": {
+                  "type": "minecraft:add",
+                  "argument1": {
+                    "type": "minecraft:mul",
+                    "argument1": 0.12,
+                    "argument2": {
+                      "type": "minecraft:noise",
+                      "noise": "barracuda:island_terrain",
+                      "xz_scale": 0.045,
+                      "y_scale": 0.0
+                    }
+                  },
+                  "argument2": {
+                    "type": "minecraft:mul",
+                    "argument1": 0.08,
+                    "argument2": {
+                      "type": "minecraft:noise",
+                      "noise": "barracuda:island_terrain",
+                      "xz_scale": 0.16,
+                      "y_scale": 0.0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

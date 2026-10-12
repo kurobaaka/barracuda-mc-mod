@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:add",
+  "argument1": {
+    "type": "minecraft:mul",
+    "argument1": 4,
+    "argument2": {
+      "type": "minecraft:quarter_negative",
+      "argument": {
+        "type": "minecraft:mul",
+        "argument1": {
+          "type": "minecraft:min",
+          "argument1": "barracuda:islands",
+          "argument2": {
+            "type": "minecraft:mul",
+            "argument1": -1,
+            "argument2": "barracuda:caves"
+          }
+        },
+        "argument2": "minecraft:overworld/factor"
+      }
+    }
+  },
+  "argument2": 0
+}

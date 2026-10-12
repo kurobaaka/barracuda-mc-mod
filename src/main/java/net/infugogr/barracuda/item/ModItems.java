@@ -131,6 +131,14 @@ public class ModItems {
     public static final Item CAPACITOR = register("capacitor");
     public static final Item SCREWDRIVER = register("screwdriver");
     public static final Item HAMMER = register("hammer");
+    public static final Item PLATE_SHAPE = register("plate_shape",
+            Item::new, settings -> settings.maxCount(1));
+    public static final Item ROD_SHAPE = register("rod_shape",
+            Item::new, settings -> settings.maxCount(1));
+    public static final Item INGOT_SHAPE = register("ingot_shape",
+            Item::new, settings -> settings.maxCount(1));
+    public static final Item WIRE_SHAPE = register("wire_shape",
+            Item::new, settings -> settings.maxCount(1));
 
     public static final Item LOST_ANCHOR = registerItem("lost_anchor",
     new SwordItem(ModToolMaterial.RUBY, 5, 3f, new FabricItemSettings()));

@@ -1,187 +1,165 @@
 {
   "multipart": [
     {
-      "apply": {
-        "model": "barracuda:block/lv_cable_dot"
-      }
+      "apply": { "model": "barracuda:block/lv_cable_dot" },
+      "when": { "state": "none" }
     },
     {
-      "apply": {
-        "model": "barracuda:block/lv_cable"
-      },
-      "when": {
-        "OR": [
-          {
-            "north": "cable"
-          }
-        ]
-      }
+      "when": { "state": "none", "north": "cable" },
+      "apply": { "model": "barracuda:block/lv_cable" }
     },
     {
-      "apply": {
-        "model": "barracuda:block/lv_cable",
-        "y": 90
-      },
-      "when": {
-        "OR": [
-          {
-            "east": "cable"
-          }
-        ]
-      }
+      "when": { "state": "none", "east": "cable" },
+      "apply": { "model": "barracuda:block/lv_cable", "y": 90 }
     },
     {
-      "apply": {
-        "model": "barracuda:block/lv_cable",
-        "y": 180
-      },
-      "when": {
-        "OR": [
-          {
-            "south": "cable"
-          }
-        ]
-      }
+      "when": { "state": "none", "south": "cable" },
+      "apply": { "model": "barracuda:block/lv_cable", "y": 180 }
     },
     {
-      "apply": {
-        "model": "barracuda:block/lv_cable",
-        "y": 270
-      },
-      "when": {
-        "OR": [
-          {
-            "west": "cable"
-          }
-        ]
-      }
+      "when": { "state": "none", "west": "cable" },
+      "apply": { "model": "barracuda:block/lv_cable", "y": 270 }
     },
     {
-      "apply": {
-        "model": "barracuda:block/lv_cable",
-        "x": 270
-      },
-      "when": {
-        "OR": [
-          {
-            "up": "cable"
-          }
-        ]
-      }
+      "when": { "state": "none", "up": "cable" },
+      "apply": { "model": "barracuda:block/lv_cable", "x": 270 }
     },
     {
-      "apply": {
-        "model": "barracuda:block/lv_cable",
-        "x": 90
-      },
-      "when": {
-        "OR": [
-          {
-            "down": "cable"
-          }
-        ]
-      }
+      "when": { "state": "none", "down": "cable" },
+      "apply": { "model": "barracuda:block/lv_cable", "x": 90 }
     },
     {
-      "apply": {
-        "model": "barracuda:block/lv_cable_connected"
-      },
-      "when": {
-        "OR": [
-          {
-            "north": "block"
-          }
-        ]
-      }
+      "when": { "state": "none", "north": "block" },
+      "apply": { "model": "barracuda:block/lv_cable_connected" }
     },
     {
-      "apply": {
-        "model": "barracuda:block/lv_cable_connected",
-        "y": 90
-      },
-      "when": {
-        "OR": [
-          {
-            "east": "block"
-          }
-        ]
-      }
+      "when": { "state": "none", "east": "block" },
+      "apply": { "model": "barracuda:block/lv_cable_connected", "y": 90 }
     },
     {
-      "apply": {
-        "model": "barracuda:block/lv_cable_connected",
-        "y": 180
-      },
-      "when": {
-        "OR": [
-          {
-            "south": "block"
-          }
-        ]
-      }
+      "when": { "state": "none", "south": "block" },
+      "apply": { "model": "barracuda:block/lv_cable_connected", "y": 180 }
     },
     {
-      "apply": {
-        "model": "barracuda:block/lv_cable_connected",
-        "y": 270
-      },
-      "when": {
-        "OR": [
-          {
-            "west": "block"
-          }
-        ]
-      }
+      "when": { "state": "none", "west": "block" },
+      "apply": { "model": "barracuda:block/lv_cable_connected", "y": 270 }
     },
     {
-      "apply": {
-        "model": "barracuda:block/lv_cable_connected",
-        "x": 270
-      },
-      "when": {
-        "OR": [
-          {
-            "up": "block"
-          }
-        ]
-      }
+      "when": { "state": "none", "up": "block" },
+      "apply": { "model": "barracuda:block/lv_cable_connected", "x": 270 }
     },
     {
-      "apply": {
-        "model": "barracuda:block/lv_cable_connected",
-        "x": 90
-      },
-      "when": {
-        "OR": [
-          {
-            "down": "block"
-          }
-        ]
-      }
+      "when": { "state": "none", "down": "block" },
+      "apply": { "model": "barracuda:block/lv_cable_connected", "x": 90 }
     },
     {
-      "apply": {
-        "model": "barracuda:block/rods_block"
-      },
-      "when": {
-        "OR": [
-          {
-            "state": "rods"
-          }
-        ]
-      }
+      "apply": { "model": "barracuda:block/lv_cable_dot" },
+      "when": { "state": "rods" }
     },
     {
-      "apply": {
-        "model": "barracuda:block/shuttle_wall"
-      },
-      "when": {
-        "OR": [
-          {
-            "state": "wall"
-          }
-        ]
-      }
+      "when": { "state": "rods" },
+      "apply": { "model": "barracuda:block/rods_block" }
+    },
+    {
+      "when": { "state": "rods", "north": "cable" },
+      "apply": { "model": "barracuda:block/lv_cable" }
+    },
+    {
+      "when": { "state": "rods", "east": "cable" },
+      "apply": { "model": "barracuda:block/lv_cable", "y": 90 }
+    },
+    {
+      "when": { "state": "rods", "south": "cable" },
+      "apply": { "model": "barracuda:block/lv_cable", "y": 180 }
+    },
+    {
+      "when": { "state": "rods", "west": "cable" },
+      "apply": { "model": "barracuda:block/lv_cable", "y": 270 }
+    },
+    {
+      "when": { "state": "rods", "up": "cable" },
+      "apply": { "model": "barracuda:block/lv_cable", "x": 270 }
+    },
+    {
+      "when": { "state": "rods", "down": "cable" },
+      "apply": { "model": "barracuda:block/lv_cable", "x": 90 }
+    },
+    {
+      "when": { "state": "rods", "north": "block" },
+      "apply": { "model": "barracuda:block/lv_cable_connected" }
+    },
+    {
+      "when": { "state": "rods", "east": "block" },
+      "apply": { "model": "barracuda:block/lv_cable_connected", "y": 90 }
+    },
+    {
+      "when": { "state": "rods", "south": "block" },
+      "apply": { "model": "barracuda:block/lv_cable_connected", "y": 180 }
+    },
+    {
+      "when": { "state": "rods", "west": "block" },
+      "apply": { "model": "barracuda:block/lv_cable_connected", "y": 270 }
+    },
+    {
+      "when": { "state": "rods", "up": "block" },
+      "apply": { "model": "barracuda:block/lv_cable_connected", "x": 270 }
+    },
+    {
+      "when": { "state": "rods", "down": "block" },
+      "apply": { "model": "barracuda:block/lv_cable_connected", "x": 90 }
+    },
+    {
+      "when": { "state": "wall", "north2": true },
+      "apply": { "model": "barracuda:block/shuttle_wall" }
+    },
+    {
+      "when": { "state": "wall", "north2": false },
+      "apply": { "model": "barracuda:block/shuttle_wall_hidden" }
+    },
+
+    {
+      "when": { "state": "wall", "south2": true },
+      "apply": { "model": "barracuda:block/shuttle_wall", "y": 180 }
+    },
+    {
+      "when": { "state": "wall", "south2": false },
+      "apply": { "model": "barracuda:block/shuttle_wall_hidden", "y": 180 }
+    },
+
+    {
+      "when": { "state": "wall", "east2": true },
+      "apply": { "model": "barracuda:block/shuttle_wall", "y": 90 }
+    },
+    {
+      "when": { "state": "wall", "east2": false },
+      "apply": { "model": "barracuda:block/shuttle_wall_hidden", "y": 90 }
+    },
+
+    {
+      "when": { "state": "wall", "west2": true },
+      "apply": { "model": "barracuda:block/shuttle_wall", "y": 270 }
+    },
+    {
+      "when": { "state": "wall", "west2": false },
+      "apply": { "model": "barracuda:block/shuttle_wall_hidden", "y": 270 }
+    },
+
+    {
+      "when": { "state": "wall", "up2": true },
+      "apply": { "model": "barracuda:block/shuttle_wall", "x": 270 }
+    },
+    {
+      "when": { "state": "wall", "up2": false },
+      "apply": { "model": "barracuda:block/shuttle_wall_hidden", "x": 270 }
+    },
+
+    {
+      "when": { "state": "wall", "down2": true },
+      "apply": { "model": "barracuda:block/shuttle_wall", "x": 90 }
+    },
+    {
+      "when": { "state": "wall", "down2": false },
+      "apply": { "model": "barracuda:block/shuttle_wall_hidden", "x": 90 }
     }
   ]
 }

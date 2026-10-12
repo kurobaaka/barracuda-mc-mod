@@ -1,5 +1,9 @@
 {
   "input": "minecraft:iron_ingot",
-  "result": "barracuda:iron_plate",
-  "experience": 0.35
-}
+  "results": {
+    "barracuda:plate_shape": "barracuda:iron_plate",
+    "barracuda:wire_shape": "barracuda:iron_wire*3",
+    "barracuda:rod_shape": "barracuda:iron_rod"
+  },
+  "block_output": "minecraft:iron_block"
+} 

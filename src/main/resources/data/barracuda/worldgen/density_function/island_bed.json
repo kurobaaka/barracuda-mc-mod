@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:max",
+  "argument1": {
+    "type": "minecraft:max",
+    "argument1": "barracuda:rock_supports",
+    "argument2": "barracuda:dunes"
+  },
+  "argument2": "barracuda:stalagmites"
+}

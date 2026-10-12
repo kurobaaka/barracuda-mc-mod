@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:range_choice",
+  "input": {
+    "type": "minecraft:noise",
+    "noise": "barracuda:vertical_crack_field",
+    "xz_scale": 0.08,
+    "y_scale": 0.0
+  },
+  "min_inclusive": 0.96,
+  "max_exclusive": 2.0,
+  "when_in_range": -1.0,
+  "when_out_of_range": 1.0
+}

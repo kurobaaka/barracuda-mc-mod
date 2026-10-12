@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:add",
+  "argument1": 160.0,
+  "argument2": {
+    "type": "minecraft:add",
+    "argument1": {
+      "type": "minecraft:mul",
+      "argument1": 9.0,
+      "argument2": {
+        "type": "minecraft:noise",
+        "noise": "barracuda:dune_terrain",
+        "xz_scale": 0.04,
+        "y_scale": 0.0
+      }
+    },
+    "argument2": {
+      "type": "minecraft:add",
+      "argument1": {
+        "type": "minecraft:mul",
+        "argument1": 4.0,
+        "argument2": {
+          "type": "minecraft:noise",
+          "noise": "barracuda:dune_terrain",
+          "xz_scale": 0.12,
+          "y_scale": 0.0
+        }
+      },
+      "argument2": {
+        "type": "minecraft:mul",
+        "argument1": 2.0,
+        "argument2": {
+          "type": "minecraft:noise",
+          "noise": "barracuda:dunes",
+          "xz_scale": 0.24,
+          "y_scale": 0.0
+        }
+      }
+    }
+  }
+}

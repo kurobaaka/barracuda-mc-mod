@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:add",
+  "argument1": {
+    "type": "minecraft:min",
+    "argument1": {
+      "type": "minecraft:add",
+      "argument1": "minecraft:overworld/depth",
+      "argument2": {
+        "type": "minecraft:y_clamped_gradient",
+        "from_y": -60,
+        "to_y": -15,
+        "from_value": -2.4,
+        "to_value": 1.6
+      }
+    },
+    "argument2": {
+      "type": "minecraft:y_clamped_gradient",
+      "from_y": -20,
+      "to_y": 40,
+      "from_value": 1.2,
+      "to_value": -1.2
+    }
+  },
+  "argument2": "minecraft:overworld/offset"
+}

@@ -75,9 +75,31 @@ public class PressRecipeManager implements SimpleSynchronousResourceReloadListen
                 if (root == null) continue;
 
                 String input = root.has("input") ? root.get("input").getAsString() : null;
-                String result = root.has("result") ? root.get("result").getAsString() : null;
-                float xp = root.has("experience") ? root.get("experience").getAsFloat() : 0f;
-                ItemStack output = PressRecipe.parseResult(result);
+                if (input == null) {
+                    LOGGER.warn("Press recipe {} missing 'input' field", id);
+                    continue;
+                }
+
+                // Parse shape results
+                Map<String, ItemStack> shapeResults = new HashMap<>();
+                if (root.has("results") && root.get("results").isJsonObject()) {
+                    JsonObject resultsObj = root.getAsJsonObject("results");
+                    for (String shapeId : resultsObj.keySet()) {
+                        String resultStr = resultsObj.get(shapeId).getAsString();
+                        ItemStack result = PressRecipe.parseResult(resultStr);
+                        if (!result.isEmpty()) {
+                            shapeResults.put(shapeId, result);
+                        }
+                    }
+                }
+
+                // Parse block output (9 items → block)
+                String blockOutput = root.has("block_output") ? root.get("block_output").getAsString() : null;
+
+                if (shapeResults.isEmpty() && blockOutput == null) {
+                    LOGGER.warn("Press recipe {} has no valid shape results or block output", id);
+                    continue;
+                }
 
                 String fileName = id.getPath().substring(id.getPath().lastIndexOf('/') + 1);
                 if (fileName.endsWith(".json")) {
@@ -86,16 +108,16 @@ public class PressRecipeManager implements SimpleSynchronousResourceReloadListen
 
                 Identifier recipeId = new Identifier("barracuda", fileName);
 
-                recipes.put(recipeId, new PressRecipe(recipeId, input, output));
+                recipes.put(recipeId, new PressRecipe(recipeId, input, shapeResults, blockOutput));
 
-                LOGGER.info("Loaded press recipe: {}", recipeId);
+                LOGGER.info("Loaded press recipe: {} with {} shape variants and block output: {}", recipeId, shapeResults.size(), blockOutput != null);
 
             } catch (Exception e) {
-                LOGGER.error("Failed to load centrifuge recipe {}", id, e);
+                LOGGER.error("Failed to load press recipe {}", id, e);
             }
         }
 
-        LOGGER.info("Centrifuge recipes loaded: {}", recipes.size());
+        LOGGER.info("Press recipes loaded: {}", recipes.size());
     }
 
     public Optional<PressRecipe> getRecipeFor(ItemStack stack) {

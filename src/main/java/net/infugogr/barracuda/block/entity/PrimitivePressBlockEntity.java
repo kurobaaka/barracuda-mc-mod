@@ -24,6 +24,7 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.registry.Registries;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -47,6 +48,7 @@ public class PrimitivePressBlockEntity extends UpdatableBlockEntity implements S
         super(ModBlockEntityType.PRIMITIVE_PRESS, pos, state);
         this.inventoryStorage.addInventory(new SyncingSimpleInventory(this, 1), Direction.NORTH);
         this.inventoryStorage.addInventory(new OutputSimpleInventory(this, 1), Direction.DOWN);
+        this.inventoryStorage.addInventory(new SyncingSimpleInventory(this, 1), Direction.UP);
         this.propertyDelegate = new PropertyDelegate() {
             @Override
             public int get(int index) {
@@ -68,9 +70,11 @@ public class PrimitivePressBlockEntity extends UpdatableBlockEntity implements S
     public List<SyncableStorage> getSyncableStorages() {
         var input = (SyncingSimpleInventory) this.inventoryStorage.getInventory(0);
         var output = (SyncingSimpleInventory) this.inventoryStorage.getInventory(1);
+        var shape = (SyncingSimpleInventory) this.inventoryStorage.getInventory(2);
         assert input != null;
         assert output != null;
-        return List.of(input, output);
+        assert shape != null;
+        return List.of(input, output, shape);
     }
 
     @Override
@@ -78,12 +82,15 @@ public class PrimitivePressBlockEntity extends UpdatableBlockEntity implements S
         if (this.world == null || this.world.isClient) return;
         var inputInv = (SyncingSimpleInventory) this.inventoryStorage.getInventory(0);
         var outputInv = (SyncingSimpleInventory) this.inventoryStorage.getInventory(1);
+        var shapeInv = (SyncingSimpleInventory) this.inventoryStorage.getInventory(2);
 
         assert inputInv != null;
         assert outputInv != null;
+        assert shapeInv != null;
 
         ItemStack inputStack = inputInv.getStack(0);
         ItemStack outputStack = outputInv.getStack(0);
+        ItemStack shapeStack = shapeInv.getStack(0);
 
         // если нет входного предмета — сброс прогресса
         if (inputStack.isEmpty()) {
@@ -94,28 +101,69 @@ public class PrimitivePressBlockEntity extends UpdatableBlockEntity implements S
             pressing = false;
             return;
         }
+
         Optional<PressRecipe> recipeOpt = PressRecipeManager.getInstance().getRecipeFor(inputStack);
         if (recipeOpt.isEmpty()) {
             if (this.progress > 0) {
                 this.progress = 0;
                 markDirty();
             }
+            pressing = false;
             return;
         }
 
         PressRecipe recipe = recipeOpt.get();
-        ItemStack result = recipe.output().copy();
+        ItemStack result;
+
+        // Если форма пуста и есть 9 слитков
+        if (shapeStack.isEmpty() && inputStack.getCount() >= 9) {
+            result = recipe.getBlockResult();
+            if (result.isEmpty()) {
+                if (this.progress > 0) {
+                    this.progress = 0;
+                    markDirty();
+                }
+                pressing = false;
+                return;
+            }
+        } else if (!shapeStack.isEmpty()) {
+            // Если форма есть, используем результат для этой формы
+            String shapeId = Registries.ITEM.getId(shapeStack.getItem()).toString();
+            result = recipe.getResultForShape(shapeId);
+            if (result.isEmpty()) {
+                if (this.progress > 0) {
+                    this.progress = 0;
+                    markDirty();
+                }
+                pressing = false;
+                return;
+            }
+        } else {
+            // Форма пуста и меньше 9 слитков
+            if (this.progress > 0) {
+                this.progress = 0;
+                markDirty();
+            }
+            pressing = false;
+            return;
+        }
 
         if (!canInsertIntoOutput(result, outputStack)) {
             return;
         }
+
         if (pressing) {
             this.progress++;
         }
 
         int maxProgress = 10;
         if (this.progress >= maxProgress) {
-            inputStack.decrement(1);
+            // Если это блок из 9 слитков
+            if (shapeStack.isEmpty()) {
+                inputStack.decrement(9);
+            } else {
+                inputStack.decrement(1);
+            }
 
             if (outputStack.isEmpty()) {
                 outputInv.setStack(0, result);
@@ -180,11 +228,27 @@ public class PrimitivePressBlockEntity extends UpdatableBlockEntity implements S
 
     public void tryStartPressing() {
         var input = Objects.requireNonNull(inventoryStorage.getInventory(0)).getStack(0);
+        var shape = Objects.requireNonNull(inventoryStorage.getInventory(2)).getStack(0);
+
         if (input.isEmpty()) return;
+
         Optional<PressRecipe> recipe = PressRecipeManager.getInstance().getRecipeFor(input);
         recipe.ifPresent(r -> {
-            this.pressing = true;
-            markDirty();
+            ItemStack result = ItemStack.EMPTY;
+
+            // Если форма пуста и есть 9 слитков
+            if (shape.isEmpty() && input.getCount() >= 9) {
+                result = r.getBlockResult();
+            } else if (!shape.isEmpty()) {
+                // Если форма есть, используем результат для этой формы
+                String shapeId = Registries.ITEM.getId(shape.getItem()).toString();
+                result = r.getResultForShape(shapeId);
+            }
+
+            if (!result.isEmpty()) {
+                this.pressing = true;
+                markDirty();
+            }
         });
     }
 }

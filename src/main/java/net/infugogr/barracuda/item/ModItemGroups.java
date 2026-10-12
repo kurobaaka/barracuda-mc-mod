@@ -214,6 +214,10 @@ public class ModItemGroups {
                         entries.add(ModBlocks.CLOSET);
                         entries.add(ModItems.SCREWDRIVER);
                         entries.add(ModItems.HAMMER);
+                        entries.add(ModItems.INGOT_SHAPE);
+                        entries.add(ModItems.PLATE_SHAPE);
+                        entries.add(ModItems.WIRE_SHAPE);
+                        entries.add(ModItems.ROD_SHAPE);
                         entries.add(ModBlocks.SHUTTLE_WALL);
                         entries.add(ModBlocks.FLOOR_BLOCK);
                         entries.add(ModBlocks.PLATING);

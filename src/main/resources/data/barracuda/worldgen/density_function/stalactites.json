@@ -1,0 +1,62 @@
+{
+  "type": "minecraft:range_choice",
+  "input": {
+    "type": "minecraft:noise",
+    "noise": "barracuda:stalactite_field",
+    "xz_scale": 0.05,
+    "y_scale": 0.0
+  },
+  "min_inclusive": 0.48,
+  "max_exclusive": 2.0,
+  "when_in_range": {
+    "type": "minecraft:min",
+    "argument1": {
+      "type": "minecraft:add",
+      "argument1": {
+        "type": "minecraft:add",
+        "argument1": "minecraft:y",
+        "argument2": -110.0
+      },
+      "argument2": {
+        "type": "minecraft:clamp",
+        "input": {
+          "type": "minecraft:mul",
+          "argument1": 30.0,
+          "argument2": {
+            "type": "minecraft:add",
+            "argument1": {
+              "type": "minecraft:noise",
+              "noise": "barracuda:stalactite_field",
+              "xz_scale": 0.05,
+              "y_scale": 0.0
+            },
+            "argument2": -0.45
+          }
+        },
+        "min": 0.0,
+        "max": 10.0
+      }
+    },
+    "argument2": {
+      "type": "minecraft:mul",
+      "argument1": 20.0,
+      "argument2": {
+        "type": "minecraft:add",
+        "argument1": {
+          "type": "minecraft:noise",
+          "noise": "barracuda:stalactite_field",
+          "xz_scale": 0.05,
+          "y_scale": 0.0
+        },
+        "argument2": {
+          "type": "minecraft:y_clamped_gradient",
+          "from_y": 100,
+          "to_y": 110,
+          "from_value": -0.8,
+          "to_value": -0.48
+        }
+      }
+    }
+  },
+  "when_out_of_range": -1.0
+}

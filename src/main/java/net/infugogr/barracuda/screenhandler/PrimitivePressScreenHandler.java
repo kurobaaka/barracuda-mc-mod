@@ -41,7 +41,7 @@ public class PrimitivePressScreenHandler extends ScreenHandler {
 
         WrappedInventoryStorage<SimpleInventory> inventory = this.blockEntity.getWrappedInventoryStorage();
         inventory.onOpen(playerInventory.player);
-        inventory.checkSize(2);
+        inventory.checkSize(3);
         addBlockEntityInventory();
         addPlayerInventory(playerInventory);
         addPlayerHotbar(playerInventory);
@@ -50,8 +50,9 @@ public class PrimitivePressScreenHandler extends ScreenHandler {
 
     private void addBlockEntityInventory() {
         WrappedInventoryStorage<?> inventory = this.blockEntity.getWrappedInventoryStorage();
-        addSlot(new Slot(inventory.getInventory(0), 0, 53, 32));
-        addSlot(new Slot(inventory.getInventory(1), 0, 109, 32));
+        addSlot(new Slot(inventory.getInventory(0), 0, 53, 30));
+        addSlot(new Slot(inventory.getInventory(1), 0, 107, 30));
+        addSlot(new Slot(inventory.getInventory(2   ), 0, 80, 12));
     }
 
     @Override

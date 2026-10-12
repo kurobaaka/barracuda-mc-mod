@@ -1,0 +1,81 @@
+{
+  "type": "minecraft:min",
+  "argument1": {
+    "type": "minecraft:min",
+    "argument1": {
+      "type": "minecraft:add",
+      "argument1": "minecraft:y",
+      "argument2": -299.0
+    },
+    "argument2": {
+      "type": "minecraft:mul",
+      "argument1": 40.0,
+      "argument2": {
+        "type": "minecraft:add",
+        "argument1": "barracuda:island_profile",
+        "argument2": {
+          "type": "minecraft:mul",
+          "argument1": -0.025,
+          "argument2": {
+            "type": "minecraft:add",
+            "argument1": "minecraft:y",
+            "argument2": -300.0
+          }
+        }
+      }
+    }
+  },
+  "argument2": {
+    "type": "minecraft:add",
+    "argument1": 318.0,
+    "argument2": {
+      "type": "minecraft:add",
+      "argument1": {
+        "type": "minecraft:mul",
+        "argument1": 6.0,
+        "argument2": {
+          "type": "minecraft:noise",
+          "noise": "barracuda:island_surface",
+          "xz_scale": 0.008,
+          "y_scale": 0.0
+        }
+      },
+      "argument2": {
+        "type": "minecraft:add",
+        "argument1": {
+          "type": "minecraft:mul",
+          "argument1": 4.0,
+          "argument2": {
+            "type": "minecraft:noise",
+            "noise": "barracuda:island_surface",
+            "xz_scale": 0.025,
+            "y_scale": 0.0
+          }
+        },
+        "argument2": {
+          "type": "minecraft:add",
+          "argument1": {
+            "type": "minecraft:mul",
+            "argument1": 2.0,
+            "argument2": {
+              "type": "minecraft:noise",
+              "noise": "barracuda:island_surface",
+              "xz_scale": 0.075,
+              "y_scale": 0.0
+            }
+          },
+          "argument2": {
+            "type": "minecraft:mul",
+            "argument1": 1.0,
+            "argument2": {
+              "type": "minecraft:noise",
+              "noise": "barracuda:island_surface",
+              "xz_scale": 0.16,
+              "y_scale": 0.0
+            }
+          }
+        }
+      }
+    }
+  }
+}

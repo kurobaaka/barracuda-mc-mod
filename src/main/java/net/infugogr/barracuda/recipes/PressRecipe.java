@@ -7,12 +7,28 @@ import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 
-public record PressRecipe(Identifier id, String input, ItemStack output) {
+import java.util.Map;
+
+public record PressRecipe(Identifier id, String input, Map<String, ItemStack> shapeResults, String blockOutput) {
 
     public String getInputId() {
         return input;
     }
 
+    public ItemStack getResultForShape(String shapeId) {
+        if (shapeId == null || shapeId.isEmpty()) {
+            return ItemStack.EMPTY;
+        }
+        ItemStack result = shapeResults.getOrDefault(shapeId, ItemStack.EMPTY);
+        return result.isEmpty() ? ItemStack.EMPTY : result.copy();
+    }
+
+    public ItemStack getBlockResult() {
+        if (blockOutput == null || blockOutput.isEmpty()) {
+            return ItemStack.EMPTY;
+        }
+        return parseResult(blockOutput);
+    }
 
     // Helper parser for individual result object
     public static ItemStack parseResult(JsonObject obj) {
