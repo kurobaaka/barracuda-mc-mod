@@ -1,0 +1,9 @@
+{
+  "feature": "barracuda:ruby_ore_medium",
+  "placement": [
+    { "type": "minecraft:count", "count": { "type": "minecraft:uniform", "value": { "min_inclusive": 2, "max_inclusive": 4 } } },
+    { "type": "minecraft:in_square" },
+    { "type": "minecraft:height_range", "height": { "type": "minecraft:uniform", "min_inclusive": { "absolute": -54 }, "max_inclusive": { "absolute": 6 } } },
+    { "type": "minecraft:biome" }
+  ]
+}

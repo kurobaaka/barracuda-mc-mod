@@ -82,7 +82,9 @@ public class PrimitivePressBlock extends BlockWithEntity implements BlockEntityP
     public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
         if (!(world.getBlockEntity(pos) instanceof PrimitivePressBlockEntity press)) return;
         if (entity instanceof FallingBlockEntity falling &&
-                falling.getBlockState().isOf(Blocks.ANVIL)) {
+                (falling.getBlockState().isOf(Blocks.ANVIL)
+                        || falling.getBlockState().isOf(Blocks.CHIPPED_ANVIL)
+                        || falling.getBlockState().isOf(Blocks.DAMAGED_ANVIL))) {
             press.tryStartPressing();
         }
     }

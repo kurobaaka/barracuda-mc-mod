@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "barracuda:crude_oil",
+    "barracuda:flowing_crude_oil"
+  ]
+}

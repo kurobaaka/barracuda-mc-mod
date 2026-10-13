@@ -22,12 +22,19 @@ public abstract class BarracudaFluid extends FlowableFluid {
     private final Supplier<Fluid> stillSupplier, flowingSupplier;
     private final Supplier<Item> bucketSupplier;
     private final Supplier<Block> blockSupplier;
+    private final int levelDecreasePerBlock;
+    protected final int flowSpeed;
+    private final int tickRate;
 
-    public BarracudaFluid(Supplier<Fluid> stillSupplier, Supplier<Fluid> flowingSupplier, Supplier<Item> bucketSupplier, Supplier<Block> blockSupplier) {
+    public BarracudaFluid(Supplier<Fluid> stillSupplier, Supplier<Fluid> flowingSupplier, Supplier<Item> bucketSupplier,
+                          Supplier<Block> blockSupplier, int levelDecreasePerBlock, int flowSpeed, int tickRate) {
         this.stillSupplier = stillSupplier;
         this.flowingSupplier = flowingSupplier;
         this.bucketSupplier = bucketSupplier;
         this.blockSupplier = blockSupplier;
+        this.levelDecreasePerBlock = levelDecreasePerBlock;
+        this.flowSpeed = flowSpeed;
+        this.tickRate = tickRate;
     }
 
     @Override
@@ -55,7 +62,7 @@ public abstract class BarracudaFluid extends FlowableFluid {
 
     @Override
     protected int getLevelDecreasePerBlock(WorldView world) {
-        return 1;
+        return this.levelDecreasePerBlock;
     }
 
     @Override
@@ -70,7 +77,7 @@ public abstract class BarracudaFluid extends FlowableFluid {
 
     @Override
     public int getTickRate(WorldView world) {
-        return 45;
+        return this.tickRate;
     }
 
     @Override
@@ -90,8 +97,9 @@ public abstract class BarracudaFluid extends FlowableFluid {
     }
 
     public static class Flowing extends BarracudaFluid {
-        public Flowing(Supplier<Fluid> stillSupplier, Supplier<Fluid> flowingSupplier, Supplier<Item> bucketSupplier, Supplier<Block> blockSupplier) {
-            super(stillSupplier, flowingSupplier, bucketSupplier, blockSupplier);
+        public Flowing(Supplier<Fluid> stillSupplier, Supplier<Fluid> flowingSupplier, Supplier<Item> bucketSupplier,
+                       Supplier<Block> blockSupplier, int levelDecreasePerBlock, int flowSpeed, int tickRate) {
+            super(stillSupplier, flowingSupplier, bucketSupplier, blockSupplier, levelDecreasePerBlock, flowSpeed, tickRate);
         }
 
         @Override
@@ -106,7 +114,7 @@ public abstract class BarracudaFluid extends FlowableFluid {
 
         @Override
         protected int getFlowSpeed(WorldView world) {
-            return 0;
+            return this.flowSpeed;
         }
 
         @Override
@@ -116,8 +124,9 @@ public abstract class BarracudaFluid extends FlowableFluid {
     }
 
     public static class Still extends BarracudaFluid {
-        public Still(Supplier<Fluid> stillSupplier, Supplier<Fluid> flowingSupplier, Supplier<Item> bucketSupplier, Supplier<Block> blockSupplier) {
-            super(stillSupplier, flowingSupplier, bucketSupplier, blockSupplier);
+        public Still(Supplier<Fluid> stillSupplier, Supplier<Fluid> flowingSupplier, Supplier<Item> bucketSupplier,
+                     Supplier<Block> blockSupplier, int levelDecreasePerBlock, int flowSpeed, int tickRate) {
+            super(stillSupplier, flowingSupplier, bucketSupplier, blockSupplier, levelDecreasePerBlock, flowSpeed, tickRate);
         }
 
         @Override
@@ -132,7 +141,7 @@ public abstract class BarracudaFluid extends FlowableFluid {
 
         @Override
         protected int getFlowSpeed(WorldView world) {
-            return 0;
+            return this.flowSpeed;
         }
 
         @Override

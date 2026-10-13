@@ -17,6 +17,7 @@ The **Barracuda** mod for Minecraft offers players a unique dive into underwater
 - **New Creatures**: Players will encounter numerous new marine creatures, ranging from peaceful fish to dangerous predators. Each creature has its own unique behaviors and interaction mechanics.
 - **Fantasy Elements**: Barracuda incorporates magical and fantastical elements, such as underwater kingdoms and ancient artifacts, adding depth to the gameplay experience.
 - **Crafting and Resources**: New content includes unique resources and items that can be crafted using materials found in the underwater worlds. This opens up new opportunities for crafting and survival.
+- **Crude Oil**: Small, viscous oil lakes generate below Y=0 in the Overworld and at any terrain height in beta92, at twice the frequency. Oil flows slowly and does not buoy items. Players use vanilla underwater drowning and lava movement, cannot jump while in oil, and get lava-like vision with black fog. Oil does not ignite or damage entities and items, and rain makes no lava smoke particles above it.
 - **Quests and Adventures**: The mod offers players various quests and missions related to ocean exploration and interaction with new creatures.
 
 ### Conclusion

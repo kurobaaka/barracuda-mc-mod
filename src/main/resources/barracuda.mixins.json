@@ -5,10 +5,16 @@
   "mixins": [
     "BucketItemMixin",
     "ContinuityClientMixin",
+    "CrudeOilDrowningMixin",
+    "CrudeOilFireMixin",
+    "CrudeOilEntityMixin",
+    "FallingBlockEntityMixin",
     "PistonBlockMixin",
     "ShearsItemMixin"
   ],
   "client": [
+    "CrudeOilFogMixin",
+    "CrudeOilRainMixin"
   ],
   "injectors": {
     "defaultRequire": 1

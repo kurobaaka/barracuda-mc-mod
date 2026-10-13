@@ -1,0 +1,9 @@
+{
+  "feature": "barracuda:ruby_ore_large",
+  "placement": [
+    { "type": "minecraft:rarity_filter", "chance": 6 },
+    { "type": "minecraft:in_square" },
+    { "type": "minecraft:height_range", "height": { "type": "minecraft:trapezoid", "min_inclusive": { "above_bottom": -70 }, "max_inclusive": { "above_bottom": 90 } } },
+    { "type": "minecraft:biome" }
+  ]
+}

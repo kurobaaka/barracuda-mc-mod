@@ -17,9 +17,15 @@ public class FluidRegisters {
                 return 7500;
             }
         };
+        var crudeOilAttributes = new FluidVariantAttributeHandler() {
+            @Override
+            public int getViscosity(FluidVariant variant, @Nullable World world) {
+                return 12000;
+            }
+        };
 
-        FluidVariantAttributes.register(ModFluids.CRUDE_OIL.still(), commonFluidAttributes);
-        FluidVariantAttributes.register(ModFluids.CRUDE_OIL.flowing(), commonFluidAttributes);
+        FluidVariantAttributes.register(ModFluids.CRUDE_OIL.still(), crudeOilAttributes);
+        FluidVariantAttributes.register(ModFluids.CRUDE_OIL.flowing(), crudeOilAttributes);
 
         FluidVariantAttributes.register(ModFluids.HEAVY_OIL.still(), commonFluidAttributes);
         FluidVariantAttributes.register(ModFluids.HEAVY_OIL.flowing(), commonFluidAttributes);
@@ -33,14 +39,7 @@ public class FluidRegisters {
         // Fluid Data
         var commonFluidData = new FluidData.Builder(ModTags.Fluids.CRUDE_OIL)
                 .preventsBlockSpreading()
-                .canSwim()
-                .fluidMovementSpeed((entity, speed) -> 0.01F)
-                .applyWaterMovement()
-                .applyBuoyancy(itemEntity -> itemEntity.setVelocity(itemEntity.getVelocity().add(0.0D, 0.01D, 0.0D)))
-                .canCauseDrowning()
-                .shouldWitchDrinkWaterBreathing()
                 .affectsBlockBreakSpeed()
-                .bubbleParticle(ParticleTypes.ASH)
                 .splashParticle(ParticleTypes.HEART)
                 .build();
 

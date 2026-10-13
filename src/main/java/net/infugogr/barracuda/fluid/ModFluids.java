@@ -25,9 +25,14 @@ public class ModFluids {
         final AtomicReference<BarracudaFluid.Flowing> flowing = new AtomicReference<>();
         final AtomicReference<BucketItem> bucket = new AtomicReference<>();
         final AtomicReference<FluidBlock> block = new AtomicReference<>();
+        int levelDecreasePerBlock = name.equals("crude_oil") ? 2 : 1;
+        int flowSpeed = name.equals("crude_oil") ? 2 : 0;
+        int tickRate = name.equals("crude_oil") ? 50 : 45;
 
-        still.set(register(name, new BarracudaFluid.Still(still::get, flowing::get, bucket::get, block::get)));
-        flowing.set(register("flowing_" + name, new BarracudaFluid.Flowing(still::get, flowing::get, bucket::get, block::get)));
+        still.set(register(name, new BarracudaFluid.Still(still::get, flowing::get, bucket::get, block::get,
+                levelDecreasePerBlock, flowSpeed, tickRate)));
+        flowing.set(register("flowing_" + name, new BarracudaFluid.Flowing(still::get, flowing::get, bucket::get, block::get,
+                levelDecreasePerBlock, flowSpeed, tickRate)));
         bucket.set(ModItems.register(name + "_bucket", settings -> new BucketItem(still.get(), settings), settings -> settings.maxCount(1).recipeRemainder(Items.BUCKET)));
         block.set(ModBlocks.registerFluidBlock(name, new FluidBlock(still.get(), FabricBlockSettings.copyOf(Blocks.WATER))));
 

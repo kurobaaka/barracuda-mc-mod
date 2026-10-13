@@ -23,6 +23,8 @@ import net.infugogr.barracuda.item.ModItems;
 import net.infugogr.barracuda.recipes.PressRecipeManager;
 import net.infugogr.barracuda.screenhandler.ModScreenHandlerType;
 import net.infugogr.barracuda.sound.ModSounds;
+import net.infugogr.barracuda.worldgen.CrudeOilWorldgen;
+import net.infugogr.barracuda.worldgen.OreWorldgen;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
@@ -54,6 +56,8 @@ public class Barracuda implements ModInitializer {
 		ModSounds.registerSounds();
 		ModFluids.register();
         FluidRegisters.register();
+        CrudeOilWorldgen.register();
+        OreWorldgen.register();
         CentrifugeRecipeManager.register();
         PressRecipeManager.register();
         ChemicalPlantRecipeManager.register();

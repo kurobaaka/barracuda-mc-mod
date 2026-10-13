@@ -1,0 +1,9 @@
+{
+  "feature": "barracuda:ruby_ore_buried",
+  "placement": [
+    { "type": "minecraft:count", "count": { "type": "minecraft:uniform", "value": { "min_inclusive": 4, "max_inclusive": 8 } } },
+    { "type": "minecraft:in_square" },
+    { "type": "minecraft:height_range", "height": { "type": "minecraft:trapezoid", "min_inclusive": { "above_bottom": -70 }, "max_inclusive": { "above_bottom": 90 } } },
+    { "type": "minecraft:biome" }
+  ]
+}

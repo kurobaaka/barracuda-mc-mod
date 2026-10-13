@@ -1,0 +1,13 @@
+{
+  "type": "barracuda:beta92_aquatic_sand_ore",
+  "config": {
+    "size": 17,
+    "discard_chance_on_air_exposure": 0.0,
+    "targets": [
+      {
+        "state": { "Name": "barracuda:aquatic_sand" },
+        "target": { "predicate_type": "minecraft:tag_match", "tag": "barracuda:beta92_aquatic_sand_replaceables" }
+      }
+    ]
+  }
+}
